@@ -1,0 +1,2 @@
+
+#define SAMPLING_PERIOD
