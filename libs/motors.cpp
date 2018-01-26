@@ -3,9 +3,9 @@
  * Documentation
  */
 
-#ifndef ERROR_INCLUDE
-#define ERROR_INCLUDE
-#include "error.h"
+#ifndef ERR_INCLUDE
+#define ERR_INCLUDE
+#include "errors.h"
 #endif
 
 #include "motor.h"
@@ -38,7 +38,7 @@ int set_pwm(struct s_motor* motor, float* duty_cycle)
 	int error = NO_ERROR;
 	if (duty_cycle > MAX_DUTY) {
 		duty_cycle = MAX_DUTY;
-		error = ERROR_PWM_OVERVALUE;
+		error = ERR_PWM_OVERVALUE;
 	}
 	motor->pwm.write(duty_cycle);
 	return error;
@@ -46,7 +46,7 @@ int set_pwm(struct s_motor* motor, float* duty_cycle)
 
 int set_direction(struct s_motor* motor, unsigned char* direction_value)
 {
-	if (direction_value > 3) return ERROR_DIRECTION_VALUE;
+	if (direction_value > 3) return ERR_DIRECTION_VALUE;
 	motor->direction_0 = direction_value & 1;
 	motor->direction_1 = direction_value & 2;
 	return NO_ERROR;

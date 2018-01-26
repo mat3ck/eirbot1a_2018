@@ -1,5 +1,5 @@
 #include "mbed.h"
-#include "tests/ps2.cpp"
+#include "libs/motor.cpp"
 
 int main() {
 }

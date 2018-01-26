@@ -2,6 +2,8 @@
 /*
  * TODO
  * Documentation
+ * Functions to calculate new command, create a pid struct
+ * Add xy and angle pid, maybe speed pid for each motor
  */
 
 #ifndef ERROR_INCLUDE
