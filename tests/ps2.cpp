@@ -149,6 +149,7 @@ void print_byte(char *byte)
 	pc.printf("\n\r");
 }
 
+/*
 int main() {
 	unsigned char err;
 	out_clk = 0;
@@ -159,12 +160,8 @@ int main() {
 	wait_us(1000);
 	pc.printf("Starting : \n\r");
 	while (not(init)) {
-		/*if (send_request(&err)) init = send(0xF4, &err);
+		if (send_request(&err)) init = send(0xF4, &err);
 		pc.printf("Initialisation : %d, erreur : %d\n\r", init, err);
-		wait_us(200);*/
-		out_clk = 1;
-		wait_us(50);
-		out_clk = 0;
-		wait_us(50);
+		wait_us(200);
 	}
-}
+} */

@@ -39,14 +39,14 @@ VPATH = ..
 ###############################################################################
 # Project settings
 
-PROJECT := Nucleo_blink_led
-
+ROBOT1 := robot1
+ROBOT2 := robot2
 
 # Project settings
 ###############################################################################
 # Objects and Paths
 
-OBJECTS += main.o
+OBJECTS += robot1.o
 
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/stm32f4xx_hal_flash_ramfunc.o
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/PeripheralPins.o
@@ -351,7 +351,7 @@ LD_SYS_LIBS :=-Wl,--start-group -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys -lmbed -
 .PHONY: all lst size
 
 
-all: $(PROJECT).bin $(PROJECT).hex size
+all: $(ROBOT1).bin $(ROBOT1).hex $(ROBOT2).bin $(ROBOT2).hex size
 
 
 .s.o:
@@ -380,24 +380,40 @@ all: $(PROJECT).bin $(PROJECT).hex size
 	@$(CPP) $(CXX_FLAGS) $(INCLUDE_PATHS) -o $@ $<
 
 
-$(PROJECT).link_script.ld: $(LINKER_SCRIPT)
+$(ROBOT1).link_script.ld: $(LINKER_SCRIPT)
 	@$(PREPROC) $< -o $@
 
 
+$(ROBOT2).link_script.ld: $(LINKER_SCRIPT)
+	@$(PREPROC) $< -o $@
 
-$(PROJECT).elf: $(OBJECTS) $(SYS_OBJECTS) $(PROJECT).link_script.ld 
+
+$(ROBOT1).elf: $(OBJECTS) $(SYS_OBJECTS) $(ROBOT1).link_script.ld 
 	+@echo "link: $(notdir $@)"
 	@$(LD) $(LD_FLAGS) -T $(filter-out %.o, $^) $(LIBRARY_PATHS) --output $@ $(filter %.o, $^) $(LIBRARIES) $(LD_SYS_LIBS)
 
 
-$(PROJECT).bin: $(PROJECT).elf
+$(ROBOT2).elf: $(ROBOT2).o $(SYS_OBJECTS) $(ROBOT2).link_script.ld 
+	+@echo "link: $(notdir $@)"
+	@$(LD) $(LD_FLAGS) -T $(filter-out %.o, $^) $(LIBRARY_PATHS) --output $@ $(filter %.o, $^) $(LIBRARIES) $(LD_SYS_LIBS)
+
+
+$(ROBOT1).bin: $(ROBOT1).elf
 	$(ELF2BIN) -O binary $< $@
 	+@echo "===== bin file ready to flash: $(OBJDIR)/$@ =====" 
 
-$(PROJECT).hex: $(PROJECT).elf
+
+$(ROBOT2).bin: $(ROBOT2).elf
+	$(ELF2BIN) -O binary $< $@
+	+@echo "===== bin file ready to flash: $(OBJDIR)/$@ =====" 
+
+
+$(ROBOT1).hex: $(ROBOT1).elf
 	$(ELF2BIN) -O ihex $< $@
 
 
+$(ROBOT2).hex: $(ROBOT2).elf
+	$(ELF2BIN) -O ihex $< $@
 # Rules
 ###############################################################################
 # Dependencies
