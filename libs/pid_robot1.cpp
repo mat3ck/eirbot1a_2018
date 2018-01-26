@@ -13,8 +13,7 @@
 
 #include "pid_robot1.cpp"
 
-struct s_pid_coef 
-{
+struct s_pid_coef {
 	float kp;
 	float ki;
 	float kd;

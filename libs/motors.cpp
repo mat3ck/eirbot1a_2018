@@ -15,8 +15,7 @@
 
 #include "motors.h"
 
-struct s_motor
-{
+struct s_motor {
 	PwmOut* pwm;
 	DigitalOut* direction_0;
 	DigitalOut* direction_1;
