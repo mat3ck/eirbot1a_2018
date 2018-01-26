@@ -51,7 +51,9 @@ int set_pwm(struct s_motor* motor, float duty_cycle)
 
 int set_direction(struct s_motor* motor, unsigned char direction_value)
 {
-	if (direction_value > 3) return ERR_DIRECTION_VALUE;
+	if (direction_value > 3) {
+		return ERR_DIRECTION_VALUE;
+	}
 	*(motor->direction_0) = direction_value & 1;
 	*(motor->direction_1) = direction_value & 2;
 	return NO_ERROR;
