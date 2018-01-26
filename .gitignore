@@ -1,2 +1,11 @@
+
 *.sw?
+
+*.o
+*.bin
+*.d
+*.elf
+*.hex
+*.ld
+
 BUILD/
