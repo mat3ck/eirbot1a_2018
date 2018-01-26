@@ -22,12 +22,12 @@ struct s_motor
 	DigitalOut* direction_1;
 };
 
-struct s_motor new_motor(PwmOut pwm, DigitalOut direction_0, DigitalOut direction_1)
+struct s_motor new_motor(PwmOut* pwm, DigitalOut* direction_0, DigitalOut* direction_1)
 {
 	struct s_motor motor;
-	*motor.pwm = pwm;
-	*motor.direction_0 = direction_0;
-	*motor.direction_1 = direction_1;
+	*motor.pwm = *pwm;
+	*motor.direction_0 = *direction_0;
+	*motor.direction_1 = *direction_1;
 	return motor;
 }
 
