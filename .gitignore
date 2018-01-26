@@ -1,2 +1,12 @@
 *.sw?
+*.yml
+CMakeLists.txt
+CMakeListsPrivate.txt
+platformio.ini
 BUILD/
+.idea/
+.pioenvs/
+.piolibdeps/
+cmake-build-debug/
+lib/
+src/
