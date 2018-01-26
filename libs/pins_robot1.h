@@ -2,14 +2,14 @@
 /* Motors */
 
 // Left motor
-#define PIN_PWM_LEFT
-#define PIN_DIR_LEFT1
-#define PIN_DIR_LEFT2
+#define PIN_PWM_LEFT PC_8
+#define PIN_DIR_LEFT1 PC_10
+#define PIN_DIR_LEFT2 PC_11
 // Right Motor
-#define PIN_PWM_RIGHT
-#define PIN_DIR_RIGHT1
-#define PIN_DIR_RIGHT2
-
+#define PIN_PWM_RIGHT PC_9
+#define PIN_DIR_RIGHT1 PD_7
+#define PIN_DIR_RIGHT2 PD_6
+ 
 /* Encoders */
 
 // Left qei
