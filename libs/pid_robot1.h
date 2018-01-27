@@ -3,7 +3,7 @@
 #define PID_ROBOT1_H
 
 
-#define SAMPLING_PERIOD
+#define SAMPLING_PERIOD 200
 
 
 #endif
