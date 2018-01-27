@@ -47,6 +47,10 @@ ROBOT2 := robot2
 # Objects and Paths
 
 OBJECTS += robot1.o
+OBJECTS += libs/motors.o
+OBJECTS += libs/movement.o
+OBJECTS += libs/pid_robot1.o
+OBJECTS += libs/qei.o
 
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/stm32f4xx_hal_flash_ramfunc.o
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/PeripheralPins.o
@@ -183,6 +187,7 @@ INCLUDE_PATHS += -I../mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM
 INCLUDE_PATHS += -I../mbed/drivers
 INCLUDE_PATHS += -I../mbed/hal
 INCLUDE_PATHS += -I../mbed/platform
+INCLUDE_PATHS += -I../libs/.
 
 LIBRARY_PATHS := -L../mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM 
 LIBRARIES := -lmbed 
@@ -339,6 +344,7 @@ ASM_FLAGS += -Imbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM
 ASM_FLAGS += -Imbed/drivers
 ASM_FLAGS += -Imbed/hal
 ASM_FLAGS += -Imbed/platform
+ASM_FLAGS += -Ilibs
 
 
 LD_FLAGS :=-Wl,--gc-sections -Wl,--wrap,main -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r -Wl,--wrap,_realloc_r -Wl,--wrap,_memalign_r -Wl,--wrap,_calloc_r -Wl,--wrap,exit -Wl,--wrap,atexit -Wl,-n -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp 

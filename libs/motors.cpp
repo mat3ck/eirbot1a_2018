@@ -9,18 +9,12 @@
 #include "motors.h"
 
 
-struct s_motor {
-	PwmOut* p_pwm;
-	DigitalOut* p_direction_0;
-	DigitalOut* p_direction_1;
-};
-
 struct s_motor new_motor(PwmOut* p_pwm, DigitalOut* p_direction_0, DigitalOut* p_direction_1)
 {
 	struct s_motor motor;
-	*motor.p_pwm = *p_pwm;
-	*motor.p_direction_0 = *p_direction_0;
-	*motor.p_direction_1 = *p_direction_1;
+	motor.p_pwm = p_pwm;
+	motor.p_direction_0 = p_direction_0;
+	motor.p_direction_1 = p_direction_1;
 	return motor;
 }
 

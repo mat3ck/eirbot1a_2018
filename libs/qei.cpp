@@ -6,7 +6,7 @@
  * Remove unnecessary old files in lib_qei
  */
 
-#include "error.h"
+#include "errors.h"
 #include "qei.h"
 
 

@@ -10,7 +10,12 @@
 #define DIRECTION_BACKWARD 2
 #define DIRECTION_BREAK 3
 
-struct s_motor;
+struct s_motor {
+	PwmOut* p_pwm;
+	DigitalOut* p_direction_0;
+	DigitalOut* p_direction_1;
+};
+
 struct s_motor new_motor(PwmOut* p_pwm, DigitalOut* p_direction_0, DigitalOut* p_direction_1);
 void init_motor(struct s_motor* p_motor_left, struct s_motor* p_motor_right);
 int set_pwm(struct s_motor* p_motor, float duty_cycle);
