@@ -16,6 +16,8 @@ struct s_pos {
 	float angle;
 };
 
+
+
 bool is_pos_in(struct s_pos* p_pos)
 {
 	bool in = 0;
