@@ -1,4 +1,8 @@
 
+#ifndef PINS_ROBOT1_H
+#define PINS_ROBOT1_H
+
+
 /* Motors */
 
 // Left motor
@@ -18,3 +22,6 @@
 // Right qei
 #define PIN_QEI_RIGHT1
 #define PIN_QEI_RIGHT2
+
+
+#endif

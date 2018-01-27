@@ -3,17 +3,11 @@
  * Documentation
  */
 
-#ifndef ERR_INCLUDE
-#define ERR_INCLUDE
-#include "errors.h"
-#endif
 
-#ifndef MBED_INCLUDE
-#define MBED_INCLUDE
 #include "mbed.h"
-#endif
-
+#include "errors.h"
 #include "motors.h"
+
 
 struct s_motor {
 	PwmOut* p_pwm;

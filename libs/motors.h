@@ -1,4 +1,7 @@
 
+#ifndef MOTORS_H
+#define MOTORS_H
+
 #define PWM_PERIOD 0.000033
 #define MAX_DUTY 0.95
 
@@ -13,3 +16,5 @@ void init_motor(struct s_motor* p_motor_left, struct s_motor* p_motor_right);
 int set_pwm(struct s_motor* p_motor, float duty_cycle);
 int set_direction(struct s_motor* p_motor, unsigned char direction_value);
 void full_stop(struct s_motor* p_motor_left, struct s_motor* p_motor_right);
+
+#endif

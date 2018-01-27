@@ -1,4 +1,8 @@
 
+#ifndef ERRORS_H
+#define ERRORS_H
+
+
 #define NO_ERROR 0
 
 /* Program errors, unexpected events, 1 to 999 */
@@ -25,3 +29,6 @@
 #define ERR_PS2_SEND_END 2122
 #define ERR_PS2_SEND_TIMEOUT 2123
 #define ERR_PS2_SEND_REQUEST 2124
+
+
+#endif

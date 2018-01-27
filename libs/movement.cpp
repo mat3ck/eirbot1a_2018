@@ -3,21 +3,10 @@
  * Documentation
  */
 
-#ifndef ERR_INCLUDE
-#define ERR_INCLUDE
-#include "errors.h"
-#endif
 
-#ifndef MBED_INCLUDE
-#define MBED_INCLUDE
 #include "mbed.h"
-#endif
-
-#ifndef MOTORS_INCLUDE
-#define MOTORS_INCLUDE
+#include "errors.h"
 #include "motors.h"
-#endif
-
 #include "movement.h"
 
 struct s_pos {

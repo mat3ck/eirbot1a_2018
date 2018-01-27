@@ -6,11 +6,7 @@
  * Remove unnecessary old files in lib_qei
  */
 
-#ifndef ERROR_INCLUDE
-#define ERROR_INCLUDE
 #include "error.h"
-#endif
-
-#define "qei.h"
+#include "qei.h"
 
 

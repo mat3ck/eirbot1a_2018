@@ -6,12 +6,8 @@
  * Add xy and angle pid, maybe speed pid for each motor
  */
 
-#ifndef ERROR_INCLUDE
-#define ERROR_INCLUDE
 #include "error.h"
-#endif
-
-#include "pid_robot1.cpp"
+#include "pid_robot1.h"
 
 struct s_pid_coef {
 	float kp;
