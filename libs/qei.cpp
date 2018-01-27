@@ -6,6 +6,7 @@
  * Remove unnecessary old files in lib_qei
  */
 
+#include "mbed.h"
 #include "errors.h"
 #include "qei.h"
 
