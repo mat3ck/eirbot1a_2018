@@ -13,8 +13,12 @@
 #include "mbed.h"
 #endif
 
-#include "movement.h"
+#ifndef MOTORS_INCLUDE
+#define MOTORS_INCLUDE
 #include "motors.h"
+#endif
+
+#include "movement.h"
 
 struct s_pos {
 	long pos_x;
@@ -22,7 +26,9 @@ struct s_pos {
 	float angle;
 };
 
-bool is_out(struct s_pos pos)
+bool is_pos_in(struct s_pos* p_pos)
 {
-	return 0;
+	bool in = 0;
+	// in ||= (in an area)
+	return in;
 }
