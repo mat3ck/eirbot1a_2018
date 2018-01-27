@@ -21,3 +21,5 @@ bool is_pos_in(struct s_pos* p_pos)
 	// in ||= (in an area)
 	return in;
 }
+
+
