@@ -4,7 +4,6 @@
 
 #include "lib_qei.h"
 #include "mbed.h"
-#include "common.h"
 
 // Déclarations des objets TIMER utilisés par la librairie
 TIM_HandleTypeDef htim4;
@@ -53,14 +52,14 @@ void init_qei_left(){
 
     //Tentative d'initialisation de la config
     if (HAL_TIM_Encoder_Init(&htim4, &sConfig) != HAL_OK) {
-        Error_Handler(1);
+        //Error_Handler(1);
     }
 
     //DATASHEET
     sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
     sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
     if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK) {
-        Error_Handler(1);
+        //Error_Handler(1);
     }
 
     //Nouvelle structure GPIO, propre aux pins utilisés par l'encodeur
@@ -83,7 +82,7 @@ void init_qei_left(){
         HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
     } else
-        Error_Handler(1);
+        //Error_Handler(1);
 
 
     //Démarrage du timer
@@ -125,13 +124,13 @@ void init_qei_right(){
     sConfig.IC2Filter = 5;
 
     if (HAL_TIM_Encoder_Init(&htim2, &sConfig) != HAL_OK) {
-        Error_Handler(1);
+        //Error_Handler(1);
     }
 
     sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
     sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
     if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK) {
-        Error_Handler(1);
+        //Error_Handler(1);
     }
 
 
@@ -160,8 +159,7 @@ void init_qei_right(){
         GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
         HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-    } else
-        Error_Handler(1);
+    }
 
 
     //Démarrage du timer
@@ -214,8 +212,8 @@ void toursQeiRefresh(){
         dq_D=dq_D+65536;
     }
 
-    QEI_G=QEI_G+dq_G;
-    QEI_D=QEI_D+dq_D;
+    //QEI_G=QEI_G+dq_G;
+    //QEI_D=QEI_D+dq_D;
 
     anciennevaleurQEI_G=nouvellevaleurQEI_G;
     anciennevaleurQEI_D=nouvellevaleurQEI_D;

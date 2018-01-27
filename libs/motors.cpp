@@ -26,8 +26,8 @@ struct s_motor new_motor(PwmOut* p_pwm, DigitalOut* p_direction_0, DigitalOut* p
 
 void init_motor(struct s_motor* p_motor_left, struct s_motor* p_motor_right)
 {
-	p_motor_left->pwm->period(PWM_PERIOD);
-	p_motor_right->pwm->period(PWM_PERIOD);
+	p_motor_left->p_pwm->period(PWM_PERIOD);
+	p_motor_right->p_pwm->period(PWM_PERIOD);
 	set_direction(p_motor_left, DIRECTION_STOP);
 	set_direction(p_motor_right, DIRECTION_STOP);
 }
@@ -39,7 +39,7 @@ int set_pwm(struct s_motor* p_motor, float duty_cycle)
 		duty_cycle = MAX_DUTY;
 		error = ERR_PWM_OVERVALUE;
 	}
-	p_motor->pwm->write(duty_cycle);
+	p_motor->p_pwm->write(duty_cycle);
 	return error;
 }
 
@@ -48,8 +48,8 @@ int set_direction(struct s_motor* p_motor, unsigned char direction_value)
 	if (direction_value > 3) {
 		return ERR_DIRECTION_VALUE;
 	}
-	*(p_motor->direction_0) = direction_value & 1;
-	*(p_motor->direction_1) = direction_value & 2;
+	*(p_motor->p_direction_0) = direction_value & 1;
+	*(p_motor->p_direction_1) = direction_value & 2;
 	return NO_ERROR;
 }
 
