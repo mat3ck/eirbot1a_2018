@@ -13,14 +13,14 @@
 
 class Motor {
 	public:
-	Motor(PwmOut*, DigitalOut*, DigitalOut*);
-	~Motor();
-	int SetPwm(float, unsigned char);
+		Motor(PwmOut*, DigitalOut*, DigitalOut*);
+		~Motor();
+		int SetPwm(float, unsigned char);
 
 	private:
-	PwmOut* m_pwm;
-	DigitalOut* m_direction_0;
-	DigitalOut* m_direction_1;
+		PwmOut* m_pwm;
+		DigitalOut* m_direction_0;
+		DigitalOut* m_direction_1;
 };
 
 
