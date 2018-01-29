@@ -8,7 +8,8 @@
 #include "errors.h"
 #include "motors.h"
 
-Motor::Motor(PwmOut* p_pwm, DigitalOut* p_direction_0, DigitalOut* p_direction_1)
+Motor::Motor(PwmOut* p_pwm, DigitalOut* p_direction_0, 
+		DigitalOut* p_direction_1)
 {
 	m_pwm = p_pwm;
 	m_direction_0 = p_direction_0;

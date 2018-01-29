@@ -16,7 +16,6 @@ class Motor {
 		Motor(PwmOut*, DigitalOut*, DigitalOut*);
 		~Motor();
 		int SetPwm(float, unsigned char);
-
 	private:
 		PwmOut* m_pwm;
 		DigitalOut* m_direction_0;
