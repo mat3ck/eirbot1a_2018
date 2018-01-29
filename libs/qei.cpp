@@ -14,6 +14,11 @@
 Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim, 
 		TIM_TypeDef* p_TIMx, int* p_err)
 {
+	if (m_TIMx == TIM2) {
+		__HAL_RCC_TIM2_CLK_ENABLE();
+	} else if (m_TIMx == TIM4) {
+		__HAL_RCC_TIM4_CLK_ENABLE();
+	}
 	m_encoder = p_encoder;
 	m_htim = p_htim;
 	m_TIMx = p_TIMx;
@@ -27,12 +32,12 @@ Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim,
 
 	m_encoder->EncoderMode = ENCODER_MODE;
 	
-	m_encoder->IC1Filter = 0x05;
+	m_encoder->IC1Filter = 5;
 	m_encoder->IC1Polarity = TIM_ICPOLARITY_RISING;
 	m_encoder->IC1Prescaler = TIM_ICPSC_DIV1;
 	m_encoder->IC1Selection = TIM_ICSELECTION_DIRECTTI;
 	
-	m_encoder->IC2Filter = 0x05;
+	m_encoder->IC2Filter = 5;
 	m_encoder->IC2Polarity = TIM_ICPOLARITY_RISING;
 	m_encoder->IC2Prescaler = TIM_ICPSC_DIV1;
 	m_encoder->IC2Selection = TIM_ICSELECTION_DIRECTTI;
@@ -50,7 +55,6 @@ Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim,
 	GPIO_InitTypeDef GPIO_InitStruct;
 
 	if (m_TIMx == TIM2) {
-		__HAL_RCC_TIM2_CLK_ENABLE();
 		__HAL_RCC_GPIOA_CLK_ENABLE();
 		__HAL_RCC_GPIOB_CLK_ENABLE();
 		GPIO_InitStruct.Pin = GPIO_PIN_0;
@@ -66,7 +70,6 @@ Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim,
 		GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
 		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 	} else if (m_TIMx == TIM4) {
-		__HAL_RCC_TIM4_CLK_ENABLE();
 		__HAL_RCC_GPIOD_CLK_ENABLE();
 		GPIO_InitStruct.Pin = GPIO_PIN_12 | GPIO_PIN_13;
 		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -78,7 +81,7 @@ Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim,
 		*p_err = ERR_ENCODER_TIMX;
 	}
 
-	if (HAL_TIM_Encoder_Start(m_htim, TIM_CHANNEL_1) != HAL_OK) {
+	if (HAL_TIM_Encoder_Start(m_htim, TIM_CHANNEL_ALL) != HAL_OK) {
 		*p_err = ERR_ENCODER_START;
 	}
 
