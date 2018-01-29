@@ -19,7 +19,7 @@ Motor::Motor(PwmOut* p_pwm, DigitalOut* p_direction_0,
 
 Motor::~Motor()
 {
-	;
+	
 }
 
 int Motor::SetPwm(float duty_cycle, unsigned char direction_value)
