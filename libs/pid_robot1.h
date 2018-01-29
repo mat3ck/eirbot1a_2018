@@ -3,7 +3,21 @@
 #define PID_ROBOT1_H
 
 
-#define SAMPLING_PERIOD 200
+class Pid {
+	public:
+		Pid(float, float, float, Timer*);
+		~Pid();
+		float GetPid(float);
+	private:
+		void RefreshPid(float);
+		float m_kp;
+		float m_ki;
+		float m_kd;
+		float m_err;
+		float m_ierr;
+		float m_derr;
+		Timer* m_timer;
+};
 
 
 #endif
