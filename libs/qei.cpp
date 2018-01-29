@@ -14,15 +14,18 @@
 Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim, 
 		TIM_TypeDef* p_TIMx, int* p_err)
 {
-	if (m_TIMx == TIM2) {
-		__HAL_RCC_TIM2_CLK_ENABLE();
-	} else if (m_TIMx == TIM4) {
-		__HAL_RCC_TIM4_CLK_ENABLE();
-	}
+	m_value = 0;
 	m_encoder = p_encoder;
 	m_htim = p_htim;
 	m_TIMx = p_TIMx;
 	TIM_MasterConfigTypeDef master_config;
+	if (m_TIMx == TIM2) {
+		__HAL_RCC_TIM2_CLK_ENABLE();
+	} else if (m_TIMx == TIM4) {
+		__HAL_RCC_TIM4_CLK_ENABLE();
+	} else {
+		*p_err = ERR_ENCODER_START;
+	}
 	
 	m_htim->Instance = m_TIMx;
 	m_htim->Init.Period = MAXCOUNT_PERIOD;
@@ -93,10 +96,10 @@ Qei::~Qei()
 
 }
 
-int Qei::GetQei()
+short Qei::GetQei()
 {
 	short new_value = m_TIMx->CNT;
-	int qei_value = new_value - m_value;
+	short qei_value = new_value - m_value;
 	m_value = new_value;
 	return qei_value;
 }

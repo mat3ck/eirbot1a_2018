@@ -11,7 +11,7 @@ class Qei {
 		Qei(TIM_Encoder_InitTypeDef*, TIM_HandleTypeDef*, 
 				TIM_TypeDef*, int*);
 		~Qei();
-		int GetQei();
+		short GetQei();
 	private:
 		TIM_Encoder_InitTypeDef* m_encoder;
 		TIM_HandleTypeDef* m_htim;
