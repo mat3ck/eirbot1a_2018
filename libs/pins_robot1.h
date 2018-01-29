@@ -17,11 +17,9 @@
 /* Encoders */
 
 // Left qei
-#define PIN_QEI_LEFT1
-#define PIN_QEI_LEFT2
+#define ENCODER_TIM_LEFT TIM4
 // Right qei
-#define PIN_QEI_RIGHT1
-#define PIN_QEI_RIGHT2
+#define ENCODER_TIM_RIGHT TIM2
 
 
 #endif
