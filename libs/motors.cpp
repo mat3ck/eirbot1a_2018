@@ -1,6 +1,8 @@
 /*
  * TODO
  * Documentation
+ * Add a position, angle and speed pid in Motor class
+ * Make SetPwm private and replace it by SetSpeed to control motors
  */
 
 
