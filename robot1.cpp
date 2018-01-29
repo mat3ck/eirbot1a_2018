@@ -1,7 +1,9 @@
 
 #include "mbed.h"
-#include "motors.h"
+#include "errors.h"
 #include "pins_robot1.h"
+#include "motors.h"
+#include "qei.h"
 #include "pid_robot1.h"
 
 

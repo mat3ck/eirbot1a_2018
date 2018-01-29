@@ -16,6 +16,13 @@
 #define ERR_DIRECTION 1120
 #define ERR_DIRECTION_VALUE 1121
 
+//Encoder errors, 1200 to 1299
+#define ERR_ENCODER 1200
+#define ERR_ENCODER_TIMX 1201
+#define ERR_ENCODER_INIT 1210
+#define ERR_ENCODER_START 1211
+#define ERR_ENCODER_MASTERCONFIG 1212
+
 /* Communication errors, 2000 to 2999 */
 
 // PS2 errors, 2100 to 2199
