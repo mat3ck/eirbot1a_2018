@@ -2,26 +2,56 @@
  * TODO
  * Documentation
  * Add a position, angle and speed pid in Motor class
- * Make SetPwm private and replace it by SetSpeed to control motors
+ * Rework SetSpeed function to solve constant command in speed
  */
 
 
 #include "mbed.h"
 #include "errors.h"
+#include "qei.h"
+#include "pid.h"
 #include "motors.h"
 
 Motor::Motor(PwmOut* p_pwm, DigitalOut* p_direction_0, 
-		DigitalOut* p_direction_1)
+		DigitalOut* p_direction_1, Qei* p_qei, Pid* p_pid, Timer* p_timer)
 {
 	m_pwm = p_pwm;
 	m_direction_0 = p_direction_0;
 	m_direction_1 = p_direction_1;
-	SetPwm(0.0f, 0);
+	m_qei = p_qei;
+	m_pid = p_pid;
+	m_timer = p_timer;
+	m_pwm->period(PWM_PERIOD);
+	SetSpeed(0.0f);
+	m_timer->start();
 }
 
 Motor::~Motor()
 {
 	
+}
+
+float Motor::GetSpeed()
+{
+	float dt = m_timer->read();
+	m_timer->reset();
+	short dist = m_qei->GetQei();
+	return (float)dist/dt;
+}
+
+
+int Motor::SetSpeed(float speed)
+{
+	short real_speed = GetSpeed();
+	short pid_err = real_speed - speed;
+	float duty_cycle = m_pid->GetPid(pid_err);
+	unsigned char direction_value;
+	if (speed > 0) {
+		direction_value = DIRECTION_FORWARD;
+	} else {
+		direction_value = DIRECTION_BACKWARD;
+	}
+	return SetPwm(duty_cycle, direction_value);
 }
 
 int Motor::SetPwm(float duty_cycle, unsigned char direction_value)
