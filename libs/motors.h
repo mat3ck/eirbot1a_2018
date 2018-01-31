@@ -7,6 +7,7 @@
 #include "pid.h"
 
 #define PWM_PERIOD 0.000033
+#define MIN_DUTY 0.01
 #define MAX_DUTY 0.95
 
 #define DIRECTION_STOP 0
@@ -20,9 +21,9 @@ class Motor {
 		Motor(PwmOut*, DigitalOut*, DigitalOut*, Qei*, Pid*, Timer*);
 		~Motor();
 		float GetSpeed();
-		int SetSpeed(float);
-	private:
+		float SetSpeed(float);
 		int SetPwm(float, unsigned char);
+	private:
 		PwmOut* m_pwm;
 		DigitalOut* m_direction_0;
 		DigitalOut* m_direction_1;

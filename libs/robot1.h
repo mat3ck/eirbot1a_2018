@@ -4,11 +4,11 @@
 
 /* Constants */
 // Left PID
-#define PID_LEFT_KP 1
+#define PID_LEFT_KP 0
 #define PID_LEFT_KI 0
 #define PID_LEFT_KD 0
 // Right PID
-#define PID_RIGHT_KP 1
+#define PID_RIGHT_KP 0
 #define PID_RIGHT_KI 0
 #define PID_RIGHT_KD 0
 

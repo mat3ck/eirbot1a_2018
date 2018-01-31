@@ -39,19 +39,22 @@ float Motor::GetSpeed()
 	return (float)dist/dt;
 }
 
-
-int Motor::SetSpeed(float speed)
+float Motor::SetSpeed(float speed)
 {
-	short real_speed = GetSpeed();
+	float real_speed = GetSpeed();
 	short pid_err = real_speed - speed;
 	float duty_cycle = m_pid->GetPid(pid_err);
 	unsigned char direction_value;
-	if (speed > 0) {
+	if (duty_cycle > MIN_DUTY) {
 		direction_value = DIRECTION_FORWARD;
-	} else {
+	} else if (duty_cycle < -MIN_DUTY) {
 		direction_value = DIRECTION_BACKWARD;
+		duty_cycle = -duty_cycle;
+	} else {
+		direction_value = DIRECTION_STOP;
 	}
-	return SetPwm(duty_cycle, direction_value);
+	SetPwm(duty_cycle, direction_value);
+	return real_speed;
 }
 
 int Motor::SetPwm(float duty_cycle, unsigned char direction_value)
