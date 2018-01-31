@@ -14,7 +14,6 @@
 Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim, 
 		TIM_TypeDef* p_TIMx, int* p_err)
 {
-	m_value = 0;
 	m_encoder = p_encoder;
 	m_htim = p_htim;
 	m_TIMx = p_TIMx;
@@ -98,9 +97,12 @@ Qei::~Qei()
 
 short Qei::GetQei()
 {
-	short new_value = m_TIMx->CNT;
-	short qei_value = new_value - m_value;
-	m_value = new_value;
-	return qei_value;
+	return m_TIMx->CNT;
 }
 
+short RefreshDiff(short *value, short new_value)
+{
+	short diff = new_value - *value;
+	*value = new_value;
+	return diff;
+}

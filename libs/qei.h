@@ -16,8 +16,9 @@ class Qei {
 		TIM_Encoder_InitTypeDef* m_encoder;
 		TIM_HandleTypeDef* m_htim;
 		TIM_TypeDef* m_TIMx;
-		short m_value; 
 };
+
+short RefreshDiff(short*, short);
 
 
 #endif
