@@ -6,9 +6,10 @@
 #include "qei.h"
 #include "pid.h"
 
-#define PWM_PERIOD 0.000033
-#define MIN_DUTY 0.01
-#define MAX_DUTY 0.95
+#define PERIOD_REFRESH 0.001f
+#define PERIOD_PWM 0.000033f
+#define MIN_DUTY 0.01f
+#define MAX_DUTY 0.95f
 
 #define DIRECTION_STOP 0
 #define DIRECTION_FORWARD 1
@@ -18,18 +19,23 @@
 
 class Motor {
 	public:
-		Motor(PwmOut*, DigitalOut*, DigitalOut*, Qei*, Pid*, Timer*);
+		Motor(PwmOut*, DigitalOut*, DigitalOut*, Qei*, Pid*, Ticker*);
 		~Motor();
 		float GetSpeed();
-		float SetSpeed(float);
-		int SetPwm(float, unsigned char);
+		void SetSpeed(float);
+	protected:
+		void Refresh();
 	private:
+		void SetPwm(float, unsigned char);
+		float m_SP_speed;
+		float m_PV_speed;
+		short m_qei_value;
 		PwmOut* m_pwm;
-		DigitalOut* m_direction_0;
-		DigitalOut* m_direction_1;
+		DigitalOut* m_direction0;
+		DigitalOut* m_direction1;
 		Qei* m_qei;
 		Pid* m_pid;
-		Timer* m_timer;
+		Ticker* m_ticker;
 };
 
 
