@@ -3,6 +3,7 @@
  * TODO
  * Documentation
  * Add xy and angle pid, maybe speed pid for each motor
+ * Add PidLearner class to auto set pid coef respecting restrictions
  */
 
 #include "mbed.h"
