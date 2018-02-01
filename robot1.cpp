@@ -45,5 +45,6 @@ Motor motor_right(p_pwm_right, p_direction_0_right, p_direction_1_right,
 
 int main()
 {
-
+	wait(1);
+	printf("\n\n\rStarting, error code : %d\n\r", err);
 }
