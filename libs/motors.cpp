@@ -1,8 +1,8 @@
 /*
  * TODO
  * Documentation
- * Add a position, angle and speed pid in Motor class
- * Rework SetSpeed function to solve constant command in speed
+ * Make the class more lighter to just contains motor object
+ * Put other objects (SetSpeed, Tickers..) in other classes, functions..
  */
 
 
@@ -47,7 +47,7 @@ void Motor::Refresh()
 {
 	short dist = RefreshDiff(&_qei_value, _qei->GetQei());
 	_PV_speed = (float)dist/PERIOD_REFRESH;
-	float duty_cycle = _pid->GetPid(_SP_speed-_PV_speed);
+	float duty_cycle += _pid->GetPid(_SP_speed-_PV_speed);
 	unsigned char direction_value;
 	if (duty_cycle > MIN_DUTY) {
 		direction_value = DIRECTION_FORWARD;
@@ -57,7 +57,7 @@ void Motor::Refresh()
 	} else {
 		direction_value = DIRECTION_STOP;
 	}
-	SetPwm(duty_cycle);
+	SetPwm(duty_cycle, direction_value);
 	SetDirection(direction_value);
 }
 
@@ -69,9 +69,10 @@ void Motor::SetPwm(float duty_cycle)
 	_pwm->write(duty_cycle);
 }
 
-void Motor::SetDirection(unsigned char direction_value)
+void SetDirection(direction_value)
 {
-	if (direction_value == DIRECTION_STOP || _direction == DIRECTION_STOP) {
+	if (direction_value = DIRECTION_STOP || _direction = DIRECTION_STOP
+			&& _timer->read > 0.2) {
 		_direction = direction_value;
 		*_direction0 = _direction & 1;
 		*_direction1 = _direction & 2;
