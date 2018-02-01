@@ -12,11 +12,11 @@
 
 Pid::Pid(float kp, float ki, float kd, Timer* p_timer)
 {
-	m_kp = kp;
-	m_ki = ki;
-	m_kd = kd;
-	m_timer = p_timer;
-	m_timer->start();
+	_kp = kp;
+	_ki = ki;
+	_kd = kd;
+	_timer = p_timer;
+	_timer->start();
 }
 
 Pid::~Pid()
@@ -27,14 +27,14 @@ Pid::~Pid()
 float Pid::GetPid(float err)
 {
 	RefreshPid(err);
-	return m_kp*m_err + m_ki*m_ierr + m_kd*m_derr;
+	return _kp*_err + _ki*_ierr + _kd*_derr;
 }
 
 void Pid::RefreshPid(float err)
 {
-	float dt = m_timer->read();
-	m_timer->reset();
-	m_ierr += err*dt;
-	m_derr = (err-m_err)/dt;
-	m_err = err;
+	float dt = _timer->read();
+	_timer->reset();
+	_ierr += err*dt;
+	_derr = (err-_err)/dt;
+	_err = err;
 }

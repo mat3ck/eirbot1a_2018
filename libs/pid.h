@@ -11,13 +11,13 @@ class Pid {
 		int SetPid(float, float, float);
 	private:
 		void RefreshPid(float);
-		float m_kp;
-		float m_ki;
-		float m_kd;
-		float m_err;
-		float m_ierr;
-		float m_derr;
-		Timer* m_timer;
+		float _kp;
+		float _ki;
+		float _kd;
+		float _err;
+		float _ierr;
+		float _derr;
+		Timer* _timer;
 };
 
 

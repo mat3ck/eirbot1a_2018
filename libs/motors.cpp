@@ -15,16 +15,16 @@
 Motor::Motor(PwmOut *p_pwm, DigitalOut *p_direction0, DigitalOut *p_direction1,
 		Qei *p_qei, Pid *p_pid, Ticker *p_ticker)
 {
-	m_qei_value = 0;
-	m_pwm = p_pwm;
-	m_direction0 = p_direction0;
-	m_direction1 = p_direction1;
-	m_qei = p_qei;
-	m_pid = p_pid;
-	m_ticker = p_ticker;
-	m_pwm->period(PERIOD_PWM);
+	_qei_value = 0;
+	_pwm = p_pwm;
+	_direction0 = p_direction0;
+	_direction1 = p_direction1;
+	_qei = p_qei;
+	_pid = p_pid;
+	_ticker = p_ticker;
+	_pwm->period(PERIOD_PWM);
 	SetSpeed(0.0f);
-	m_ticker->attach(callback(this, &Motor::Refresh), PERIOD_REFRESH);
+	_ticker->attach(callback(this, &Motor::Refresh), PERIOD_REFRESH);
 }
 
 Motor::~Motor()
@@ -34,20 +34,20 @@ Motor::~Motor()
 
 float Motor::GetSpeed()
 {
-	return m_PV_speed;
-	return m_SP_speed;
+	return _PV_speed;
+	return _SP_speed;
 }
 
 void Motor::SetSpeed(float speed)
 {
-	m_SP_speed = speed;
+	_SP_speed = speed;
 }
 
 void Motor::Refresh()
 {
-	short dist = RefreshDiff(&m_qei_value, m_qei->GetQei());
-	m_PV_speed = (float)dist/PERIOD_REFRESH;
-	float duty_cycle = m_pid->GetPid(m_PV_speed - m_SP_speed);
+	short dist = RefreshDiff(&_qei_value, _qei->GetQei());
+	_PV_speed = (float)dist/PERIOD_REFRESH;
+	float duty_cycle = _pid->GetPid(_PV_speed - _SP_speed);
 	unsigned char direction_value;
 	if (duty_cycle > MIN_DUTY) {
 		direction_value = DIRECTION_FORWARD;
@@ -67,8 +67,8 @@ void Motor::SetPwm(float duty_cycle, unsigned char direction_value)
 	if (duty_cycle > MAX_DUTY) {
 		duty_cycle = MAX_DUTY;
 	}
-	m_pwm->write(duty_cycle);
-	*m_direction0 = direction_value & 1;
-	*m_direction1 = direction_value & 2;
+	_pwm->write(duty_cycle);
+	*_direction0 = direction_value & 1;
+	*_direction1 = direction_value & 2;
 }
 

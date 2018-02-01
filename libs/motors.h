@@ -27,15 +27,15 @@ class Motor {
 		void Refresh();
 	private:
 		void SetPwm(float, unsigned char);
-		float m_SP_speed;
-		float m_PV_speed;
-		short m_qei_value;
-		PwmOut* m_pwm;
-		DigitalOut* m_direction0;
-		DigitalOut* m_direction1;
-		Qei* m_qei;
-		Pid* m_pid;
-		Ticker* m_ticker;
+		float _SP_speed;
+		float _PV_speed;
+		short _qei_value;
+		PwmOut* _pwm;
+		DigitalOut* _direction0;
+		DigitalOut* _direction1;
+		Qei* _qei;
+		Pid* _pid;
+		Ticker* _ticker;
 };
 
 
