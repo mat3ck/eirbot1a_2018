@@ -31,6 +31,13 @@ float Pid::GetPid(float err)
 	return _kp*_err + _ki*_ierr + _kd*_derr;
 }
 
+void Pid::SetPid(float kp, float ki, float kd)
+{
+	_kp = kp;
+	_ki = ki;
+	_kd = kd;
+}
+
 void Pid::RefreshPid(float err)
 {
 	float dt = _timer->read();

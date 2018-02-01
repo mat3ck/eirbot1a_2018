@@ -9,8 +9,7 @@ class Pid {
 		Pid(float, float, float, Timer*);
 		~Pid();
 		float GetPid(float);
-	protected:
-		int SetPid(float, float, float);
+		void SetPid(float, float, float);
 	private:
 		void RefreshPid(float);
 		float _kp;

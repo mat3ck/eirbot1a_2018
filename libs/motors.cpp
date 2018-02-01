@@ -24,6 +24,7 @@ Motor::Motor(PwmOut *p_pwm, DigitalOut *p_direction0, DigitalOut *p_direction1,
 	_ticker = p_ticker;
 	_pwm->period(PERIOD_PWM);
 	SetSpeed(0.0f);
+	SetDirection(DIRECTION_STOP);
 	_ticker->attach(callback(this, &Motor::Refresh), PERIOD_REFRESH);
 }
 
@@ -35,7 +36,6 @@ Motor::~Motor()
 float Motor::GetSpeed()
 {
 	return _PV_speed;
-	return _SP_speed;
 }
 
 void Motor::SetSpeed(float speed)
@@ -47,28 +47,33 @@ void Motor::Refresh()
 {
 	short dist = RefreshDiff(&_qei_value, _qei->GetQei());
 	_PV_speed = (float)dist/PERIOD_REFRESH;
-	float duty_cycle = _pid->GetPid(_PV_speed - _SP_speed);
+	float duty_cycle = _pid->GetPid(_SP_speed-_PV_speed);
 	unsigned char direction_value;
 	if (duty_cycle > MIN_DUTY) {
 		direction_value = DIRECTION_FORWARD;
 	} else if (duty_cycle < -MIN_DUTY) {
 		direction_value = DIRECTION_BACKWARD;
 		duty_cycle = -duty_cycle;
-	} else if (duty_cycle == NAN) {
-		direction_value = DIRECTION_BREAK;
 	} else {
 		direction_value = DIRECTION_STOP;
 	}
-	SetPwm(duty_cycle, direction_value);
+	SetPwm(duty_cycle);
+	SetDirection(direction_value);
 }
 
-void Motor::SetPwm(float duty_cycle, unsigned char direction_value)
+void Motor::SetPwm(float duty_cycle)
 {
 	if (duty_cycle > MAX_DUTY) {
 		duty_cycle = MAX_DUTY;
 	}
 	_pwm->write(duty_cycle);
-	*_direction0 = direction_value & 1;
-	*_direction1 = direction_value & 2;
 }
 
+void Motor::SetDirection(unsigned char direction_value)
+{
+	if (direction_value == DIRECTION_STOP || _direction == DIRECTION_STOP) {
+		_direction = direction_value;
+		*_direction0 = _direction & 1;
+		*_direction1 = _direction & 2;
+	}
+}
