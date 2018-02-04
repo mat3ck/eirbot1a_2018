@@ -20,7 +20,7 @@
 
 class Motor {
 	public:
-		Motor(PwmOut*, DigitalOut*, DigitalOut*, Qei*, Pid*, Ticker*);
+		Motor(PwmOut*, DigitalOut*, DigitalOut*, Qei*, Pid*, Ticker*, Timer*);
 		~Motor();
 		float GetSpeed();
 		void SetSpeed(float);
