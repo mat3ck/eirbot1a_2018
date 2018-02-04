@@ -11,12 +11,12 @@
 #include "pid.h"
 
 
-Pid::Pid(float kp, float ki, float kd, Timer* p_timer)
+Pid::Pid(float kp, float ki, float kd, Timer* timer)
 {
 	_kp = kp;
 	_ki = ki;
 	_kd = kd;
-	_timer = p_timer;
+	_timer = timer;
 	_timer->start();
 }
 
