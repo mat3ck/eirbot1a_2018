@@ -29,20 +29,14 @@ Timer* timer_pid_right = new Timer;
 Pid pid_right(PID_RIGHT_KP, PID_RIGHT_KI, PID_RIGHT_KD, timer_pid_right);
 // Left Motor
 PwmOut* pwm_left = new PwmOut(PIN_PWM_LEFT);
-DigitalOut* direction0_left = new DigitalOut(PIN_DIR_LEFT1);
-DigitalOut* direction1_left = new DigitalOut(PIN_DIR_LEFT2);
-Ticker* ticker_motor_left = new Ticker;
-Timer* timer_motor_left = new Timer;
-Motor motor_left(pwm_left, direction0_left, direction1_left, 
-		&qei_left, &pid_left, ticker_motor_left, timer_motor_left);
+DigitalOut* dir0_left = new DigitalOut(PIN_DIR_LEFT1);
+DigitalOut* dir1_left = new DigitalOut(PIN_DIR_LEFT2);
+Motor motor_left(pwm_left, dir0_left, dir1_left);
 // Right Motor
 PwmOut* pwm_right = new PwmOut(PIN_PWM_RIGHT);
-DigitalOut* direction0_right = new DigitalOut(PIN_DIR_RIGHT1);
-DigitalOut* direction1_right = new DigitalOut(PIN_DIR_RIGHT2);
-Ticker* ticker_motor_right = new Ticker;
-Timer* timer_motor_right = new Timer;
-Motor motor_right(pwm_right, direction0_right, direction1_right, 
-		&qei_right, &pid_right, ticker_motor_right, timer_motor_right);
+DigitalOut* dir0_right = new DigitalOut(PIN_DIR_RIGHT1);
+DigitalOut* dir1_right = new DigitalOut(PIN_DIR_RIGHT2);
+Motor motor_right(pwm_right, dir0_right, dir1_right);
 
 
 int main()

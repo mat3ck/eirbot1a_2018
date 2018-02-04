@@ -11,35 +11,26 @@
 #define MIN_DUTY 0.05f
 #define MAX_DUTY 0.50f
 
-#define DIRECTION_STOP 0
-#define DIRECTION_FORWARD 1
-#define DIRECTION_BACKWARD 2
-#define DIRECTION_BREAK 3
+#define DIR_STOP 0
+#define DIR_FORWARD 1
+#define DIR_BACKWARD 2
+#define DIR_BREAK 3
 
-#define AbsMin(x, y) (abs(x)<abs(y) ? (x) : (y))
+#define min(x, y) ((x)<(y) ? (x) : (y))
 
 class Motor {
 	public:
-		Motor(PwmOut*, DigitalOut*, DigitalOut*, Qei*, Pid*, Ticker*, Timer*);
+		Motor(PwmOut*, DigitalOut*, DigitalOut*);
 		~Motor();
-		float GetSpeed();
-		void SetSpeed(float);
-	private:
-		void Refresh();
+	protected:
 		void SetPwm(float);
 		void SetDirection(unsigned char);
-		float _SP_speed;
-		float _PV_speed;
+	private:
 		float _duty;
-		unsigned short _direction;
-		short _qei_value;
+		unsigned short _dir;
 		PwmOut* _pwm;
-		DigitalOut* _direction0;
-		DigitalOut* _direction1;
-		Qei* _qei;
-		Pid* _pid;
-		Ticker* _ticker;
-		Timer* _timer;
+		DigitalOut* _dir0;
+		DigitalOut* _dir1;
 };
 
 
