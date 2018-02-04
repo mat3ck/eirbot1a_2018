@@ -27,6 +27,7 @@ Motor::Motor(PwmOut* pwm, DigitalOut* direction0, DigitalOut* direction1,
 	SetSpeed(0.0f);
 	SetDirection(DIRECTION_STOP);
 	_ticker->attach(callback(this, &Motor::Refresh), PERIOD_REFRESH);
+	_timer->start();
 }
 
 Motor::~Motor()
@@ -72,7 +73,7 @@ void Motor::SetPwm(float duty_cycle)
 
 void Motor::SetDirection(unsigned char direction_value)
 {
-	if (direction_value = DIRECTION_STOP || _direction = DIRECTION_STOP
+	if ((direction_value == DIRECTION_STOP || _direction == DIRECTION_STOP)
 			&& _timer->read() > 0.2) {
 		_direction = direction_value;
 		*_direction0 = _direction & 1;
