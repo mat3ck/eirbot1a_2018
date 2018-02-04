@@ -11,19 +11,19 @@
 #include "qei.h"
 
 
-Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim, 
-		TIM_TypeDef* p_TIMx, int* p_err)
+Qei::Qei(TIM_Encoder_InitTypeDef* encoder, TIM_HandleTypeDef* htim, 
+		TIM_TypeDef* TIMx, int* err)
 {
-	_encoder = p_encoder;
-	_htim = p_htim;
-	_TIMx = p_TIMx;
+	_encoder = encoder;
+	_htim = htim;
+	_TIMx = TIMx;
 	TIM_MasterConfigTypeDef master_config;
 	if (_TIMx == TIM2) {
 		__HAL_RCC_TIM2_CLK_ENABLE();
 	} else if (_TIMx == TIM4) {
 		__HAL_RCC_TIM4_CLK_ENABLE();
 	} else {
-		*p_err = ERR_ENCODER_START;
+		*err = ERR_ENCODER_START;
 	}
 	
 	_htim->Instance = _TIMx;
@@ -45,13 +45,13 @@ Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim,
 	_encoder->IC2Selection = TIM_ICSELECTION_DIRECTTI;
 
 	if (HAL_TIM_Encoder_Init(_htim, _encoder) != HAL_OK) {
-		*p_err = ERR_ENCODER_INIT;
+		*err = ERR_ENCODER_INIT;
 	}
 	master_config.MasterOutputTrigger = TIM_TRGO_RESET;
 	master_config.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
 	if (HAL_TIMEx_MasterConfigSynchronization(_htim, &master_config)
 			!= HAL_OK) {
-		*p_err = ERR_ENCODER_MASTERCONFIG;
+		*err = ERR_ENCODER_MASTERCONFIG;
 	}
 	
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -80,11 +80,11 @@ Qei::Qei(TIM_Encoder_InitTypeDef* p_encoder, TIM_HandleTypeDef* p_htim,
 		GPIO_InitStruct.Alternate = GPIO_AF2_TIM4;
 		HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 	} else {
-		*p_err = ERR_ENCODER_TIMX;
+		*err = ERR_ENCODER_TIMX;
 	}
 
 	if (HAL_TIM_Encoder_Start(_htim, TIM_CHANNEL_ALL) != HAL_OK) {
-		*p_err = ERR_ENCODER_START;
+		*err = ERR_ENCODER_START;
 	}
 
 	_TIMx->CNT = 0;
@@ -100,7 +100,7 @@ short Qei::GetQei()
 	return _TIMx->CNT;
 }
 
-short RefreshDiff(short *value, short new_value)
+short RefreshDiff(short* value, short new_value)
 {
 	short diff = new_value - *value;
 	*value = new_value;
