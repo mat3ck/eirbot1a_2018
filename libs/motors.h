@@ -22,6 +22,7 @@ class Motor {
 	public:
 		Motor(PwmOut*, DigitalOut*, DigitalOut*, Timer*);
 		~Motor();
+	protected:
 		void SetPwm(float, int*);
 		void SetDirection(unsigned char, int*);
 	private:
@@ -31,6 +32,23 @@ class Motor {
 		DigitalOut* _dir0;
 		DigitalOut* _dir1;
 		Timer* _timer;
+};
+
+class Block {
+	public:
+		Block(Motor*, Qei*, Pid*, Ticker*);
+		~Block();
+		float GetSpeed();
+		void SetSpeed(float);
+	private:
+		void Refresh();
+		_SPspeed;
+		_PVspeed;
+		Motor* _motor;
+		Qei* _qei;
+		Pid* _pid;
+		Ticker* _ticker;
+
 };
 
 
