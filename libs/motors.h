@@ -20,17 +20,17 @@
 
 class Motor {
 	public:
-		Motor(PwmOut*, DigitalOut*, DigitalOut*);
+		Motor(PwmOut*, DigitalOut*, DigitalOut*, Timer*);
 		~Motor();
-	protected:
-		void SetPwm(float);
-		void SetDirection(unsigned char);
+		void SetPwm(float, int*);
+		void SetDirection(unsigned char, int*);
 	private:
 		float _duty;
 		unsigned short _dir;
 		PwmOut* _pwm;
 		DigitalOut* _dir0;
 		DigitalOut* _dir1;
+		Timer* _timer;
 };
 
 
