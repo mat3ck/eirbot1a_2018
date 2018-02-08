@@ -5,14 +5,14 @@
 #include "mbed.h"
 #include "pid.h"
 #include "qei.h"
-#include "motor.h"
+#include "motors.h"
 
 #define PERIOD_REFRESH 0.001f
 
 
 class Block {
 	public:
-		Block(Motor*, Qei*, Pid*, Ticker*, int*);
+		Block(Qei*, Pid*, Motor*, Ticker*, int*);
 		~Block();
 		float GetSpeed();
 		void SetSpeed(float);
@@ -22,9 +22,9 @@ class Block {
 		float _PVspeed;
 		short _qei_value;
 		int* _err;
-		Motor* _motor;
 		Qei* _qei;
 		Pid* _pid;
+		Motor* _motor;
 		Ticker* _ticker;
 };
 

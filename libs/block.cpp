@@ -10,9 +10,10 @@
 #include "pid.h"
 #include "qei.h"
 #include "motors.h"
+#include "block.h"
 
 
-Block::Block(Motor* motor, Qei* qei, Pid* pid, Ticker* ticker, int* err)
+Block::Block(Qei* qei, Pid* pid, Motor* motor, Ticker* ticker, int* err)
 {
 	_motor = motor;
 	_qei = qei;
@@ -21,7 +22,7 @@ Block::Block(Motor* motor, Qei* qei, Pid* pid, Ticker* ticker, int* err)
 	_err = err;
 	_SPspeed = 0;
 	_PVspeed = 0;
-	_qei_value = _qei->GetValue();
+	_qei_value = _qei->GetQei();
 	_ticker->attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
 }
 
