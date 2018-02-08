@@ -50,6 +50,7 @@ OBJECTS += robot1.o
 OBJECTS += libs/pid.o
 OBJECTS += libs/qei.o
 OBJECTS += libs/motors.o
+OBJECTS += libs/block.o
 OBJECTS += libs/movement.o
 
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/stm32f4xx_hal_flash_ramfunc.o
