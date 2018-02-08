@@ -21,12 +21,12 @@
 /* Motors */
 // Left motor
 #define PIN_PWM_LEFT PC_8
-#define PIN_DIR_LEFT1 PC_10
-#define PIN_DIR_LEFT2 PC_11
+#define PIN_DIR_LEFT PC_10
+#define PIN_BREAK_LEFT PC_11
 // Right Motor
 #define PIN_PWM_RIGHT PC_9
-#define PIN_DIR_RIGHT1 PD_7
-#define PIN_DIR_RIGHT2 PD_6
+#define PIN_DIR_RIGHT PD_7
+#define PIN_BREAK_RIGHT PD_6
 
 
 #endif

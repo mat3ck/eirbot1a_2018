@@ -30,13 +30,13 @@ Timer* timer_pid_right = new Timer;
 Pid pid_right(PID_RIGHT_KP, PID_RIGHT_KI, PID_RIGHT_KD, timer_pid_right);
 // Left Motor
 PwmOut* pwm_left = new PwmOut(PIN_PWM_LEFT);
-DigitalOut* dir_left = new DigitalOut(PIN_DIR_LEFT1);
-DigitalOut* break_left = new DigitalOut(PIN_DIR_LEFT2);
+DigitalOut* dir_left = new DigitalOut(PIN_DIR_LEFT);
+DigitalOut* break_left = new DigitalOut(PIN_BREAK_LEFT);
 Motor motor_left(pwm_left, dir_left, break_left);
 // Right Motor
 PwmOut* pwm_right = new PwmOut(PIN_PWM_RIGHT);
-DigitalOut* dir_right = new DigitalOut(PIN_DIR_RIGHT1);
-DigitalOut* break_right = new DigitalOut(PIN_DIR_RIGHT2);
+DigitalOut* dir_right = new DigitalOut(PIN_DIR_RIGHT);
+DigitalOut* break_right = new DigitalOut(PIN_BREAK_RIGHT);
 Motor motor_right(pwm_right, dir_right, break_right);
 // Left Block
 Ticker* ticker_left;
