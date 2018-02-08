@@ -5,6 +5,7 @@
 #include "qei.h"
 #include "pid.h"
 #include "motors.h"
+#include "block.h"
 
 
 int err = 0;
@@ -37,7 +38,12 @@ PwmOut* pwm_right = new PwmOut(PIN_PWM_RIGHT);
 DigitalOut* dir_right = new DigitalOut(PIN_DIR_RIGHT1);
 DigitalOut* break_right = new DigitalOut(PIN_DIR_RIGHT2);
 Motor motor_right(pwm_right, dir_right, break_right);
-
+// Left Block
+Ticker* ticker_left;
+Block block_left(&qei_left, &pid_left, &motor_left, ticker_left, &err);
+// Right Block
+Ticker* ticker_right;
+Block block_right(&qei_right, &pid_right, &motor_right, ticker_right, &err);
 
 int main()
 {
