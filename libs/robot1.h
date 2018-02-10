@@ -4,13 +4,19 @@
 
 /* Constants */
 // Left PID
-#define PID_LEFT_KP 0
-#define PID_LEFT_KI 0
-#define PID_LEFT_KD 0
+#define K1_ERR_LEFT 0.0f
+#define K2_ERR_LEFT 0.0f
+#define K3_ERR_LEFT 0.0f
+#define K1_SP_LEFT 0.0f
+#define K2_SP_LEFT 0.0f
+#define K3_SP_LEFT 0.0f
 // Right PID
-#define PID_RIGHT_KP 0
-#define PID_RIGHT_KI 0
-#define PID_RIGHT_KD 0
+#define K1_ERR_RIGHT 0.0f
+#define K2_ERR_RIGHT 0.0f
+#define K3_ERR_RIGHT 0.0f
+#define K1_SP_RIGHT 0.0f
+#define K2_SP_RIGHT 0.0f
+#define K3_SP_RIGHT 0.0f
 
 /* Encoders */
 // Left qei
