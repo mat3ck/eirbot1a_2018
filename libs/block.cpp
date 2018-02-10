@@ -2,6 +2,7 @@
  * TODO
  * Documentation
  * Finish Block::Refresh()
+ * L49 replace 0 by previous setpoint
  */
 
 
@@ -44,7 +45,8 @@ void Block::SetSpeed(float speed)
 void Block::Refresh()
 {
 	_PVspeed = RefreshDiff(&_qei_value, _qei->GetQei());
-	static float duty_cycle = _pid->GetPid(_SPspeed - _PVspeed);
+	static float err = _SPspeed - _PVspeed;
+	static float duty_cycle = _pid->GetPid(err, 0);
 	static unsigned char dir;
 	if (duty_cycle > 0.0f) {
 		dir = DIR_FORWARD;
