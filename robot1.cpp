@@ -23,11 +23,13 @@ TIM_HandleTypeDef* htim_right = new TIM_HandleTypeDef;
 TIM_TypeDef* TIMx_right = ENCODER_TIM_RIGHT;
 Qei qei_right(encoder_right, htim_right, TIMx_right, &err);
 // Left motor speed PID
-Timer* timer_pid_left = new Timer;
-Pid pid_left(PID_LEFT_KP, PID_LEFT_KI, PID_LEFT_KD, timer_pid_left);
+float coef_err_left[] = {K1_ERR_LEFT, K2_ERR_LEFT, K3_ERR_LEFT};
+float coef_sp_left[] = {K1_SP_LEFT, K2_ERR_LEFT, K3_ERR_LEFT};
+Pid pid_left(coef_err_left, coef_sp_left);
 // Right motor speed PID
-Timer* timer_pid_right = new Timer;
-Pid pid_right(PID_RIGHT_KP, PID_RIGHT_KI, PID_RIGHT_KD, timer_pid_right);
+float coef_err_right[] = {K1_ERR_RIGHT, K2_ERR_RIGHT, K3_ERR_RIGHT};
+float coef_sp_right[] = {K1_SP_RIGHT, K2_ERR_RIGHT, K3_ERR_RIGHT};
+Pid pid_right(coef_err_right, coef_sp_right);
 // Left Motor
 PwmOut* pwm_left = new PwmOut(PIN_PWM_LEFT);
 DigitalOut* dir_left = new DigitalOut(PIN_DIR_LEFT);
