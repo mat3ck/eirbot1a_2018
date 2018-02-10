@@ -4,21 +4,31 @@
 
 #include "mbed.h"
 
+#define NB_COEF 3
+
+
+class CArray {
+	public:
+		CArray();
+		~CArray();
+		void Add(float);
+		float operator[](int);
+	private:
+		int _index;
+		float _array[NB_COEF];
+};
+
 class Pid {
 	public:
-		Pid(float, float, float, Timer*);
+		Pid(float [NB_COEF], float [NB_COEF]);
 		~Pid();
-		float GetPid(float);
-		void SetPid(float, float, float);
+		float GetPid(float, float);
 	private:
-		void RefreshPid(float);
-		float _kp;
-		float _ki;
-		float _kd;
-		float _err;
-		float _ierr;
-		float _derr;
-		Timer* _timer;
+		void RefreshPid(float, float);
+		float* _coef_err;
+		float* _coef_sp;
+		CArray _err_ca;
+		CArray _sp_ca;
 };
 
 
