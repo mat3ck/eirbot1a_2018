@@ -1,8 +1,7 @@
 /*
  * TODO
  * Documentation
- * Add xy and angle pid, maybe speed pid for each motor
- * Add PidLearner class to auto set pid coef respecting restrictions
+ * Make position and angle pid to control motor's speed pid
  */
 
 #include "mbed.h"
@@ -47,12 +46,12 @@ Pid::~Pid()
 
 float Pid::GetPid(float err, float sp)
 {
-	RefreshPid(err, sp);
 	float sum = 0.0f;
 	for (int i = 0; i < NB_COEF; i++) {
 		sum += _coef_err[i] * _err_ca[i];
 		sum += _coef_sp[i] * _sp_ca[i];
 	}
+	RefreshPid(err, sp);
 	return sum;
 }
 
