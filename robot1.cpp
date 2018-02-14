@@ -42,10 +42,10 @@ DigitalOut* break_right = new DigitalOut(PIN_BREAK_RIGHT);
 Motor motor_right(pwm_right, dir_right, break_right);
 // Left Block
 Ticker* ticker_left = new Ticker;
-Block block_left(&qei_left, &pid_left, &motor_left, ticker_left, &err);
+Block block_left(&qei_left, &pid_left, &motor_left, ticker_left);
 // Right Block
 Ticker* ticker_right = new Ticker;
-Block block_right(&qei_right, &pid_right, &motor_right, ticker_right, &err);
+Block block_right(&qei_right, &pid_right, &motor_right, ticker_right);
 
 int main()
 {
