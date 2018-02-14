@@ -1,8 +1,6 @@
 /*
  * TODO
  * Documentation
- * Finish Block::Refresh()
- * L49 replace 0 by previous setpoint
  */
 
 
@@ -14,16 +12,16 @@
 #include "block.h"
 
 
-Block::Block(Qei* qei, Pid* pid, Motor* motor, Ticker* ticker, int* err)
+Block::Block(Qei* qei, Pid* pid, Motor* motor, Ticker* ticker)
 {
 	_motor = motor;
 	_qei = qei;
 	_pid = pid;
 	_ticker = ticker;
-	_err = err;
 	_SPspeed = 0;
 	_PVspeed = 0;
 	_qei_value = _qei->GetQei();
+	_duty = _motor->GetPwm();
 	_ticker->attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
 }
 
@@ -46,15 +44,15 @@ void Block::Refresh()
 {
 	_PVspeed = RefreshDiff(&_qei_value, _qei->GetQei());
 	static float err = _SPspeed - _PVspeed;
-	static float duty_cycle = _pid->GetPid(err, 0);
+	_duty = _pid->GetPid(err, _duty);
 	static unsigned char dir;
-	if (duty_cycle > 0.0f) {
+	if (_duty > 0.0f) {
 		dir = DIR_FORWARD;
 	} else {
 		dir = DIR_BACKWARD;
-		duty_cycle = -duty_cycle;
+		_duty = -_duty;
 	}
-	_motor->SetPwm(duty_cycle);
 	_motor->SetDirection(dir);
+	_motor->SetPwm(_duty);
 }
 

@@ -12,7 +12,7 @@
 
 class Block {
 	public:
-		Block(Qei*, Pid*, Motor*, Ticker*, int*);
+		Block(Qei*, Pid*, Motor*, Ticker*);
 		~Block();
 		float GetSpeed();
 		void SetSpeed(float);
@@ -21,7 +21,7 @@ class Block {
 		float _SPspeed;
 		float _PVspeed;
 		short _qei_value;
-		int* _err;
+		float _duty;
 		Qei* _qei;
 		Pid* _pid;
 		Motor* _motor;
