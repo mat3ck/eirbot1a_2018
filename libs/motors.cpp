@@ -24,6 +24,11 @@ Motor::~Motor()
 	
 }
 
+float Motor::GetPwm()
+{
+	return _pwm->read();
+}
+
 void Motor::SetPwm(float duty_cycle)
 {
 	float duty = min(duty_cycle, MAX_DUTY);

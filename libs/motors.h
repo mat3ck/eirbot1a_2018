@@ -18,6 +18,7 @@ class Motor {
 	public:
 		Motor(PwmOut*, DigitalOut*, DigitalOut*);
 		~Motor();
+		float GetPwm();
 		void SetPwm(float);
 		void SetDirection(unsigned char);
 		void SetBreak(bool);
