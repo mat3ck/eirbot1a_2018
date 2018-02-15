@@ -1,6 +1,7 @@
 /*
  * TODO
  * Documentation
+ * Create LMD18200 and L298 class inheritant from Motor
  */
 
 
