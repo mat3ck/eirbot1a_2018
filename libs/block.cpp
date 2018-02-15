@@ -66,6 +66,11 @@ void Block::SetSpeed(float speed)
 	_SPspeed = speed;
 }
 
+void Block::SetBreak(bool br)
+{
+	_motor->SetBreak(br);
+}
+
 void Block::Refresh()
 {
 	_PVspeed = RefreshDiff(&_qei_value, _qei->GetQei());
