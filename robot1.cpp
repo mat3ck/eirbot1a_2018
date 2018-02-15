@@ -6,6 +6,7 @@
 #include "pid.h"
 #include "motors.h"
 #include "block.h"
+#include "telemetry.h"
 
 
 int err = 0;
@@ -51,4 +52,7 @@ int main()
 {
 	wait(1);
 	printf("\n\n\rStarting, error code : %d\n\r", err);
+	while(1) {
+		
+	}
 }
