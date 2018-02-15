@@ -25,7 +25,7 @@ CArray::~CArray()
 
 void CArray::Add(float val)
 {
-	_index = (_index-1) % NB_COEF;
+	_index = ((_index-1) % NB_COEF + NB_COEF) % NB_COEF;
 	_array[_index] = val;
 }
 
