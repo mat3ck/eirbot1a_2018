@@ -1,6 +1,7 @@
 /*
  * TODO
  * Documentation
+ * Add getter functions to access more values
  */
 
 
@@ -30,9 +31,34 @@ Block::~Block()
 
 }
 
-float Block::GetSpeed()
+float Block::GetSP()
+{
+	return _SPspeed;
+}
+
+float Block::GetPV()
 {
 	return _PVspeed;
+}
+
+float Block::GetPwm()
+{
+	return _motor->GetPwm();
+}
+
+bool Block::GetDir()
+{
+	return _motor->GetDir();
+}
+
+bool Block::GetBreak()
+{
+	return _motor->GetBreak();
+}
+
+short Block::GetQei()
+{
+	return _qei->GetQei();
 }
 
 void Block::SetSpeed(float speed)
@@ -44,7 +70,7 @@ void Block::Refresh()
 {
 	_PVspeed = RefreshDiff(&_qei_value, _qei->GetQei());
 	static float err = _SPspeed - _PVspeed;
-	_duty = _pid->GetPid(err, _duty);
+	_duty = min(_pid->GetPid(err, _duty), MAX_DUTY);
 	static unsigned char dir;
 	if (_duty > 0.0f) {
 		dir = DIR_FORWARD;

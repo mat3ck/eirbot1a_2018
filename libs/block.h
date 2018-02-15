@@ -14,7 +14,12 @@ class Block {
 	public:
 		Block(Qei*, Pid*, Motor*, Ticker*);
 		~Block();
-		float GetSpeed();
+		float GetSP();
+		float GetPV();
+		float GetPwm();
+		bool GetDir();
+		bool GetBreak();
+		short GetQei();
 		void SetSpeed(float);
 	private:
 		void Refresh();
