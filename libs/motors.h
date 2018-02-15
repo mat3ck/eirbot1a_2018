@@ -14,11 +14,14 @@
 
 #define min(x, y) ((x)<(y) ? (x) : (y))
 
+
 class Motor {
 	public:
 		Motor(PwmOut*, DigitalOut*, DigitalOut*);
 		~Motor();
 		float GetPwm();
+		bool GetDir();
+		bool GetBreak();
 		void SetPwm(float);
 		void SetDirection(unsigned char);
 		void SetBreak(bool);

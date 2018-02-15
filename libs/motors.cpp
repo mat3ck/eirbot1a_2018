@@ -30,6 +30,16 @@ float Motor::GetPwm()
 	return _pwm->read();
 }
 
+bool Motor::GetDir()
+{
+	return *_dir;
+}
+
+bool Motor::GetBreak()
+{
+	return *_break;
+}
+
 void Motor::SetPwm(float duty_cycle)
 {
 	float duty = min(duty_cycle, MAX_DUTY);
