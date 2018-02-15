@@ -47,6 +47,7 @@ ROBOT2 := robot2
 # Objects and Paths
 
 OBJECTS += robot1.o
+OBJECTS += libs/telemetry.o
 OBJECTS += libs/pid.o
 OBJECTS += libs/qei.o
 OBJECTS += libs/motors.o
