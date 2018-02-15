@@ -48,11 +48,16 @@ Block block_left(&qei_left, &pid_left, &motor_left, ticker_left);
 Ticker* ticker_right = new Ticker;
 Block block_right(&qei_right, &pid_right, &motor_right, ticker_right);
 
+
 int main()
 {
 	wait(1);
-	printf("\n\n\rStarting, error code : %d\n\r", err);
+	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
+	block_left.SetBreak(BREAK_OFF);
+	block_right.SetBreak(BREAK_OFF);
+	block_left.SetSpeed(DIR_FORWARD);
+	block_right.SetSpeed(DIR_FORWARD);
 	while(1) {
-		
+		wait(PERIOD_REFRESH);
 	}
 }
