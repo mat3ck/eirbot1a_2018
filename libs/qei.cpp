@@ -4,6 +4,7 @@
  * Documentation
  * Test
  * Add support for TIM1 and TIM3
+ * Move refreshDiff in a commun func file
  */
 
 #include "mbed.h"
