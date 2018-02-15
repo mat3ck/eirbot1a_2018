@@ -23,7 +23,7 @@ class Motor {
 		bool GetDir();
 		bool GetBreak();
 		void SetPwm(float);
-		void SetDirection(unsigned char);
+		void SetDirection(bool);
 		void SetBreak(bool);
 	private:
 		PwmOut* _pwm;

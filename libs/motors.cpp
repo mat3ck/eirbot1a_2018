@@ -46,7 +46,7 @@ void Motor::SetPwm(float duty_cycle)
 	_pwm->write(duty);
 }
 
-void Motor::SetDirection(unsigned char dir_value)
+void Motor::SetDirection(bool dir_value)
 {
 	*_dir = dir_value;
 }
