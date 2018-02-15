@@ -7,7 +7,7 @@
 #include "qei.h"
 #include "motors.h"
 
-#define PERIOD_REFRESH 0.001f
+#define PERIOD_REFRESH 0.005f
 
 
 class Block {
@@ -21,6 +21,7 @@ class Block {
 		bool GetBreak();
 		short GetQei();
 		void SetSpeed(float);
+		void SetBreak(bool);
 	private:
 		void Refresh();
 		float _SPspeed;
