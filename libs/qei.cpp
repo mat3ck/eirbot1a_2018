@@ -103,7 +103,7 @@ short Qei::GetQei()
 
 short RefreshDiff(short* value, short new_value)
 {
-	short diff = new_value - *value;
+	short diff = *value - new_value;
 	*value = new_value;
 	return diff;
 }
