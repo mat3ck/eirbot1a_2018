@@ -2,6 +2,7 @@
  * TODO
  * Documentation
  * Make position and angle pid to control motor's speed pid
+ * Change GetPid to allow reading value without actualizing arrays
  */
 
 #include "mbed.h"
