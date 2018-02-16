@@ -38,6 +38,8 @@ Pid::Pid(float coef_err[NB_COEF], float coef_sp[NB_COEF])
 {
 	_coef_err = coef_err;
 	_coef_sp = coef_sp;
+	_err_ca = new CArray();
+	_sp_ca = new CArray();
 }
 
 Pid::~Pid()
@@ -49,8 +51,8 @@ float Pid::GetPid(float err, float sp)
 {
 	float sum = 0.0f;
 	for (int i = 0; i < NB_COEF; i++) {
-		sum += _coef_err[i] * _err_ca[i];
-		sum += _coef_sp[i] * _sp_ca[i];
+		sum += _coef_err[i] * (*_err_ca)[i];
+		sum += _coef_sp[i] * (*_sp_ca)[i];
 	}
 	RefreshPid(err, sp);
 	return sum;
@@ -58,7 +60,7 @@ float Pid::GetPid(float err, float sp)
 
 void Pid::RefreshPid(float err, float sp)
 {
-	_err_ca.Add(err);
-	_sp_ca.Add(sp);
+	_err_ca->Add(err);
+	_sp_ca->Add(sp);
 }
 

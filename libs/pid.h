@@ -27,8 +27,8 @@ class Pid {
 		void RefreshPid(float, float);
 		float* _coef_err;
 		float* _coef_sp;
-		CArray _err_ca;
-		CArray _sp_ca;
+		CArray* _err_ca;
+		CArray* _sp_ca;
 };
 
 
