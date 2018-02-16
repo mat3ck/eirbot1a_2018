@@ -5,7 +5,7 @@
 #include "mbed.h"
 
 #define PERIOD_PWM 0.000033f
-#define MAX_DUTY 0.50f
+#define MAX_DUTY 0.20f
 
 #define DIR_FORWARD 0
 #define DIR_BACKWARD 1
@@ -17,7 +17,7 @@
 
 class Motor {
 	public:
-		Motor(PwmOut*, DigitalOut*, DigitalOut*);
+		Motor(PwmOut*, DigitalOut*, DigitalOut*, bool);
 		~Motor();
 		float GetPwm();
 		bool GetDir();
@@ -26,6 +26,7 @@ class Motor {
 		void SetDirection(bool);
 		void SetBreak(bool);
 	private:
+		bool _dir_fwd;
 		PwmOut* _pwm;
 		DigitalOut* _dir;
 		DigitalOut* _break;

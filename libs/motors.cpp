@@ -9,8 +9,9 @@
 #include "errors.h"
 #include "motors.h"
 
-Motor::Motor(PwmOut* pwm, DigitalOut* dir, DigitalOut* br)
+Motor::Motor(PwmOut* pwm, DigitalOut* dir, DigitalOut* br, bool dir_fwd)
 {
+	_dir_fwd = dir_fwd;
 	_pwm = pwm;
 	_dir = dir;
 	_break = br;
@@ -48,7 +49,7 @@ void Motor::SetPwm(float duty_cycle)
 
 void Motor::SetDirection(bool dir_value)
 {
-	*_dir = dir_value;
+	*_dir = (dir_value && !_dir_fwd) || (!dir_value && _dir_fwd);
 }
 
 void Motor::SetBreak(bool br)
