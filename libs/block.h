@@ -7,7 +7,7 @@
 #include "qei.h"
 #include "motors.h"
 
-#define PERIOD_REFRESH 0.005f
+#define PERIOD_REFRESH 0.0052f
 
 
 class Block {
