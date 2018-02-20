@@ -5,25 +5,27 @@
 #ifndef EIRBOT1A_2018_GP2_H
 #define EIRBOT1A_2018_GP2_H
 
-#endif //EIRBOT1A_2018_GP2_H
+#include "mbed.h"
 
-#include "mbed.h";
+#define COEFF_A (29.967f)
+#define COEFF_B (-0.811f)
 
 class gp2 {
 
-//internals variable of gp2 class
-private:
+	public:
+		gp2(PinName pin);
+		AnalogIn getAnalogIn();
+		float getDistance();
+		float getDistanceMilliMeters();
+		void setThreshold(int distance);
+		int isThresholdReached();
 
-	AnalogIn m_analogGP2;
-	int m_threshold;
+		~gp2();
 
-//Methods of gp2 class
-public:
+	private:
+		AnalogIn m_analogGP2;
+		int m_threshold;
 
-	gp2(PinName pin);
-	AnalogIn getAnalogIn();
-	float getDistance();
-	int getDistanceMilliMeters();
-	void setThreshold(int distance);
-	int isThresholdReached();
 };
+
+#endif //EIRBOT1A_2018_GP2_H
