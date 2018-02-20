@@ -54,6 +54,7 @@ Block block_right(&qei_right, &pid_right, &motor_right, ticker_right);
 
 int main()
 {
+	gp2 testGP2(A0);
 	led = 1;
 	wait(1);
 	led = 0;
