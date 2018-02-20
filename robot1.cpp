@@ -1,12 +1,13 @@
 
 #include "mbed.h"
 #include "errors.h"
+#include "telemetry.h"
 #include "robot1.h"
 #include "qei.h"
-#include "pid.h"
 #include "motors.h"
+#include "pid.h"
 #include "block.h"
-#include "telemetry.h"
+#include "gp2.h"
 
 
 int err = 0;
@@ -53,9 +54,9 @@ Block block_right(&qei_right, &pid_right, &motor_right, ticker_right);
 
 int main()
 {
-	starting_led = 1;
+	led = 1;
 	wait(1);
-	starting_led = 0;
+	led = 0;
 	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
 	while(1) {
 
