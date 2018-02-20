@@ -11,6 +11,9 @@
 
 int err = 0;
 
+
+// Led
+DigitalOut led(LED3);
 // Serial PC
 Serial pc(USBTX, USBRX);
 // Left Qei
@@ -35,12 +38,12 @@ Pid pid_right(coef_err_right, coef_sp_right);
 PwmOut* pwm_left = new PwmOut(PIN_PWM_LEFT);
 DigitalOut* dir_left = new DigitalOut(PIN_DIR_LEFT);
 DigitalOut* break_left = new DigitalOut(PIN_BREAK_LEFT);
-Motor motor_left(pwm_left, dir_left, break_left);
+Motor motor_left(pwm_left, dir_left, break_left, 0);
 // Right Motor
 PwmOut* pwm_right = new PwmOut(PIN_PWM_RIGHT);
 DigitalOut* dir_right = new DigitalOut(PIN_DIR_RIGHT);
 DigitalOut* break_right = new DigitalOut(PIN_BREAK_RIGHT);
-Motor motor_right(pwm_right, dir_right, break_right);
+Motor motor_right(pwm_right, dir_right, break_right, 1);
 // Left Block
 Ticker* ticker_left = new Ticker;
 Block block_left(&qei_left, &pid_left, &motor_left, ticker_left);
@@ -48,16 +51,13 @@ Block block_left(&qei_left, &pid_left, &motor_left, ticker_left);
 Ticker* ticker_right = new Ticker;
 Block block_right(&qei_right, &pid_right, &motor_right, ticker_right);
 
-
 int main()
 {
+	starting_led = 1;
 	wait(1);
+	starting_led = 0;
 	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
-	block_left.SetBreak(BREAK_OFF);
-	block_right.SetBreak(BREAK_OFF);
-	block_left.SetSpeed(DIR_FORWARD);
-	block_right.SetSpeed(DIR_FORWARD);
 	while(1) {
-		wait(PERIOD_REFRESH);
+
 	}
 }
