@@ -34,7 +34,7 @@ float CArray::operator[](int i)
 	return _array[(_index+i) % NB_COEF];
 }
 
-Pid::Pid(float coef_err[NB_COEF], float coef_sp[NB_COEF])
+Pid::Pid(float* coef_err, float* coef_sp)
 {
 	_coef_err = coef_err;
 	_coef_sp = coef_sp;
