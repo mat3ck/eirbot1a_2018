@@ -29,11 +29,11 @@ TIM_TypeDef* TIMx_right = ENCODER_TIM_RIGHT;
 Qei qei_right(encoder_right, htim_right, TIMx_right, &err);
 // Left motor speed PID
 float coef_err_left[] = {K1_ERR_LEFT, K2_ERR_LEFT, K3_ERR_LEFT};
-float coef_sp_left[] = {K1_SP_LEFT, K2_ERR_LEFT, K3_ERR_LEFT};
+float coef_sp_left[] = {K1_SP_LEFT, K2_SP_LEFT, K3_SP_LEFT};
 Pid pid_left(coef_err_left, coef_sp_left);
 // Right motor speed PID
 float coef_err_right[] = {K1_ERR_RIGHT, K2_ERR_RIGHT, K3_ERR_RIGHT};
-float coef_sp_right[] = {K1_SP_RIGHT, K2_ERR_RIGHT, K3_ERR_RIGHT};
+float coef_sp_right[] = {K1_SP_RIGHT, K2_SP_RIGHT, K3_SP_RIGHT};
 Pid pid_right(coef_err_right, coef_sp_right);
 // Left Motor
 PwmOut* pwm_left = new PwmOut(PIN_PWM_LEFT);
@@ -54,12 +54,14 @@ Block block_right(&qei_right, &pid_right, &motor_right, ticker_right);
 
 int main()
 {
-	gp2 testGP2(A0);
 	led = 1;
-	wait(1);
+	pc.baud(115200);
+	block_left.SetSpeed(0.0f);
+	block_right.SetSpeed(0.0f);
+	wait(3);
 	led = 0;
 	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
-	while(1) {
-
+	while (1) {
+		
 	}
 }
