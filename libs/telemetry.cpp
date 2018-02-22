@@ -13,7 +13,7 @@ float duty = 0;
 void Telemetry(Serial* pc, Block* block)
 {
 	static float new_duty = block->GetPwm();
-	var_max = max(var_max, new_duty-duty);
+	var_max = max(var_max, abs(new_duty-duty));
 	duty = new_duty;
 	err_max = max(err_max, block->GetPV()-block->GetSP());
 	pc->printf("SP\t\tPV\t\tPwm\t\tDir\tVarMax\tErrMax\n\r");
