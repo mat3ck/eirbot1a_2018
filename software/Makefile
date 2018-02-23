@@ -39,13 +39,13 @@ VPATH = ..
 ###############################################################################
 # Project settings
 
-ROBOT1 := robot1
+PROJECT := nucleo_1
 
 # Project settings
 ###############################################################################
 # Objects and Paths
 
-OBJECTS += robot1.o
+OBJECTS += nucleo_1/main.o
 OBJECTS += libs/telemetry.o
 OBJECTS += libs/qei.o
 OBJECTS += libs/motor.o
@@ -188,7 +188,8 @@ INCLUDE_PATHS += -I../mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM
 INCLUDE_PATHS += -I../mbed/drivers
 INCLUDE_PATHS += -I../mbed/hal
 INCLUDE_PATHS += -I../mbed/platform
-INCLUDE_PATHS += -I../libs/.
+INCLUDE_PATHS += -I../nucleo_1
+INCLUDE_PATHS += -I../libs
 
 LIBRARY_PATHS := -L../mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM 
 LIBRARIES := -lmbed 
@@ -358,7 +359,7 @@ LD_SYS_LIBS :=-Wl,--start-group -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys -lmbed -
 .PHONY: all lst size
 
 
-all: $(ROBOT1).bin $(ROBOT1).hex size
+all: $(PROJECT).bin $(PROJECT).hex size
 
 
 .s.o:
@@ -387,21 +388,21 @@ all: $(ROBOT1).bin $(ROBOT1).hex size
 	@$(CPP) $(CXX_FLAGS) $(INCLUDE_PATHS) -o $@ $<
 
 
-$(ROBOT1).link_script.ld: $(LINKER_SCRIPT)
+$(PROJECT).link_script.ld: $(LINKER_SCRIPT)
 	@$(PREPROC) $< -o $@
 
 
-$(ROBOT1).elf: $(OBJECTS) $(SYS_OBJECTS) $(ROBOT1).link_script.ld 
+$(PROJECT).elf: $(OBJECTS) $(SYS_OBJECTS) $(PROJECT).link_script.ld 
 	+@echo "link: $(notdir $@)"
 	@$(LD) $(LD_FLAGS) -T $(filter-out %.o, $^) $(LIBRARY_PATHS) --output $@ $(filter %.o, $^) $(LIBRARIES) $(LD_SYS_LIBS)
 
 
-$(ROBOT1).bin: $(ROBOT1).elf
+$(PROJECT).bin: $(PROJECT).elf
 	$(ELF2BIN) -O binary $< $@
 	+@echo "===== bin file ready to flash: $(OBJDIR)/$@ =====" 
 
 
-$(ROBOT1).hex: $(ROBOT1).elf
+$(PROJECT).hex: $(PROJECT).elf
 	$(ELF2BIN) -O ihex $< $@
 
 
