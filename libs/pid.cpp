@@ -3,6 +3,8 @@
  * Documentation
  * Make position and angle pid to control motor's speed pid
  * Change GetPid to allow reading value without actualizing arrays
+ * Rework constructor to call it with pinNames
+ * Move CArray in a common lib and add different length support
  */
 
 #include "mbed.h"

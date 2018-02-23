@@ -1,7 +1,8 @@
 /*
  * TODO
  * Documentation
- * Add getter functions to access more values
+ * Rework constructor to call it with pinNames arguments
+ * Add a reset method
  */
 
 

@@ -1,3 +1,11 @@
+/*
+ * TODO
+ * Documentation
+ * Initialization function
+ * Rework classes to call them with PinNames
+ * Integrate AX12 librarie
+ */
+
 
 #include "mbed.h"
 #include "errors.h"

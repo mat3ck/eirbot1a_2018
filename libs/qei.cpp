@@ -5,6 +5,7 @@
  * Test
  * Add support for TIM1 and TIM3
  * Move refreshDiff in a commun func file
+ * Rework constructor to call it with pinNames
  */
 
 #include "mbed.h"
