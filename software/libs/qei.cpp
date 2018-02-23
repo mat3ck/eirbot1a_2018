@@ -8,9 +8,10 @@
  * Rework constructor to call it with pinNames
  */
 
+
 #include "mbed.h"
-#include "errors.h"
-#include "qei.h"
+#include "error.hpp"
+#include "qei.hpp"
 
 
 Qei::Qei(TIM_Encoder_InitTypeDef* encoder, TIM_HandleTypeDef* htim, 

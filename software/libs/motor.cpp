@@ -7,8 +7,9 @@
 
 
 #include "mbed.h"
-#include "errors.h"
-#include "motors.h"
+#include "error.hpp"
+#include "motor.hpp"
+
 
 Motor::Motor(PwmOut* pwm, DigitalOut* dir, DigitalOut* br, bool dir_fwd)
 {

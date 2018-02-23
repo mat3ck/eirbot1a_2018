@@ -2,8 +2,8 @@
 // Created by CopperBot on 20/02/2018.
 //
 
-#ifndef EIRBOT1A_2018_GP2_H
-#define EIRBOT1A_2018_GP2_H
+#ifndef GP2_HPP
+#define GP2_HPP
 
 #include "mbed.h"
 

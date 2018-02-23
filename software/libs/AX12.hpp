@@ -2,7 +2,7 @@
 #define DEFAX12_H
 
 
-#include "Comm_AX12.h"
+#include "Comm_AX12.hpp"
 
 
 class AX12{

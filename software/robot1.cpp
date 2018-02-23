@@ -8,14 +8,14 @@
 
 
 #include "mbed.h"
-#include "errors.h"
-#include "telemetry.h"
-#include "robot1.h"
-#include "qei.h"
-#include "motors.h"
-#include "pid.h"
-#include "block.h"
-#include "gp2.h"
+#include "error.hpp"
+#include "telemetry.hpp"
+#include "robot1.hpp"
+#include "qei.hpp"
+#include "motor.hpp"
+#include "pid.hpp"
+#include "block.hpp"
+#include "gp2.hpp"
 
 
 int err = 0;

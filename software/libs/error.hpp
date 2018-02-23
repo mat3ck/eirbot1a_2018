@@ -1,6 +1,6 @@
 
-#ifndef ERRORS_H
-#define ERRORS_H
+#ifndef ERROR_HPP
+#define ERROR_HPP
 
 
 #define NO_ERROR 0

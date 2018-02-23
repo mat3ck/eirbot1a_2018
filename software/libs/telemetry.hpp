@@ -3,7 +3,8 @@
 #define TELEMETRY_H
 
 #include "mbed.h"
-#include "block.h"
+#include "block.hpp"
+
 
 #define max(x, y) ((x)>(y) ? (x) : (y))
 

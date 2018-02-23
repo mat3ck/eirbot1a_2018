@@ -2,7 +2,7 @@
 // Created by CopperBot on 20/02/2018.
 //
 
-#include "gp2.h"
+#include "gp2.hpp"
 
 gp2::gp2(PinName pin) : m_analogGP2(pin)
 {

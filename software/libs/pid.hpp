@@ -1,8 +1,9 @@
 
-#ifndef PID_ROBOT1_H
-#define PID_ROBOT1_H
+#ifndef PID_HPP
+#define PID_HPP
 
 #include "mbed.h"
+
 
 #define NB_COEF 3
 

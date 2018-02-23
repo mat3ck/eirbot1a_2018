@@ -1,11 +1,12 @@
 
-#ifndef BLOCK_H
-#define BLOCK_H
+#ifndef BLOCK_HPP
+#define BLOCK_HPP
 
 #include "mbed.h"
-#include "pid.h"
-#include "qei.h"
-#include "motors.h"
+#include "pid.hpp"
+#include "qei.hpp"
+#include "motor.hpp"
+
 
 #define PERIOD_REFRESH 0.0052f
 

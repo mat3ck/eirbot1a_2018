@@ -1,6 +1,6 @@
 
-#ifndef PINS_ROBOT1_H
-#define PINS_ROBOT1_H
+#ifndef ROBOT1_HPP
+#define ROBOT1_HPP
 
 /* PID coefficients */
 // Left PID

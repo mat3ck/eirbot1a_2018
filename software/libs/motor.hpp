@@ -1,8 +1,9 @@
 
-#ifndef MOTORS_H
-#define MOTORS_H
+#ifndef MOTOR_HPP
+#define MOTOR_HPP
 
 #include "mbed.h"
+
 
 #define PERIOD_PWM 0.000033f
 #define MAX_DUTY 0.20f

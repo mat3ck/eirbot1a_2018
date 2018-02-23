@@ -7,11 +7,11 @@
 
 
 #include "mbed.h"
-#include "errors.h"
-#include "pid.h"
-#include "qei.h"
-#include "motors.h"
-#include "block.h"
+#include "error.hpp"
+#include "pid.hpp"
+#include "qei.hpp"
+#include "motor.hpp"
+#include "block.hpp"
 
 
 Block::Block(Qei* qei, Pid* pid, Motor* motor, Ticker* ticker)

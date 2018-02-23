@@ -1,4 +1,4 @@
-#include "AX12.h"
+#include "AX12.hpp"
 
 
 //void constructor, not usefull

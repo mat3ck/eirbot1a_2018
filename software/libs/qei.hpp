@@ -1,8 +1,9 @@
 
-#ifndef QEI_H
-#define QEI_H
+#ifndef QEI_HPP
+#define QEI_HPP
 
 #include "mbed.h"
+
 
 #define MAXCOUNT_PERIOD 0xFFFF
 #define ENCODER_MODE TIM_ENCODERMODE_TI12

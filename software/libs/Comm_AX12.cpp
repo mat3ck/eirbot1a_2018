@@ -1,4 +1,4 @@
-#include "Comm_AX12.h"
+#include "Comm_AX12.hpp"
 
 
 Comm_AX12::Comm_AX12()

@@ -8,8 +8,8 @@
  */
 
 #include "mbed.h"
-#include "errors.h"
-#include "pid.h"
+#include "error.hpp"
+#include "pid.hpp"
 
 
 CArray::CArray()

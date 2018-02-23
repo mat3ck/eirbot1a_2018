@@ -40,7 +40,6 @@ VPATH = ..
 # Project settings
 
 ROBOT1 := robot1
-ROBOT2 := robot2
 
 # Project settings
 ###############################################################################
@@ -49,11 +48,10 @@ ROBOT2 := robot2
 OBJECTS += robot1.o
 OBJECTS += libs/telemetry.o
 OBJECTS += libs/qei.o
-OBJECTS += libs/motors.o
+OBJECTS += libs/motor.o
 OBJECTS += libs/pid.o
 OBJECTS += libs/block.o
 OBJECTS += libs/gp2.o
-OBJECTS += libs/movement.o
 
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/stm32f4xx_hal_flash_ramfunc.o
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/PeripheralPins.o
@@ -360,7 +358,7 @@ LD_SYS_LIBS :=-Wl,--start-group -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys -lmbed -
 .PHONY: all lst size
 
 
-all: $(ROBOT1).bin $(ROBOT1).hex $(ROBOT2).bin $(ROBOT2).hex size
+all: $(ROBOT1).bin $(ROBOT1).hex size
 
 
 .s.o:
@@ -393,16 +391,7 @@ $(ROBOT1).link_script.ld: $(LINKER_SCRIPT)
 	@$(PREPROC) $< -o $@
 
 
-$(ROBOT2).link_script.ld: $(LINKER_SCRIPT)
-	@$(PREPROC) $< -o $@
-
-
 $(ROBOT1).elf: $(OBJECTS) $(SYS_OBJECTS) $(ROBOT1).link_script.ld 
-	+@echo "link: $(notdir $@)"
-	@$(LD) $(LD_FLAGS) -T $(filter-out %.o, $^) $(LIBRARY_PATHS) --output $@ $(filter %.o, $^) $(LIBRARIES) $(LD_SYS_LIBS)
-
-
-$(ROBOT2).elf: $(ROBOT2).o $(SYS_OBJECTS) $(ROBOT2).link_script.ld 
 	+@echo "link: $(notdir $@)"
 	@$(LD) $(LD_FLAGS) -T $(filter-out %.o, $^) $(LIBRARY_PATHS) --output $@ $(filter %.o, $^) $(LIBRARIES) $(LD_SYS_LIBS)
 
@@ -412,17 +401,10 @@ $(ROBOT1).bin: $(ROBOT1).elf
 	+@echo "===== bin file ready to flash: $(OBJDIR)/$@ =====" 
 
 
-$(ROBOT2).bin: $(ROBOT2).elf
-	$(ELF2BIN) -O binary $< $@
-	+@echo "===== bin file ready to flash: $(OBJDIR)/$@ =====" 
-
-
 $(ROBOT1).hex: $(ROBOT1).elf
 	$(ELF2BIN) -O ihex $< $@
 
 
-$(ROBOT2).hex: $(ROBOT2).elf
-	$(ELF2BIN) -O ihex $< $@
 # Rules
 ###############################################################################
 # Dependencies
