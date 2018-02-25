@@ -3,6 +3,8 @@
 *.yml
 *.txt
 *.ini
+*.pdf
+*.svg
 
 *.o
 *.bin
