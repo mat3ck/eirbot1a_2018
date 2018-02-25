@@ -1,0 +1,536 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:SamacSys_Parts
+LIBS:7segment_afficheur-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Conn_01x04_Female J2
+U 1 1 5A329F65
+P 8100 2650
+F 0 "J2" H 8100 2850 50  0000 C CNN
+F 1 "Conn_01x04_Female" H 8100 2350 50  0000 C CNN
+F 2 "Socket_Strips:Socket_Strip_Straight_1x04_Pitch2.54mm" H 8100 2650 50  0001 C CNN
+F 3 "" H 8100 2650 50  0001 C CNN
+	1    8100 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7850 2850 7900 2850
+Wire Wire Line
+	7850 2450 7850 3050
+Connection ~ 7850 2750
+Connection ~ 7850 2650
+Connection ~ 7850 2550
+$Comp
+L GND #PWR01
+U 1 1 5A329F66
+P 7850 3050
+F 0 "#PWR01" H 7850 2800 50  0001 C CNN
+F 1 "GND" H 7850 2900 50  0000 C CNN
+F 2 "" H 7850 3050 50  0001 C CNN
+F 3 "" H 7850 3050 50  0001 C CNN
+	1    7850 3050
+	1    0    0    -1  
+$EndComp
+Connection ~ 7850 2850
+Wire Wire Line
+	7900 2650 7850 2650
+Wire Wire Line
+	7900 2750 7850 2750
+$Comp
+L 2N7000 Q2
+U 1 1 5A329F6A
+P 3900 3700
+F 0 "Q2" H 4100 3775 50  0000 L CNN
+F 1 "2N7000" H 4100 3700 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Wide" H 4100 3625 50  0001 L CIN
+F 3 "" H 3900 3700 50  0001 L CNN
+	1    3900 3700
+	-1   0    0    1   
+$EndComp
+$Comp
+L 2N7000 Q3
+U 1 1 5A329F6B
+P 4400 3700
+F 0 "Q3" H 4600 3775 50  0000 L CNN
+F 1 "2N7000" H 4600 3700 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Wide" H 4600 3625 50  0001 L CIN
+F 3 "" H 4400 3700 50  0001 L CNN
+	1    4400 3700
+	-1   0    0    1   
+$EndComp
+$Comp
+L 2N7000 Q4
+U 1 1 5A329F6C
+P 4900 3700
+F 0 "Q4" H 5100 3775 50  0000 L CNN
+F 1 "2N7000" H 5100 3700 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Wide" H 5100 3625 50  0001 L CIN
+F 3 "" H 4900 3700 50  0001 L CNN
+	1    4900 3700
+	-1   0    0    1   
+$EndComp
+$Comp
+L 2N7000 Q5
+U 1 1 5A329F6D
+P 5400 3700
+F 0 "Q5" H 5600 3775 50  0000 L CNN
+F 1 "2N7000" H 5600 3700 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Wide" H 5600 3625 50  0001 L CIN
+F 3 "" H 5400 3700 50  0001 L CNN
+	1    5400 3700
+	-1   0    0    1   
+$EndComp
+$Comp
+L 2N7000 Q6
+U 1 1 5A329F6E
+P 5900 3700
+F 0 "Q6" H 6100 3775 50  0000 L CNN
+F 1 "2N7000" H 6100 3700 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Wide" H 6100 3625 50  0001 L CIN
+F 3 "" H 5900 3700 50  0001 L CNN
+	1    5900 3700
+	-1   0    0    1   
+$EndComp
+$Comp
+L 2N7000 Q7
+U 1 1 5A329F6F
+P 6400 3700
+F 0 "Q7" H 6600 3775 50  0000 L CNN
+F 1 "2N7000" H 6600 3700 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Wide" H 6600 3625 50  0001 L CIN
+F 3 "" H 6400 3700 50  0001 L CNN
+	1    6400 3700
+	-1   0    0    1   
+$EndComp
+$Comp
+L 2N7000 Q1
+U 1 1 5A329F70
+P 3400 3700
+F 0 "Q1" H 3600 3775 50  0000 L CNN
+F 1 "2N7000" H 3600 3700 50  0000 L CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Molded_Wide" H 3600 3625 50  0001 L CIN
+F 3 "" H 3400 3700 50  0001 L CNN
+	1    3400 3700
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3100 2400 3100 3050
+Wire Wire Line
+	3100 3050 3750 3050
+Wire Wire Line
+	4750 3000 3200 3000
+Wire Wire Line
+	3200 3000 3200 2400
+Wire Wire Line
+	3300 2400 3300 2950
+Wire Wire Line
+	3300 2950 4850 2950
+Wire Wire Line
+	3400 2400 3400 2900
+Wire Wire Line
+	3400 2900 4950 2900
+Wire Wire Line
+	3500 2400 3500 2850
+Wire Wire Line
+	3500 2850 5300 2850
+Wire Wire Line
+	3600 2400 3600 2800
+Wire Wire Line
+	3600 2800 7250 2800
+Wire Wire Line
+	3700 2400 3700 2750
+Wire Wire Line
+	3700 2750 7350 2750
+Wire Wire Line
+	4650 2400 4650 2700
+Wire Wire Line
+	4650 2700 3750 2700
+Wire Wire Line
+	3750 2700 3750 3050
+Connection ~ 3300 3050
+Wire Wire Line
+	4750 2400 4750 3000
+Connection ~ 3800 3000
+Wire Wire Line
+	4850 2950 4850 2400
+Connection ~ 4300 2950
+Wire Wire Line
+	4950 2900 4950 2400
+Connection ~ 4800 2900
+Wire Wire Line
+	5050 2400 5050 2850
+Connection ~ 5050 2850
+Wire Wire Line
+	5150 2400 5150 2800
+Connection ~ 5150 2800
+Wire Wire Line
+	5250 2400 5250 2750
+Connection ~ 5250 2750
+Wire Wire Line
+	6750 2400 6750 2500
+Wire Wire Line
+	6750 2500 4650 2500
+Connection ~ 4650 2500
+Wire Wire Line
+	4750 2550 6850 2550
+Wire Wire Line
+	6850 2550 6850 2400
+Connection ~ 4750 2550
+Wire Wire Line
+	4850 2600 6950 2600
+Wire Wire Line
+	6950 2600 6950 2400
+Connection ~ 4850 2600
+Wire Wire Line
+	4950 2650 7050 2650
+Wire Wire Line
+	7050 2650 7050 2400
+Connection ~ 4950 2650
+Wire Wire Line
+	5050 2700 7150 2700
+Wire Wire Line
+	7150 2700 7150 2400
+Connection ~ 5050 2700
+Wire Wire Line
+	7250 2800 7250 2400
+Connection ~ 5800 2800
+Wire Wire Line
+	7350 2750 7350 2400
+Connection ~ 6300 2750
+Wire Wire Line
+	3800 2450 7850 2450
+Wire Wire Line
+	7900 2550 7850 2550
+$Comp
+L Conn_01x11_Female J1
+U 1 1 5A329F71
+P 5050 5250
+F 0 "J1" H 5050 5850 50  0000 C CNN
+F 1 "Conn_01x11_Female" H 5050 4650 50  0000 C CNN
+F 2 "Socket_Strips:Socket_Strip_Straight_1x11_Pitch2.54mm" H 5050 5250 50  0001 C CNN
+F 3 "" H 5050 5250 50  0001 C CNN
+	1    5050 5250
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6600 3700 6650 3700
+Wire Wire Line
+	4750 4350 4750 5050
+Wire Wire Line
+	6650 3700 6650 4350
+Wire Wire Line
+	6650 4350 4750 4350
+Wire Wire Line
+	4650 5050 4650 4300
+Wire Wire Line
+	4650 4300 6150 4300
+Wire Wire Line
+	6150 4300 6150 3700
+Wire Wire Line
+	6150 3700 6100 3700
+Wire Wire Line
+	4850 4800 4850 5050
+Wire Wire Line
+	3600 3700 3650 3700
+Wire Wire Line
+	3650 3700 3650 4800
+Wire Wire Line
+	3650 4800 4850 4800
+Wire Wire Line
+	4100 3700 4150 3700
+Wire Wire Line
+	4150 3700 4150 4750
+Wire Wire Line
+	4150 4750 4950 4750
+Wire Wire Line
+	4950 4750 4950 5050
+Wire Wire Line
+	4600 3700 4700 3700
+Wire Wire Line
+	4700 3700 4700 4700
+Wire Wire Line
+	4700 4700 5050 4700
+Wire Wire Line
+	5050 4700 5050 5050
+Wire Wire Line
+	5100 3700 5150 3700
+Wire Wire Line
+	5150 3700 5150 5050
+Wire Wire Line
+	5250 5050 5250 4700
+Wire Wire Line
+	5250 4700 5650 4700
+Wire Wire Line
+	5650 4700 5650 3700
+Wire Wire Line
+	5650 3700 5600 3700
+Wire Wire Line
+	8650 1350 8650 4850
+Wire Wire Line
+	8600 1400 8600 4800
+Wire Wire Line
+	8600 4800 5450 4800
+Wire Wire Line
+	5450 4800 5450 5050
+Wire Wire Line
+	4550 5050 4550 5000
+Wire Wire Line
+	4550 5000 3300 5000
+Wire Wire Line
+	3300 5000 3300 3900
+Wire Wire Line
+	3300 3950 6300 3950
+Wire Wire Line
+	6300 3950 6300 3900
+Connection ~ 3300 3950
+Wire Wire Line
+	5800 3900 5800 3950
+Connection ~ 5800 3950
+Wire Wire Line
+	5300 3900 5300 3950
+Connection ~ 5300 3950
+Wire Wire Line
+	4800 3900 4800 3950
+Connection ~ 4800 3950
+Wire Wire Line
+	4300 3900 4300 3950
+Connection ~ 4300 3950
+Wire Wire Line
+	3800 3900 3800 3950
+Connection ~ 3800 3950
+$Comp
+L 7-segment-CC U1
+U 1 1 5A32B27A
+P 3450 1900
+F 0 "U1" H 3450 1800 60  0000 C CNN
+F 1 "7-segment-CC" H 3450 1900 60  0000 C CNN
+F 2 "Made_component:7-segment_CC" H 3450 1900 60  0001 C CNN
+F 3 "" H 3450 1900 60  0001 C CNN
+	1    3450 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L 7-segment-CC U2
+U 1 1 5A32B3B1
+P 5000 1900
+F 0 "U2" H 5000 1800 60  0000 C CNN
+F 1 "7-segment-CC" H 5000 1900 60  0000 C CNN
+F 2 "Made_component:7-segment_CC" H 5000 1900 60  0001 C CNN
+F 3 "" H 5000 1900 60  0001 C CNN
+	1    5000 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L 7-segment-CC U3
+U 1 1 5A32B40C
+P 7100 1900
+F 0 "U3" H 7100 1800 60  0000 C CNN
+F 1 "7-segment-CC" H 7100 1900 60  0000 C CNN
+F 2 "Made_component:7-segment_CC" H 7100 1900 60  0001 C CNN
+F 3 "" H 7100 1900 60  0001 C CNN
+	1    7100 1900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 2450 3800 2400
+Wire Wire Line
+	5350 2400 5350 2450
+Connection ~ 5350 2450
+Wire Wire Line
+	7450 2400 7450 2450
+Connection ~ 7450 2450
+Wire Wire Line
+	7000 1450 7000 1500
+Wire Wire Line
+	8550 1450 7000 1450
+Wire Wire Line
+	7100 1450 7100 1500
+Wire Wire Line
+	7200 1450 7200 1500
+Connection ~ 7100 1450
+Connection ~ 7200 1450
+Wire Wire Line
+	8600 1400 5100 1400
+Wire Wire Line
+	5100 1400 5100 1500
+Wire Wire Line
+	4900 1450 4900 1500
+Wire Wire Line
+	5000 1500 5000 1450
+Wire Wire Line
+	4900 1450 5100 1450
+Connection ~ 5000 1450
+Connection ~ 5100 1450
+Wire Wire Line
+	8650 1350 3550 1350
+Wire Wire Line
+	3550 1350 3550 1500
+Wire Wire Line
+	3350 1500 3350 1450
+Wire Wire Line
+	3350 1450 3550 1450
+Connection ~ 3550 1450
+Wire Wire Line
+	3450 1500 3450 1450
+Connection ~ 3450 1450
+$Comp
+L R R1
+U 1 1 5A330155
+P 3300 3300
+F 0 "R1" V 3380 3300 50  0000 C CNN
+F 1 "50" V 3300 3300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 3230 3300 50  0001 C CNN
+F 3 "" H 3300 3300 50  0001 C CNN
+	1    3300 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R2
+U 1 1 5A3307A0
+P 3800 3300
+F 0 "R2" V 3880 3300 50  0000 C CNN
+F 1 "50" V 3800 3300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 3730 3300 50  0001 C CNN
+F 3 "" H 3800 3300 50  0001 C CNN
+	1    3800 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R3
+U 1 1 5A3307EA
+P 4300 3300
+F 0 "R3" V 4380 3300 50  0000 C CNN
+F 1 "50" V 4300 3300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 4230 3300 50  0001 C CNN
+F 3 "" H 4300 3300 50  0001 C CNN
+	1    4300 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R4
+U 1 1 5A330831
+P 4800 3300
+F 0 "R4" V 4880 3300 50  0000 C CNN
+F 1 "50" V 4800 3300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 4730 3300 50  0001 C CNN
+F 3 "" H 4800 3300 50  0001 C CNN
+	1    4800 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R5
+U 1 1 5A33087F
+P 5300 3300
+F 0 "R5" V 5380 3300 50  0000 C CNN
+F 1 "50" V 5300 3300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 5230 3300 50  0001 C CNN
+F 3 "" H 5300 3300 50  0001 C CNN
+	1    5300 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R6
+U 1 1 5A3308D4
+P 5800 3300
+F 0 "R6" V 5880 3300 50  0000 C CNN
+F 1 "50" V 5800 3300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 5730 3300 50  0001 C CNN
+F 3 "" H 5800 3300 50  0001 C CNN
+	1    5800 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R7
+U 1 1 5A33096C
+P 6300 3300
+F 0 "R7" V 6380 3300 50  0000 C CNN
+F 1 "50" V 6300 3300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 6230 3300 50  0001 C CNN
+F 3 "" H 6300 3300 50  0001 C CNN
+	1    6300 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3300 3500 3300 3450
+Wire Wire Line
+	3300 3150 3300 3050
+Wire Wire Line
+	3800 3000 3800 3150
+Wire Wire Line
+	3800 3500 3800 3450
+Wire Wire Line
+	4300 3500 4300 3450
+Wire Wire Line
+	4300 3150 4300 2950
+Wire Wire Line
+	4800 2900 4800 3150
+Wire Wire Line
+	4800 3500 4800 3450
+Wire Wire Line
+	5300 3500 5300 3450
+Wire Wire Line
+	5300 2850 5300 3150
+Wire Wire Line
+	5800 2800 5800 3150
+Wire Wire Line
+	5800 3500 5800 3450
+Wire Wire Line
+	6300 3500 6300 3450
+Wire Wire Line
+	6300 3150 6300 2750
+Wire Wire Line
+	8550 1450 8550 4750
+Wire Wire Line
+	8550 4750 5350 4750
+Wire Wire Line
+	5350 4750 5350 5050
+Wire Wire Line
+	5550 5050 5550 4850
+Wire Wire Line
+	5550 4850 8650 4850
+$EndSCHEMATC
