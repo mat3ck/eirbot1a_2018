@@ -39,13 +39,13 @@ VPATH = ..
 ###############################################################################
 # Project settings
 
-PROJECT := nucleo_1
+PROJECT := nucleo_mir
 
 # Project settings
 ###############################################################################
 # Objects and Paths
 
-OBJECTS += nucleo_1/main.o
+OBJECTS += nucleo_mir/main.o
 OBJECTS += libs/telemetry.o
 OBJECTS += libs/qei.o
 OBJECTS += libs/motor.o
@@ -188,7 +188,7 @@ INCLUDE_PATHS += -I../mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM
 INCLUDE_PATHS += -I../mbed/drivers
 INCLUDE_PATHS += -I../mbed/hal
 INCLUDE_PATHS += -I../mbed/platform
-INCLUDE_PATHS += -I../nucleo_1
+INCLUDE_PATHS += -I../nucleo_mir
 INCLUDE_PATHS += -I../libs
 
 LIBRARY_PATHS := -L../mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM 
