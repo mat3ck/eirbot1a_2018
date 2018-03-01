@@ -22,7 +22,6 @@ Block::Block(Qei* _qei, Pid* _pid, Motor* _motor)
 	qei_value = qei->GetQei();
 	duty = motor->GetPwm();
 	ticker = new Ticker;
-	ticker->attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
 }
 
 Block::~Block()
@@ -40,6 +39,12 @@ void Block::Reset()
 	motor->Reset();
 	qei_value = qei->GetQei();
 	duty = motor->GetPwm();
+}
+
+void Block::Start()
+{
+
+	ticker->attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
 }
 
 float Block::GetSP()

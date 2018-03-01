@@ -16,6 +16,7 @@ class Block {
 		Block(Qei*, Pid*, Motor*);
 		~Block();
 		void Reset();
+		void Start();
 		float GetSP();
 		float GetPV();
 		float GetPwm();
