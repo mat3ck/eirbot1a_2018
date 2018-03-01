@@ -1,8 +1,6 @@
 /*
  * TODO
  * Documentation
- * Rework constructor to call it with pinNames arguments
- * Add a reset method
  */
 
 
@@ -14,17 +12,17 @@
 #include "block.hpp"
 
 
-Block::Block(Qei* qei, Pid* pid, Motor* motor, Ticker* ticker)
+Block::Block(Qei* _qei, Pid* _pid, Motor* _motor)
 {
-	_motor = motor;
-	_qei = qei;
-	_pid = pid;
-	_ticker = ticker;
-	_SPspeed = 0;
-	_PVspeed = 0;
-	_qei_value = _qei->GetQei();
-	_duty = _motor->GetPwm();
-	_ticker->attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
+	motor = _motor;
+	qei = _qei;
+	pid = _pid;
+	SPspeed = 0;
+	PVspeed = 0;
+	qei_value = qei->GetQei();
+	duty = motor->GetPwm();
+	ticker = new Ticker;
+	ticker->attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
 }
 
 Block::~Block()
@@ -32,59 +30,76 @@ Block::~Block()
 
 }
 
+void Block::Reset()
+{
+	SPspeed = 0;
+	PVspeed = 0;
+	qei->Reset();
+	pid->Reset();
+	motor->Reset();
+}
+
 float Block::GetSP()
 {
-	return _SPspeed;
+	return SPspeed;
 }
 
 float Block::GetPV()
 {
-	return _PVspeed;
+	return PVspeed;
 }
 
 float Block::GetPwm()
 {
-	return _motor->GetPwm();
+	return motor->GetPwm();
 }
 
 bool Block::GetDir()
 {
-	return _motor->GetDir();
+	return motor->GetDir();
 }
 
 bool Block::GetBreak()
 {
-	return _motor->GetBreak();
+	return motor->GetBreak();
 }
 
 short Block::GetQei()
 {
-	return _qei->GetQei();
+	return qei->GetQei();
+}
+
+short Block::GetQei(short* value)
+{
+	short new_value = qei->GetQei();
+	short diff = new_value - value;;
+	value = new_value;
+	return diff;
 }
 
 void Block::SetSpeed(float speed)
 {
-	_SPspeed = speed;
+	SPspeed = speed;
 }
 
 void Block::SetBreak(bool br)
 {
-	_motor->SetBreak(br);
+	motor->SetBreak(br);
 }
 
 void Block::Refresh()
 {
-	_PVspeed = RefreshDiff(&_qei_value, _qei->GetQei());
-	float err = _SPspeed - _PVspeed;
-	_duty = min(_pid->GetPid(err, _duty), MAX_DUTY);
+	PVspeed = RefreshDiff(&qei_value, _qei->GetQei());
+	float err = SPspeed - PVspeed;
+	duty = min(pid->GetPid(err, _duty), MAX_DUTY);
 	static unsigned char dir;
-	if (_duty > 0.0f) {
+	if (duty > 0.0f) {
 		dir = DIR_FORWARD;
 	} else {
 		dir = DIR_BACKWARD;
-		_duty = -_duty;
+		duty = -_duty;
 	}
-	_motor->SetDirection(dir);
-	_motor->SetPwm(_duty);
+	motor->SetDirection(dir);
+	motor->SetPwm(duty);
 }
 
