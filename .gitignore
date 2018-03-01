@@ -21,6 +21,4 @@ MNT/
 .pioenvs/
 .piolibdeps/
 cmake-build-debug/
-.pioenvs
-.piolibdeps
 CMakeListsPrivate.txt
