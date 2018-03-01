@@ -26,15 +26,9 @@ DigitalOut led(LED3);
 // Serial PC
 Serial pc(USBTX, USBRX);
 // Left Qei
-TIM_Encoder_InitTypeDef* encoder_left = new TIM_Encoder_InitTypeDef;
-TIM_HandleTypeDef* htim_left = new TIM_HandleTypeDef;
-TIM_TypeDef* TIMx_left = ENCODER_TIM_LEFT;
-Qei qei_left(encoder_left, htim_left, TIMx_left, &err);
+Qei qei_left(ENCODER_TIM_LEFT, &err);
 //Right Qei
-TIM_Encoder_InitTypeDef* encoder_right = new TIM_Encoder_InitTypeDef;
-TIM_HandleTypeDef* htim_right = new TIM_HandleTypeDef;
-TIM_TypeDef* TIMx_right = ENCODER_TIM_RIGHT;
-Qei qei_right(encoder_right, htim_right, TIMx_right, &err);
+Qei qei_right(ENCODER_TIM_RIGHT, &err);
 // Left motor speed PID
 float coef_err_left[] = {K1_ERR_LEFT, K2_ERR_LEFT, K3_ERR_LEFT};
 float coef_sp_left[] = {K1_SP_LEFT, K2_SP_LEFT, K3_SP_LEFT};

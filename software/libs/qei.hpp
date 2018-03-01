@@ -11,14 +11,13 @@
 
 class Qei {
 	public:
-		Qei(TIM_Encoder_InitTypeDef*, TIM_HandleTypeDef*, 
-				TIM_TypeDef*, int*);
+		Qei(TIM_TypeDef*, int*);
 		~Qei();
 		short GetQei();
 	private:
-		TIM_Encoder_InitTypeDef* _encoder;
-		TIM_HandleTypeDef* _htim;
-		TIM_TypeDef* _TIMx;
+		TIM_Encoder_InitTypeDef* encoder;
+		TIM_HandleTypeDef* htim;
+		TIM_TypeDef* TIMx;
 };
 
 short RefreshDiff(short*, short);
