@@ -50,11 +50,13 @@ int main()
 {
 	led = 1;
 	pc.baud(115200);
-	block_left.SetSpeed(0.0f);
-	block_right.SetSpeed(0.0f);
+	block_left.Reset();
+	block_right.Reset();
 	wait(3);
 	led = 0;
 	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
+	block_left.Start();
+	block_right.Start();
 	while (1) {
 		
 	}
