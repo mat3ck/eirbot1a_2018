@@ -97,7 +97,7 @@ void Block::SetBreak(bool br)
 
 void Block::Refresh()
 {
-	PVspeed = RefreshDiff(&qei_value, qei->GetQei());
+	PVspeed = GetQei(&qei_value);
 	float err = SPspeed - PVspeed;
 	duty = min(pid->GetPid(err, duty), MAX_DUTY);
 	static unsigned char dir;
