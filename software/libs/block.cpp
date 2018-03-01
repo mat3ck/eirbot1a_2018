@@ -72,8 +72,8 @@ short Block::GetQei()
 short Block::GetQei(short* value)
 {
 	short new_value = qei->GetQei();
-	short diff = new_value - value;;
-	value = new_value;
+	short diff = new_value - *value;;
+	*value = new_value;
 	return diff;
 }
 
@@ -89,15 +89,15 @@ void Block::SetBreak(bool br)
 
 void Block::Refresh()
 {
-	PVspeed = RefreshDiff(&qei_value, _qei->GetQei());
+	PVspeed = RefreshDiff(&qei_value, qei->GetQei());
 	float err = SPspeed - PVspeed;
-	duty = min(pid->GetPid(err, _duty), MAX_DUTY);
+	duty = min(pid->GetPid(err, duty), MAX_DUTY);
 	static unsigned char dir;
 	if (duty > 0.0f) {
 		dir = DIR_FORWARD;
 	} else {
 		dir = DIR_BACKWARD;
-		duty = -_duty;
+		duty = -duty;
 	}
 	motor->SetDirection(dir);
 	motor->SetPwm(duty);

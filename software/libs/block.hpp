@@ -22,7 +22,7 @@ class Block {
 		bool GetDir();
 		bool GetBreak();
 		short GetQei();
-		short GetQei(short);
+		short GetQei(short*);
 		void SetSpeed(float);
 		void SetBreak(bool);
 	private:
@@ -30,6 +30,7 @@ class Block {
 		float SPspeed;
 		float PVspeed;
 		float duty;
+		short qei_value;
 		Qei* qei;
 		Pid* pid;
 		Motor* motor;
