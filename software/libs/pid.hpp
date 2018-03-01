@@ -16,8 +16,8 @@ class CArray {
 		void Add(float);
 		float operator[](int);
 	private:
-		int _index;
-		float _array[NB_COEF];
+		int index;
+		float array[NB_COEF];
 };
 
 class Pid {

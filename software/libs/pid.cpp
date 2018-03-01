@@ -57,10 +57,10 @@ Pid::~Pid()
 
 }
 
-Pid::Reset()
+void Pid::Reset()
 {
-	err_ca.Reset();
-	sp_ca.Reset();
+	err_ca->Reset();
+	sp_ca->Reset();
 }
 
 float Pid::GetPid(float err, float sp)
