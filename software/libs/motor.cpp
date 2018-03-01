@@ -28,6 +28,13 @@ Motor::~Motor()
 	
 }
 
+void Motor::Reset()
+{
+	SetPwm(0.0f);
+	SetDirection(DIR_FORWARD);
+	SetBreak(BREAK_OFF);
+}
+
 float Motor::GetPwm()
 {
 	return pin_pwm->read();
