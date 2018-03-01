@@ -14,9 +14,9 @@
 
 CArray::CArray()
 {
-	_index = 0;
+	index = 0;
 	for (int i = 0; i < NB_COEF; i++) {
-		_array[i] = 0.0f;
+		array[i] = 0.0f;
 	}
 }
 
@@ -25,23 +25,31 @@ CArray::~CArray()
 
 }
 
+void CArray::Reset()
+{
+	index = 0;
+	for (int i = 0; i < NB_COEF; i++) {
+		array[i] = 0.0f;
+	}
+}
+
 void CArray::Add(float val)
 {
-	_index = ((_index-1) % NB_COEF + NB_COEF) % NB_COEF;
-	_array[_index] = val;
+	index = ((index-1) % NB_COEF + NB_COEF) % NB_COEF;
+	array[index] = val;
 }
 
 float CArray::operator[](int i)
 {
-	return _array[(_index+i) % NB_COEF];
+	return array[(index+i) % NB_COEF];
 }
 
-Pid::Pid(float* coef_err, float* coef_sp)
+Pid::Pid(float* _coef_err, float* _coef_sp)
 {
-	_coef_err = coef_err;
-	_coef_sp = coef_sp;
-	_err_ca = new CArray();
-	_sp_ca = new CArray();
+	coef_err = _coef_err;
+	coef_sp = _coef_sp;
+	err_ca = new CArray();
+	sp_ca = new CArray();
 }
 
 Pid::~Pid()
@@ -49,12 +57,18 @@ Pid::~Pid()
 
 }
 
+void Pid::Reset()
+{
+	err_ca->Reset();
+	sp_ca->Reset();
+}
+
 float Pid::GetPid(float err, float sp)
 {
 	float sum = 0.0f;
 	for (int i = 0; i < NB_COEF; i++) {
-		sum += _coef_err[i] * (*_err_ca)[i];
-		sum += _coef_sp[i] * (*_sp_ca)[i];
+		sum += coef_err[i] * (*err_ca)[i];
+		sum += coef_sp[i] * (*sp_ca)[i];
 	}
 	RefreshPid(err, sp);
 	return sum;
@@ -62,7 +76,7 @@ float Pid::GetPid(float err, float sp)
 
 void Pid::RefreshPid(float err, float sp)
 {
-	_err_ca->Add(err);
-	_sp_ca->Add(sp);
+	err_ca->Add(err);
+	sp_ca->Add(sp);
 }
 
