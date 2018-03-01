@@ -97,6 +97,11 @@ Qei::~Qei()
 
 }
 
+void Qei::Reset()
+{
+	TIMx->CNT = 0;
+}
+
 short Qei::GetQei()
 {
 	return TIMx->CNT;
