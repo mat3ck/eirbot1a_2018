@@ -32,11 +32,14 @@ Block::~Block()
 
 void Block::Reset()
 {
+	ticker->detach();
 	SPspeed = 0;
 	PVspeed = 0;
 	qei->Reset();
 	pid->Reset();
 	motor->Reset();
+	qei_value = qei->GetQei();
+	duty = motor->GetPwm();
 }
 
 float Block::GetSP()
