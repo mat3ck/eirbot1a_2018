@@ -44,21 +44,13 @@ float coef_err_right[] = {K1_ERR_RIGHT, K2_ERR_RIGHT, K3_ERR_RIGHT};
 float coef_sp_right[] = {K1_SP_RIGHT, K2_SP_RIGHT, K3_SP_RIGHT};
 Pid pid_right(coef_err_right, coef_sp_right);
 // Left Motor
-PwmOut* pwm_left = new PwmOut(PIN_PWM_LEFT);
-DigitalOut* dir_left = new DigitalOut(PIN_DIR_LEFT);
-DigitalOut* break_left = new DigitalOut(PIN_BREAK_LEFT);
-Motor motor_left(pwm_left, dir_left, break_left, 0);
+Motor motor_left(PIN_PWM_LEFT, PIN_DIR_LEFT, PIN_BREAK_LEFT, 0);
 // Right Motor
-PwmOut* pwm_right = new PwmOut(PIN_PWM_RIGHT);
-DigitalOut* dir_right = new DigitalOut(PIN_DIR_RIGHT);
-DigitalOut* break_right = new DigitalOut(PIN_BREAK_RIGHT);
-Motor motor_right(pwm_right, dir_right, break_right, 1);
+Motor motor_right(PIN_PWM_RIGHT, PIN_DIR_RIGHT, PIN_BREAK_RIGHT, 1);
 // Left Block
-Ticker* ticker_left = new Ticker;
-Block block_left(&qei_left, &pid_left, &motor_left, ticker_left);
+Block block_left(&qei_left, &pid_left, &motor_left);
 // Right Block
-Ticker* ticker_right = new Ticker;
-Block block_right(&qei_right, &pid_right, &motor_right, ticker_right);
+Block block_right(&qei_right, &pid_right, &motor_right);
 
 int main()
 {
