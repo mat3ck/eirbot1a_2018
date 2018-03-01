@@ -21,7 +21,5 @@ class Qei {
 		TIM_TypeDef* TIMx;
 };
 
-short RefreshDiff(short*, short);
-
 
 #endif

@@ -107,9 +107,3 @@ short Qei::GetQei()
 	return TIMx->CNT;
 }
 
-short RefreshDiff(short* value, short new_value)
-{
-	short diff = *value - new_value;
-	*value = new_value;
-	return diff;
-}
