@@ -18,7 +18,7 @@
 
 class Motor {
 	public:
-		Motor(PwmOut*, DigitalOut*, DigitalOut*, bool);
+		Motor(PinName, PinName, PinName, bool);
 		~Motor();
 		float GetPwm();
 		bool GetDir();
@@ -27,10 +27,10 @@ class Motor {
 		void SetDirection(bool);
 		void SetBreak(bool);
 	private:
-		bool _dir_fwd;
-		PwmOut* _pwm;
-		DigitalOut* _dir;
-		DigitalOut* _break;
+		bool dir_fwd;
+		PwmOut* pin_pwm;
+		DigitalOut* pin_dir;
+		DigitalOut* pin_break;
 };
 
 

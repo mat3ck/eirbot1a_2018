@@ -11,13 +11,13 @@
 #include "motor.hpp"
 
 
-Motor::Motor(PwmOut* pwm, DigitalOut* dir, DigitalOut* br, bool dir_fwd)
+Motor::Motor(PinName _pwm, PinName _dir, PinName _break, bool _dir_fwd)
 {
-	_dir_fwd = dir_fwd;
-	_pwm = pwm;
-	_dir = dir;
-	_break = br;
-	_pwm->period(PERIOD_PWM);
+	dir_fwd = _dir_fwd;
+	pin_pwm = new PwmOut(_pwm);
+	pin_dir = new DigitalOut(_dir);
+	pin_break = new DigitalOut(_break);
+	pin_pwm->period(PERIOD_PWM);
 	SetPwm(0.0f);
 	SetDirection(DIR_FORWARD);
 	SetBreak(BREAK_OFF);
@@ -30,32 +30,32 @@ Motor::~Motor()
 
 float Motor::GetPwm()
 {
-	return _pwm->read();
+	return pin_pwm->read();
 }
 
 bool Motor::GetDir()
 {
-	return *_dir;
+	return *pin_dir;
 }
 
 bool Motor::GetBreak()
 {
-	return *_break;
+	return *pin_break;
 }
 
 void Motor::SetPwm(float duty_cycle)
 {
 	float duty = min(duty_cycle, MAX_DUTY);
-	_pwm->write(duty);
+	pin_pwm->write(duty);
 }
 
 void Motor::SetDirection(bool dir_value)
 {
-	*_dir = (dir_value && !_dir_fwd) || (!dir_value && _dir_fwd);
+	*pin_dir = (dir_value && !dir_fwd) || (!dir_value && dir_fwd);
 }
 
 void Motor::SetBreak(bool br)
 {
-	*_break = br;
+	*pin_break = br;
 }
 
