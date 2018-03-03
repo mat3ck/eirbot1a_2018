@@ -1,22 +1,24 @@
-//
-// Created by CopperBot on 20/02/2018.
-//
+/*
+ * TODO
+ *
+ *
+ */
 
 #include "gp2.hpp"
 
-gp2::gp2(PinName pin) : m_analogGP2(pin)
+Gp2::Gp2(PinName pin) : analogGP2(pin)
 {
-	m_threshold = 300;
+	threshold = 300;
 }
 
-gp2::~gp2()
+Gp2::~Gp2()
 {
 
 }
 
-AnalogIn gp2::getAnalogIn()
+AnalogIn Gp2::GetAnalogIn()
 {
-	return m_analogGP2;
+	return analogGP2;
 }
 
 /**
@@ -24,9 +26,9 @@ AnalogIn gp2::getAnalogIn()
  * The more the distance, the more the number (between 0 and 1).
  * @return
  */
-float gp2::getDistance()
+float Gp2::GetDistance()
 {
-	float distance = 1.0 - m_analogGP2.read();
+	float distance = 1.0 - analogGP2.read();
 	return distance;
 }
 
@@ -35,23 +37,23 @@ float gp2::getDistance()
  * An approximation of the GP2 output with excel was done to get coefficients "a" and "b".
  * @return
  */
-float gp2::getDistanceMilliMeters()
+float Gp2::GetDistanceMilliMeters()
 {
-	return (pow((m_analogGP2.read() / COEFF_A), (1.0f / COEFF_B)));
+	return (pow((analogGP2.read() / COEFF_A), (1.0f / COEFF_B)));
 }
 
 /**
  * Set the threshold in millimeters.
  * @param distance
  */
-void gp2::setThreshold(int distance)
+void Gp2::SetThreshold(int distance)
 {
-	m_threshold = distance;
+	threshold = distance;
 }
 
-int gp2::isThresholdReached()
+int Gp2::IsThresholdReached()
 {
-	if (getDistanceMilliMeters() < m_threshold)
+	if (GetDistanceMilliMeters() < threshold)
 		return 1;
 	return 0;
 }

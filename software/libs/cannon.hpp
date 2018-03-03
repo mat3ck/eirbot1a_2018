@@ -2,8 +2,8 @@
 // Created by CopperBot on 03/03/2018.
 //
 
-#ifndef CANNON_H
-#define CANNON_H
+#ifndef CANNON_HPP
+#define CANNON_HPP
 
 #include "mbed.h"
 #include "Comm_AX12.hpp"
@@ -11,25 +11,22 @@
 
 #define STOP 0
 
-class cannon {
-
+class Cannon
+{
 	public:
-		cannon(PinName rx,PinName tx);
-		cannon(PinName rx,PinName tx,char ax12_id);
+		Cannon(PinName rx, PinName tx);
+		Cannon(PinName rx, PinName tx, char ax12_id);
+		~Cannon();
 
-		void startCannon();
-		void stopCannon();
-		void setMotorSpeed(short speed,int refreshNow);
-		int isBallReady();
+		void StartCannon();
+		void StopCannon();
+		void SetMotorSpeed(short speed, int refreshNow);
+		int IsBallReady();
 
 	private:
-		Comm_AX12 m_comm;
-		AX12 m_motor;
-		short m_speed;
-
+		Comm_AX12 comm;
+		AX12 motor;
+		short speed;
 };
-
-
-
 
 #endif //CANNON_H

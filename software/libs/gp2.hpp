@@ -10,22 +10,21 @@
 #define COEFF_A (29.967f)
 #define COEFF_B (-0.811f)
 
-class gp2 {
-
+class Gp2
+{
 	public:
-		gp2(PinName pin);
-		AnalogIn getAnalogIn();
-		float getDistance();
-		float getDistanceMilliMeters();
-		void setThreshold(int distance);
-		int isThresholdReached();
+		Gp2(PinName pin);
+		~Gp2();
 
-		~gp2();
+		AnalogIn GetAnalogIn();
+		float GetDistance();
+		float GetDistanceMilliMeters();
+		void SetThreshold(int distance);
+		int IsThresholdReached();
 
 	private:
-		AnalogIn m_analogGP2;
-		int m_threshold;
-
+		AnalogIn analogGP2;
+		int threshold;
 };
 
-#endif //EIRBOT1A_2018_GP2_H
+#endif //GP2_H
