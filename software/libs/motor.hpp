@@ -16,7 +16,8 @@
 #define min(x, y) ((x)<(y) ? (x) : (y))
 
 
-class Motor {
+class Motor 
+{
 	public:
 		Motor(PinName, PinName, PinName, bool);
 		~Motor();
