@@ -30,9 +30,9 @@ class Motor
 		void SetBreak(bool);
 	private:
 		bool dir_fwd;
-		PwmOut* pin_pwm;
-		DigitalOut* pin_dir;
-		DigitalOut* pin_break;
+		PwmOut pwm;
+		DigitalOut dir;
+		DigitalOut br;
 };
 
 
