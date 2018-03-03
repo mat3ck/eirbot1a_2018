@@ -3,12 +3,6 @@
  * Documentation
  */
 
-
-#include "mbed.h"
-#include "error.hpp"
-#include "pid.hpp"
-#include "qei.hpp"
-#include "motor.hpp"
 #include "block.hpp"
 
 

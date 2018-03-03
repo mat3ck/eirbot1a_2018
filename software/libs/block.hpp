@@ -11,7 +11,8 @@
 #define PERIOD_REFRESH 0.0052f
 
 
-class Block {
+class Block
+{
 	public:
 		Block(Qei*, Pid*, Motor*);
 		~Block();
