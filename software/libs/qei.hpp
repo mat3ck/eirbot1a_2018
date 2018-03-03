@@ -9,7 +9,8 @@
 #define ENCODER_MODE TIM_ENCODERMODE_TI12
 
 
-class Qei {
+class Qei
+{
 	public:
 		Qei(TIM_TypeDef*, int*);
 		~Qei();

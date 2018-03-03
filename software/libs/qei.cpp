@@ -1,13 +1,9 @@
-
 /*
  * TODO
  * Documentation
  * Add support for TIM1 and TIM3
  */
 
-
-#include "mbed.h"
-#include "error.hpp"
 #include "qei.hpp"
 
 
