@@ -89,7 +89,7 @@ bool AX12::EndlessTurn(char _direction, short _DesiredSpeed)
 bool AX12::Init()
 {
 	char parameters1[] = { CW_ANGLE_LIMIT_H, 0x00, 0x00, 0x9B, 0x02 };
-	port_com->Send(0x07, WRITE_DATA, parameters1); //Set limit angle of 0° to 200°
+	port_com->Send(0x07, WRITE_DATA, parameters1); //Set limit angle of 0ï¿½ to 200ï¿½
 	char parameters2[] = { LIMIT_TEMPERATURE, TEMP_MAX, VOLT_L, VOLT_H, TORQUE_L, TORQUE_H, RETURN_STATUS, LED_BLINK, SHUTDOWN };
 	port_com->Send(0x0B, WRITE_DATA, parameters2); //Set Temperature lvl to maximum, set maximum torque, set LED to blink only for overweight, never shutdown torque
 
