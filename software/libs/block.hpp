@@ -14,7 +14,7 @@
 class Block
 {
 	public:
-		Block(Qei*, Pid*, Motor*);
+		Block(Qei&, Pid&, Motor&);
 		~Block();
 		void Reset();
 		void Start();
@@ -33,10 +33,10 @@ class Block
 		float PVspeed;
 		float duty;
 		short qei_value;
-		Qei* qei;
-		Pid* pid;
-		Motor* motor;
-		Ticker* ticker;
+		Qei& qei;
+		Pid& pid;
+		Motor& motor;
+		Ticker ticker;
 };
 
 

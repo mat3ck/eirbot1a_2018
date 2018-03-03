@@ -6,16 +6,15 @@
 #include "block.hpp"
 
 
-Block::Block(Qei* _qei, Pid* _pid, Motor* _motor)
+Block::Block(Qei& _qei, Pid& _pid, Motor& _motor):
+	qei(_qei),
+	pid(_pid),
+	motor(_motor)
 {
-	motor = _motor;
-	qei = _qei;
-	pid = _pid;
 	SPspeed = 0;
 	PVspeed = 0;
-	qei_value = qei->GetQei();
-	duty = motor->GetPwm();
-	ticker = new Ticker;
+	qei_value = qei.GetQei();
+	duty = motor.GetPwm();
 }
 
 Block::~Block()
@@ -25,20 +24,20 @@ Block::~Block()
 
 void Block::Reset()
 {
-	ticker->detach();
+	ticker.detach();
 	SPspeed = 0;
 	PVspeed = 0;
-	qei->Reset();
-	pid->Reset();
-	motor->Reset();
-	qei_value = qei->GetQei();
-	duty = motor->GetPwm();
+	qei.Reset();
+	pid.Reset();
+	motor.Reset();
+	qei_value = qei.GetQei();
+	duty = motor.GetPwm();
 }
 
 void Block::Start()
 {
 
-	ticker->attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
+	ticker.attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
 }
 
 float Block::GetSP()
@@ -53,27 +52,27 @@ float Block::GetPV()
 
 float Block::GetPwm()
 {
-	return motor->GetPwm();
+	return motor.GetPwm();
 }
 
 bool Block::GetDir()
 {
-	return motor->GetDir();
+	return motor.GetDir();
 }
 
 bool Block::GetBreak()
 {
-	return motor->GetBreak();
+	return motor.GetBreak();
 }
 
 short Block::GetQei()
 {
-	return qei->GetQei();
+	return qei.GetQei();
 }
 
 short Block::GetQei(short* value)
 {
-	short new_value = qei->GetQei();
+	short new_value = qei.GetQei();
 	short diff = new_value - *value;;
 	*value = new_value;
 	return diff;
@@ -86,14 +85,14 @@ void Block::SetSpeed(float speed)
 
 void Block::SetBreak(bool br)
 {
-	motor->SetBreak(br);
+	motor.SetBreak(br);
 }
 
 void Block::Refresh()
 {
 	PVspeed = GetQei(&qei_value);
 	float err = SPspeed - PVspeed;
-	duty = min(pid->GetPid(err, duty), MAX_DUTY);
+	duty = min(pid.GetPid(err, duty), MAX_DUTY);
 	static unsigned char dir;
 	if (duty > 0.0f) {
 		dir = DIR_FORWARD;
@@ -101,7 +100,7 @@ void Block::Refresh()
 		dir = DIR_BACKWARD;
 		duty = -duty;
 	}
-	motor->SetDirection(dir);
-	motor->SetPwm(duty);
+	motor.SetDirection(dir);
+	motor.SetPwm(duty);
 }
 
