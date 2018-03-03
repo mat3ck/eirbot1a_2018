@@ -4,9 +4,6 @@
  * Create LMD18200 and L298 class inheritant from Motor
  */
 
-
-#include "mbed.h"
-#include "error.hpp"
 #include "motor.hpp"
 
 
