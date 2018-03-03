@@ -2,45 +2,12 @@
  * TODO
  * Documentation
  * Make position and angle pid to control motor's speed pid
- * Move CArray in a common lib and add different length support
+ * Add different length support
+ * Add Pid::GetPid() to read Pid value without entering new values
  */
 
-#include "mbed.h"
-#include "error.hpp"
 #include "pid.hpp"
 
-
-CArray::CArray()
-{
-	index = 0;
-	for (int i = 0; i < NB_COEF; i++) {
-		array[i] = 0.0f;
-	}
-}
-
-CArray::~CArray()
-{
-
-}
-
-void CArray::Reset()
-{
-	index = 0;
-	for (int i = 0; i < NB_COEF; i++) {
-		array[i] = 0.0f;
-	}
-}
-
-void CArray::Add(float val)
-{
-	index = ((index-1) % NB_COEF + NB_COEF) % NB_COEF;
-	array[index] = val;
-}
-
-float CArray::operator[](int i)
-{
-	return array[(index+i) % NB_COEF];
-}
 
 Pid::Pid(float* _coef_err, float* _coef_sp)
 {

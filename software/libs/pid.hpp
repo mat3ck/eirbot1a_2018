@@ -3,24 +3,11 @@
 #define PID_HPP
 
 #include "mbed.h"
+#include "common.hpp"
 
 
-#define NB_COEF 3
-
-
-class CArray {
-	public:
-		CArray();
-		~CArray();
-		void Reset();
-		void Add(float);
-		float operator[](int);
-	private:
-		int index;
-		float array[NB_COEF];
-};
-
-class Pid {
+class Pid
+{
 	public:
 		Pid(float [NB_COEF], float [NB_COEF]);
 		~Pid();
