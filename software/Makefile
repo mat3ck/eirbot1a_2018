@@ -47,6 +47,7 @@ PROJECT := nucleo_mir
 
 OBJECTS += nucleo_mir/main.o
 OBJECTS += libs/telemetry.o
+OBJECTS += libs/common.o
 OBJECTS += libs/qei.o
 OBJECTS += libs/motor.o
 OBJECTS += libs/pid.o
