@@ -3,6 +3,7 @@
 #define NUCLEO_1_HPP
 
 /* PID coefficients */
+#define NB_COEF 3
 // Left PID
 #define K1_ERR_LEFT (0.0035f)
 #define K2_ERR_LEFT (-0.0070f)

@@ -9,12 +9,14 @@
 class Pid
 {
 	public:
-		Pid(float [NB_COEF], float [NB_COEF]);
+		Pid(float* _coef_err, float* _coef_sp, int _length);
 		~Pid();
 		void Reset();
-		float GetPid(float, float);
+		float GetPid(float err, float sp);
+		float GetPid();
 	private:
 		void RefreshPid(float, float);
+		int length;
 		float* coef_err;
 		float* coef_sp;
 		CArray* err_ca;

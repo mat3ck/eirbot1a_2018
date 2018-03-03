@@ -9,17 +9,19 @@
 #include "pid.hpp"
 
 
-Pid::Pid(float* _coef_err, float* _coef_sp)
+Pid::Pid(float* _coef_err, float* _coef_sp, int _length)
 {
 	coef_err = _coef_err;
 	coef_sp = _coef_sp;
-	err_ca = new CArray();
-	sp_ca = new CArray();
+	length = _length;
+	err_ca = new CArray(length);
+	sp_ca = new CArray(length);
 }
 
 Pid::~Pid()
 {
-
+	delete [] err_ca;
+	delete [] sp_ca;
 }
 
 void Pid::Reset()
@@ -31,7 +33,7 @@ void Pid::Reset()
 float Pid::GetPid(float err, float sp)
 {
 	float sum = 0.0f;
-	for (int i = 0; i < NB_COEF; i++) {
+	for (int i = 0; i < length; i++) {
 		sum += coef_err[i] * (*err_ca)[i];
 		sum += coef_sp[i] * (*sp_ca)[i];
 	}

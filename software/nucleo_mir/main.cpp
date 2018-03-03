@@ -32,11 +32,11 @@ Qei qei_right(ENCODER_TIM_RIGHT, &err);
 // Left motor speed PID
 float coef_err_left[] = {K1_ERR_LEFT, K2_ERR_LEFT, K3_ERR_LEFT};
 float coef_sp_left[] = {K1_SP_LEFT, K2_SP_LEFT, K3_SP_LEFT};
-Pid pid_left(coef_err_left, coef_sp_left);
+Pid pid_left(coef_err_left, coef_sp_left, NB_COEF);
 // Right motor speed PID
 float coef_err_right[] = {K1_ERR_RIGHT, K2_ERR_RIGHT, K3_ERR_RIGHT};
 float coef_sp_right[] = {K1_SP_RIGHT, K2_SP_RIGHT, K3_SP_RIGHT};
-Pid pid_right(coef_err_right, coef_sp_right);
+Pid pid_right(coef_err_right, coef_sp_right, NB_COEF);
 // Left Motor
 Motor motor_left(PIN_PWM_LEFT, PIN_DIR_LEFT, PIN_BREAK_LEFT, 0);
 // Right Motor
