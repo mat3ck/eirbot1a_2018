@@ -5,6 +5,7 @@
  */
 
 #include "qei.hpp"
+#include "error.hpp"
 
 
 Qei::Qei(TIM_TypeDef* _TIMx, int* err)
