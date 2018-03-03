@@ -3,20 +3,18 @@
 #define COMMON_HPP
 
 
-#define NB_COEF 3
-
-
 class CArray
 {
 	public:
-		CArray();
+		CArray(int _length);
 		~CArray();
 		void Reset();
-		void Add(float);
-		float operator[](int);
+		void Add(float value);
+		float operator[](int _index);
 	private:
 		int index;
-		float array[NB_COEF];
+		int length;
+		float* array;
 };
 
 
