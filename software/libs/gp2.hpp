@@ -7,24 +7,22 @@
 
 #include "mbed.h"
 
-#define COEFF_A (29.967f)
-#define COEFF_B (-0.811f)
+
+#define COEF_A (29.967f)
+#define COEF_B (-0.811f)
 
 class Gp2
 {
-	public:
-		Gp2(PinName pin);
-		~Gp2();
-
-		AnalogIn GetAnalogIn();
-		float GetDistance();
-		float GetDistanceMilliMeters();
-		void SetThreshold(int distance);
-		int IsThresholdReached();
-
-	private:
-		AnalogIn analogGP2;
-		int threshold;
+public:
+	Gp2(PinName _pin);
+	~Gp2();
+	float GetDistance();
+	void SetThreshold(int distance);
+	int IsThresholdReached();
+private:
+	float threshold;
+	AnalogIn pin;
 };
 
-#endif //GP2_H
+
+#endif

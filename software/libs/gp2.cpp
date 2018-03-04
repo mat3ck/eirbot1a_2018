@@ -1,14 +1,14 @@
 /*
  * TODO
- *
- *
+ * Add TRESHOLD to nuc_X/config.hpp
  */
 
 #include "gp2.hpp"
 
-Gp2::Gp2(PinName pin) : analogGP2(pin)
+Gp2::Gp2(PinName _pin):
+	pin(_pin)
 {
-	threshold = 300;
+	threshold = 300.0f;
 }
 
 Gp2::~Gp2()
@@ -16,36 +16,12 @@ Gp2::~Gp2()
 
 }
 
-AnalogIn Gp2::GetAnalogIn()
-{
-	return analogGP2;
-}
-
-/**
- * Return the distance read with AnalogIn.
- * The more the distance, the more the number (between 0 and 1).
- * @return
- */
+/* Return the distance in millimeters */
 float Gp2::GetDistance()
 {
-	float distance = 1.0 - analogGP2.read();
-	return distance;
+	return (pow((pin.read() / COEF_A), (1.0f / COEF_B)));
 }
 
-/**
- * Return the distance in millimeters.
- * An approximation of the GP2 output with excel was done to get coefficients "a" and "b".
- * @return
- */
-float Gp2::GetDistanceMilliMeters()
-{
-	return (pow((analogGP2.read() / COEFF_A), (1.0f / COEFF_B)));
-}
-
-/**
- * Set the threshold in millimeters.
- * @param distance
- */
 void Gp2::SetThreshold(int distance)
 {
 	threshold = distance;
@@ -53,7 +29,5 @@ void Gp2::SetThreshold(int distance)
 
 int Gp2::IsThresholdReached()
 {
-	if (GetDistanceMilliMeters() < threshold)
-		return 1;
-	return 0;
+	return GetDistance() > threshold;
 }
