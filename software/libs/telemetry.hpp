@@ -6,8 +6,6 @@
 #include "block.hpp"
 
 
-#define max(x, y) ((x)>(y) ? (x) : (y))
-
 void Telemetry(Serial*, Block*);
 
 

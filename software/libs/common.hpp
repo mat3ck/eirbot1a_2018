@@ -3,6 +3,10 @@
 #define COMMON_HPP
 
 
+#define min(x, y) ((x)<(y) ? (x) : (y))
+#define max(x, y) ((x)>(y) ? (x) : (y))
+
+
 class CArray
 {
 public:

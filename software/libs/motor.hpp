@@ -3,6 +3,7 @@
 #define MOTOR_HPP
 
 #include "mbed.h"
+#include "common.hpp"
 
 
 #define PERIOD_PWM 0.000033f
@@ -12,8 +13,6 @@
 #define DIR_BACKWARD 1
 #define BREAK_OFF 0
 #define BREAK_ON 1
-
-#define min(x, y) ((x)<(y) ? (x) : (y))
 
 
 class Motor 

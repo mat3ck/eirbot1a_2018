@@ -1,7 +1,6 @@
 /*
  * TODO
  * Documentation
- * Add common macros in common.hpp
  */
 
 #include "common.hpp"
