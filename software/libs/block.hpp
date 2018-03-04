@@ -13,30 +13,30 @@
 
 class Block
 {
-	public:
-		Block(Qei& _qei, Pid& _pid, Motor& _motor);
-		~Block();
-		void Reset();
-		void Start();
-		float GetSP();
-		float GetPV();
-		float GetPwm();
-		bool GetDir();
-		bool GetBreak();
-		short GetQei();
-		short GetQei(short*);
-		void SetSpeed(float);
-		void SetBreak(bool);
-	private:
-		void Refresh();
-		float SPspeed;
-		float PVspeed;
-		float duty;
-		short qei_value;
-		Qei& qei;
-		Pid& pid;
-		Motor& motor;
-		Ticker ticker;
+public:
+	Block(Qei& _qei, Pid& _pid, Motor& _motor);
+	~Block();
+	void Reset();
+	void Start();
+	float GetSP();
+	float GetPV();
+	float GetPwm();
+	bool GetDir();
+	bool GetBreak();
+	short GetQei();
+	short GetQei(short*);
+	void SetSpeed(float);
+	void SetBreak(bool);
+private:
+	void Refresh();
+	float SPspeed;
+	float PVspeed;
+	float duty;
+	short qei_value;
+	Qei& qei;
+	Pid& pid;
+	Motor& motor;
+	Ticker ticker;
 };
 
 

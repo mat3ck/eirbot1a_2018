@@ -5,16 +5,16 @@
 
 class CArray
 {
-	public:
-		CArray(int _length);
-		~CArray();
-		void Reset();
-		void Add(float value);
-		float operator[](int _index);
-	private:
-		int index;
-		int length;
-		float* array;
+public:
+	CArray(int _length);
+	~CArray();
+	void Reset();
+	void Add(float value);
+	float operator[](int _index);
+private:
+	int index;
+	int length;
+	float* array;
 };
 
 
