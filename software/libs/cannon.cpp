@@ -1,14 +1,24 @@
 /*
  * TODO
- * setup "IsBallReady()" function.
- *
+ * Documentation
+ * Setup "IsBallReady()" function.
  */
 
 #include "cannon.hpp"
 
-Cannon::Cannon(PinName rx, PinName tx) : comm(rx, tx), motor(&comm)
+
+Cannon::Cannon(PinName rx, PinName tx):
+	ax12_comm(rx, tx), ax12(&ax12_comm)
 {
-	motor.Init();
+	ax12.Init();
+	speed = 45;
+}
+
+Cannon::Cannon(PinName rx, PinName tx, char ax12_id):
+	ax12_comm(rx, tx), ax12(&ax12_comm)
+{
+	ax12.SetID(ax12_id);
+	ax12.Init();
 	speed = 45;
 }
 
@@ -17,34 +27,27 @@ Cannon::~Cannon()
 
 }
 
-Cannon::Cannon(PinName rx, PinName tx, char ax12_id) : comm(rx, tx), motor(&comm)
+void Cannon::Start()
 {
-	motor.SetID(ax12_id);
-	motor.Init();
-	speed = 45;
+	ax12.EndlessTurn(1, speed);
 }
 
-void Cannon::StartCannon()
+void Cannon::Stop()
 {
-	motor.EndlessTurn(1, speed);
+	ax12.EndlessTurn(1, STOP);
 }
 
-void Cannon::StopCannon()
-{
-	motor.EndlessTurn(1, STOP);
-}
-
-void Cannon::SetMotorSpeed(short speed, int refreshNow)
+void Cannon::SetMotorSpeed(short speed, bool refreshNow)
 {
 	speed = speed;
-	if (refreshNow)
-		motor.EndlessTurn(1, speed);
+	if (refreshNow) {
+		ax12.EndlessTurn(1, speed);
+	}
 }
 
-int Cannon::IsBallReady()
+bool Cannon::IsBallReady()
 {
-	/*
-	 * Here, the test to know if the ball is ready to launch.
-	 */
+	// Insert the test to know if the ball is ready to launch.
 	return 1;
 }
+
