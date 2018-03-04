@@ -2,7 +2,6 @@
  * TODO
  * Documentation
  * Make position and angle pid to control motor's speed pid
- * Add Pid::GetPid() to read Pid value without entering new values
  */
 
 #include "pid.hpp"
