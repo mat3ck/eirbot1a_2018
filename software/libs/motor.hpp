@@ -19,7 +19,7 @@
 class Motor 
 {
 	public:
-		Motor(PinName, PinName, PinName, bool);
+		Motor(PinName pwm, PinName dir, PinName br, bool);
 		~Motor();
 		void Reset();
 		float GetPwm();

@@ -14,7 +14,7 @@
 class Block
 {
 	public:
-		Block(Qei&, Pid&, Motor&);
+		Block(Qei& _qei, Pid& _pid, Motor& _motor);
 		~Block();
 		void Reset();
 		void Start();
