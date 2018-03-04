@@ -26,9 +26,9 @@ DigitalOut led(LED3);
 // Serial PC
 Serial pc(USBTX, USBRX);
 // Left Qei
-Qei qei_left(ENCODER_TIM_LEFT, &err);
+Qei qei_left(ENCODER_TIM_LEFT, err);
 //Right Qei
-Qei qei_right(ENCODER_TIM_RIGHT, &err);
+Qei qei_right(ENCODER_TIM_RIGHT, err);
 // Left motor speed PID
 float coef_err_left[] = {K1_ERR_LEFT, K2_ERR_LEFT, K3_ERR_LEFT};
 float coef_sp_left[] = {K1_SP_LEFT, K2_SP_LEFT, K3_SP_LEFT};
