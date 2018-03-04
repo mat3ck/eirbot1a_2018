@@ -46,13 +46,16 @@ PROJECT := nucleo_mir
 # Objects and Paths
 
 OBJECTS += nucleo_mir/main.o
-OBJECTS += libs/telemetry.o
 OBJECTS += libs/common.o
+OBJECTS += libs/telemetry.o
 OBJECTS += libs/qei.o
 OBJECTS += libs/motor.o
+OBJECTS += libs/ax12.o
+OBJECTS += libs/comm_ax12.o
 OBJECTS += libs/pid.o
-OBJECTS += libs/block.o
 OBJECTS += libs/gp2.o
+OBJECTS += libs/block.o
+OBJECTS += libs/cannon.o
 
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/stm32f4xx_hal_flash_ramfunc.o
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/PeripheralPins.o
