@@ -90,17 +90,16 @@ void Block::SetBreak(bool br)
 
 void Block::Refresh()
 {
-	PVspeed = GetQei(&qei_value);
+	PVspeed = (float)GetQei(&qei_value);
 	float err = SPspeed - PVspeed;
 	duty = min(pid.GetPid(err, duty), MAX_DUTY);
-	static unsigned char dir;
+	duty = max(duty, -MAX_DUTY);
 	if (duty > 0.0f) {
-		dir = DIR_FORWARD;
+		motor.SetDirection(DIR_FORWARD);
+		motor.SetPwm(duty);
 	} else {
-		dir = DIR_BACKWARD;
-		duty = -duty;
+		motor.SetDirection(DIR_BACKWARD);
+		motor.SetPwm(-duty);
 	}
-	motor.SetDirection(dir);
-	motor.SetPwm(duty);
 }
 
