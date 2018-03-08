@@ -7,11 +7,11 @@
 #include "pid.hpp"
 
 
-Pid::Pid(float (&_coef_err)[NB_COEF], float (&_coef_sp)[NB_COEF]):
+Pid::Pid(float (&_coef_err)[NB_COEF_ERR], float (&_coef_sp)[NB_COEF_SP]):
 	coef_err(_coef_err),
 	coef_sp(_coef_sp),
-	err_ca(NB_COEF),
-	sp_ca(NB_COEF)
+	err_ca(NB_COEF_ERR),
+	sp_ca(NB_COEF_SP)
 {
 	
 }
@@ -30,8 +30,10 @@ void Pid::Reset()
 float Pid::GetPid()
 {
 	float sum = 0.0f;
-	for (int i = 0; i < NB_COEF; i++) {
+	for (int i = 0; i < NB_COEF_ERR; i++) {
 		sum += coef_err[i] * err_ca[i];
+	}
+	for (int i = 0; i < NB_COEF_SP; i++) {
 		sum += coef_sp[i] * sp_ca[i];
 	}
 	return sum;
