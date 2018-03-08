@@ -7,7 +7,7 @@
 
 
 #define PERIOD_PWM 0.000033f
-#define MAX_DUTY 0.20f
+#define MAX_DUTY 0.50f
 
 #define DIR_FORWARD 0
 #define DIR_BACKWARD 1
