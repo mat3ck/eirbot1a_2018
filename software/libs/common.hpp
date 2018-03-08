@@ -3,9 +3,9 @@
 #define COMMON_HPP
 
 
-#define min(x, y) ((x)<(y) ? (x) : (y))
-#define max(x, y) ((x)>(y) ? (x) : (y))
-
+float max(float val_1, float val_2);
+float min(float val_1, float val_2);
+float min(float val_1, float val_2, float val_3);
 
 class CArray
 {
