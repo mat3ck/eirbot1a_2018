@@ -27,7 +27,7 @@ Motor::~Motor()
 void Motor::Reset()
 {
 	SetPwm(0.0f);
-	SetDirection(DIR_FORWARD);
+	SetDirection(DIR_BACKWARD);
 	SetBreak(BREAK_OFF);
 }
 
