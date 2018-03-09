@@ -40,6 +40,11 @@ float CArray::operator[](int _index)
 	return array[(index+_index) % length];
 }
 
+float sg(float val)
+{
+	return (val < 0.0f) ? -1.0f : 1.0f;
+}
+
 float max(float val_1, float val_2)
 {
 	return (val_1 > val_2) ? val_1 : val_2;
