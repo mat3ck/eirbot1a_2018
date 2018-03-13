@@ -24,7 +24,7 @@ public:
 	bool GetDir();
 	bool GetBreak();
 	short GetQei();
-	short GetQei(short*);
+	short GetQei(short&);
 	void SetSpeed(float);
 	void SetBreak(bool);
 private:

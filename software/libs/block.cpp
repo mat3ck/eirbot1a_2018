@@ -70,11 +70,11 @@ short Block::GetQei()
 	return qei.GetQei();
 }
 
-short Block::GetQei(short* value)
+short Block::GetQei(short& value)
 {
 	short new_value = qei.GetQei();
-	short diff = new_value - *value;;
-	*value = new_value;
+	short diff = new_value - value;;
+	value = new_value;
 	return diff;
 }
 
@@ -90,7 +90,7 @@ void Block::SetBreak(bool br)
 
 void Block::Refresh()
 {
-	PVspeed = (float)GetQei(&qei_value);
+	PVspeed = (float)GetQei(qei_value);
 	float err = SPspeed - PVspeed;
 	duty = min(pid.GetPid(err, duty), MAX_DUTY);
 	duty = max(duty, -MAX_DUTY);
