@@ -21,7 +21,7 @@ public:
 	Motor(PinName pwm, PinName dir, PinName br, bool);
 	~Motor();
 	void Reset();
-	float GetPwm();
+	float GetDuty();
 	bool GetDir();
 	bool GetBreak();
 	void SetPwm(float);
