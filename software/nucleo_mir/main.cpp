@@ -32,13 +32,13 @@ Qei qei_left(ENCODER_TIM_LEFT, err);
 //Right Qei
 Qei qei_right(ENCODER_TIM_RIGHT, err);
 // Left motor speed PID
-Pid pid_left(coef_err, 4, coef_sp, 3);
+Pid pid_left(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
 // Right motor speed PID
-Pid pid_right(coef_err, 4, coef_sp, 3);
+Pid pid_right(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
 // Left Motor
-Motor motor_left(PIN_PWM_LEFT, PIN_DIR_LEFT, PIN_BREAK_LEFT, 0);
+Motor motor_left(PIN_PWM_LEFT, PIN_DIR_LEFT, PIN_BREAK_LEFT, DIR_FWD_LEFT);
 // Right Motor
-Motor motor_right(PIN_PWM_RIGHT, PIN_DIR_RIGHT, PIN_BREAK_RIGHT, 1);
+Motor motor_right(PIN_PWM_RIGHT, PIN_DIR_RIGHT, PIN_BREAK_RIGHT, DIR_FWD_RIGHT);
 // Left Block
 Block block_left(qei_left, pid_left, motor_left);
 // Right Block
@@ -54,7 +54,7 @@ int main()
 	led = 0;
 	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
 	while (1) {
-		wait(PERIOD_REFRESH);
+
 	}
 	return 0;
 }
