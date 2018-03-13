@@ -18,15 +18,15 @@
 class Motor 
 {
 public:
-	Motor(PinName pwm, PinName dir, PinName br, bool);
+	Motor(PinName pwm, PinName dir, PinName br, bool _dir_fwd);
 	~Motor();
 	void Reset();
 	float GetDuty();
 	bool GetDir();
 	bool GetBreak();
-	void SetPwm(float);
-	void SetDirection(bool);
-	void SetBreak(bool);
+	void SetPwm(float duty_cycle);
+	void SetDirection(bool dir_value);
+	void SetBreak(bool br_value);
 private:
 	bool dir_fwd;
 	PwmOut pwm;
