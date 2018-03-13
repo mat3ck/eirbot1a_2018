@@ -6,7 +6,7 @@
 #include "block.hpp"
 
 
-Block::Block(Qei& _qei, Pid& _pid, Motor& _motor):
+Block::Block(Qei& _qei, Pid& _pid, Motor& _motor, float _period):
 	qei(_qei),
 	pid(_pid),
 	motor(_motor)
@@ -15,6 +15,7 @@ Block::Block(Qei& _qei, Pid& _pid, Motor& _motor):
 	PVspeed = 0;
 	qei_value = qei.GetQei();
 	duty = 0.0f;
+	period = _period;
 }
 
 Block::~Block()
@@ -38,7 +39,7 @@ void Block::Start()
 
 	qei_value = qei.GetQei();
 	duty = 0.0f;
-	ticker.attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
+	ticker.attach(callback(this, &Block::Refresh), period);
 }
 
 float Block::GetSP()

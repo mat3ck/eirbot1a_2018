@@ -8,13 +8,10 @@
 #include "motor.hpp"
 
 
-#define PERIOD_REFRESH 0.0052f
-
-
 class Block
 {
 public:
-	Block(Qei& _qei, Pid& _pid, Motor& _motor);
+	Block(Qei& _qei, Pid& _pid, Motor& _motor, float _period);
 	~Block();
 	void Reset();
 	void Start();
@@ -33,6 +30,7 @@ private:
 	float PVspeed;
 	float duty;
 	short qei_value;
+	float period;
 	Qei& qei;
 	Pid& pid;
 	Motor& motor;
