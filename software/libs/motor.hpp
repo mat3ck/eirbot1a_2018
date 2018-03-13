@@ -6,9 +6,6 @@
 #include "common.hpp"
 
 
-#define PERIOD_PWM 0.000033f
-#define MAX_DUTY 0.50f
-
 #define DIR_FORWARD 0
 #define DIR_BACKWARD 1
 #define BREAK_OFF 0
@@ -18,7 +15,8 @@
 class Motor 
 {
 public:
-	Motor(PinName pwm, PinName dir, PinName br, bool _dir_fwd);
+	Motor(PinName _pwm, PinName _dir, PinName _br, bool _dir_fwd,
+			float _period);
 	~Motor();
 	void Reset();
 	float GetDuty();
