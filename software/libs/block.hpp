@@ -20,7 +20,7 @@ public:
 	void Start();
 	float GetSP();
 	float GetPV();
-	float GetPwm();
+	float GetDuty();
 	bool GetDir();
 	bool GetBreak();
 	short GetQei();

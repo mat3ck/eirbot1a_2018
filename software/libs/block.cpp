@@ -14,7 +14,7 @@ Block::Block(Qei& _qei, Pid& _pid, Motor& _motor):
 	SPspeed = 0;
 	PVspeed = 0;
 	qei_value = qei.GetQei();
-	duty = motor.GetPwm();
+	duty = 0.0f;
 }
 
 Block::~Block()
@@ -30,13 +30,14 @@ void Block::Reset()
 	qei.Reset();
 	pid.Reset();
 	motor.Reset();
-	qei_value = qei.GetQei();
-	duty = motor.GetPwm();
+	duty = 0.0f;
 }
 
 void Block::Start()
 {
 
+	qei_value = qei.GetQei();
+	duty = 0.0f;
 	ticker.attach(callback(this, &Block::Refresh), PERIOD_REFRESH);
 }
 
@@ -50,9 +51,9 @@ float Block::GetPV()
 	return PVspeed;
 }
 
-float Block::GetPwm()
+float Block::GetDuty()
 {
-	return motor.GetPwm();
+	return motor.GetDuty();
 }
 
 bool Block::GetDir()
