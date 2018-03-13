@@ -1,11 +1,11 @@
 
-#ifndef NUCLEO_1_HPP
-#define NUCLEO_1_HPP
+#ifndef NUCLEO_MIR_HPP
+#define NUCLEO_MIR_HPP
 
 /* == Software paramters == */
 
 /* Speed PID */
-#define PERIOD_REFRESH (0.005200f)
+#define PERIOD_PID (0.0052f)
 #define NB_COEF_ERR 4
 #define NB_COEF_SP 3
 #define K1_ERR (0.002996f/2.4f)
@@ -16,8 +16,10 @@
 #define K2_SP (0.999500f/2.4f)
 #define K3_SP (0.947700f/2.4f)
 /* Motor Parameters */
-#define DIR_FWD_LEFT 1
-#define DIR_FWD_RIGHT 1
+#define PERIOD_PWM 0.000033f
+#define MAX_DUTY 0.50f
+#define DIR_FWD_L 1
+#define DIR_FWD_R 1
 
 
 /* == Pin connections == */
@@ -34,13 +36,13 @@
 
 /* Motors */
 // Left motor
-#define PIN_PWM_LEFT PC_8
-#define PIN_DIR_LEFT PC_10
-#define PIN_BREAK_LEFT PC_11
+#define PWM_L PC_8
+#define DIR_L PC_10
+#define BREAK_L PC_11
 // Right Motor
-#define PIN_PWM_RIGHT PC_9
-#define PIN_DIR_RIGHT PD_7
-#define PIN_BREAK_RIGHT PD_6
+#define PWM_R PC_9
+#define DIR_R PD_7
+#define BREAK_R PD_6
 
 
 #endif
