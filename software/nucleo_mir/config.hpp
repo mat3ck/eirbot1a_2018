@@ -4,7 +4,8 @@
 
 /* == Software paramters == */
 
-/* Speed PID coefficients */
+/* Speed PID */
+#define PERIOD_REFRESH (0.005200f)
 #define NB_COEF_ERR 4
 #define NB_COEF_SP 3
 #define K1_ERR (0.002996f/2.4f)

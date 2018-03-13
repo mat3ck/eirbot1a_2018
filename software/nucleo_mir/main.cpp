@@ -40,9 +40,9 @@ Motor motor_left(PIN_PWM_LEFT, PIN_DIR_LEFT, PIN_BREAK_LEFT, DIR_FWD_LEFT);
 // Right Motor
 Motor motor_right(PIN_PWM_RIGHT, PIN_DIR_RIGHT, PIN_BREAK_RIGHT, DIR_FWD_RIGHT);
 // Left Block
-Block block_left(qei_left, pid_left, motor_left);
+Block block_left(qei_left, pid_left, motor_left, PERIOD_REFRESH);
 // Right Block
-Block block_right(qei_right, pid_right, motor_right);
+Block block_right(qei_right, pid_right, motor_right, PERIOD_REFRESH);
 
 int main()
 {
