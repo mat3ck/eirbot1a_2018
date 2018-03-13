@@ -27,22 +27,18 @@ float coef_sp[] = {K1_SP, K2_SP, K3_SP};
 DigitalOut led(LED3);
 // Serial PC
 Serial pc(USBTX, USBRX);
-// Left Qei
+// Qeis
 Qei qei_left(ENCODER_TIM_LEFT, err);
-//Right Qei
 Qei qei_right(ENCODER_TIM_RIGHT, err);
-// Left motor speed PID
+// Speed PIDs
 Pid pid_left(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
-// Right motor speed PID
 Pid pid_right(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
-// Left Motor
-Motor motor_left(PIN_PWM_LEFT, PIN_DIR_LEFT, PIN_BREAK_LEFT, DIR_FWD_LEFT);
-// Right Motor
-Motor motor_right(PIN_PWM_RIGHT, PIN_DIR_RIGHT, PIN_BREAK_RIGHT, DIR_FWD_RIGHT);
-// Left Block
-Block block_left(qei_left, pid_left, motor_left, PERIOD_REFRESH);
-// Right Block
-Block block_right(qei_right, pid_right, motor_right, PERIOD_REFRESH);
+// Motors
+Motor motor_left(PWM_L, DIR_L, BREAK_L, DIR_FWD_L, PERIOD_PWM);
+Motor motor_right(PWM_R, DIR_R, BREAK_R, DIR_FWD_R, PERIOD_PWM);
+// Blocks
+Block block_left(qei_left, pid_left, motor_left, MAX_DUTY, PERIOD_PID);
+Block block_right(qei_right, pid_right, motor_right, MAX_DUTY, PERIOD_PID);
 
 int main()
 {
