@@ -11,7 +11,8 @@
 class Block
 {
 public:
-	Block(Qei& _qei, Pid& _pid, Motor& _motor, float _period);
+	Block(Qei& _qei, Pid& _pid, Motor& _motor, float _max_duty,
+			float _period);
 	~Block();
 	void Reset();
 	void Start();
@@ -30,6 +31,7 @@ private:
 	float PVspeed;
 	float duty;
 	short qei_value;
+	float max_duty;
 	float period;
 	Qei& qei;
 	Pid& pid;

@@ -6,7 +6,8 @@
 #include "block.hpp"
 
 
-Block::Block(Qei& _qei, Pid& _pid, Motor& _motor, float _period):
+Block::Block(Qei& _qei, Pid& _pid, Motor& _motor, float _max_duty,
+		float _period):
 	qei(_qei),
 	pid(_pid),
 	motor(_motor)
@@ -15,6 +16,7 @@ Block::Block(Qei& _qei, Pid& _pid, Motor& _motor, float _period):
 	PVspeed = 0;
 	qei_value = qei.GetQei();
 	duty = 0.0f;
+	max_duty = _max_duty;
 	period = _period;
 }
 
@@ -94,8 +96,8 @@ void Block::Refresh()
 {
 	PVspeed = (float)GetQei(qei_value);
 	float err = SPspeed - PVspeed;
-	duty = min(pid.GetPid(err, duty), MAX_DUTY);
-	duty = max(duty, -MAX_DUTY);
+	duty = min(pid.GetPid(err, duty), max_duty);
+	duty = max(duty, -max_duty);
 	if (duty > 0.0f) {
 		motor.SetDirection(DIR_FORWARD);
 		motor.SetPwm(duty);
