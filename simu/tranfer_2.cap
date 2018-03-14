@@ -1,3 +1,5 @@
+PWM = 0.30	Voltage = 18V
+
 Speed_L	Speed_R	Time
 -3	1	0.000005
 0	2	0.006495
