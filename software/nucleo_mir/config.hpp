@@ -44,5 +44,9 @@
 #define DIR_R PD_7
 #define BREAK_R PD_6
 
+/* Canon */
+#define CANNON_RX PE_7
+#define CANNON_TX PE_8
+
 
 #endif
