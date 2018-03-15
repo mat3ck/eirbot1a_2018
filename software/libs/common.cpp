@@ -60,6 +60,13 @@ Pos::~Pos()
 
 }
 
+Pos::Reset()
+{
+	x = 0.0f;
+	y = 0.0f;
+	angle = 0.0f;
+}
+
 
 float sg(float val)
 {

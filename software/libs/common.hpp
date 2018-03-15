@@ -23,6 +23,7 @@ public:
 	Pos();
 	Pos(float _x, float _y, float _angle);
 	~Pos();
+	void Reset();
 	float x;
 	float y;
 	float angle;
