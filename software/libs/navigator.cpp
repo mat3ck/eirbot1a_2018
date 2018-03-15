@@ -2,16 +2,27 @@
  * TODO
  * Documentation
  * Add amax and vmax parameters
- * Add wanted precision values into if block in Refresh()
+ * See Refresh function
  */
 
 #include "navigator.hpp"
 
+float ticks_per_meter = 43723.0f;
+float eps = 0.366f*ticks_per_meter;
+float vmax = 0.5f*ticks_per_meter;
+float vmax_t = vmax * 0.0052f;
+float amax = 0.05f*ticks_per_meter;
+float amax_t = amax*0.0052f;
+
 
 Navigator::Navigator(Block& _block_l, Block& _block_r, float _period):
+	pos(),
+	dst(),
 	block_l(_block_l),
 	block_r(_block_r)
 {
+	qei_l = 0;
+	qei_r = 0;
 	period = _period;
 }
 
@@ -20,43 +31,98 @@ Navigator::~Navigator()
 	
 }
 
-Navigator::Reset()
+void Navigator::Reset()
 {
+	ticker.detach();
 	block_l.Reset();
 	block_r.Reset();
+	qei_l = 0;
+	qei_r = 0;
 }
 
-Navigator::GetPos()
+void Navigator::Start()
 {
-	
+	block_l.Start();
+	block_r.Start();
+	ticker.attach(callback(this, &Navigator::Refresh), period);
 }
 
-Navigator::SetPos(float x, float y, float angle)
+Pos Navigator::GetPos()
+{
+	return pos;
+}
+
+Pos Navigator::GetDst()
+{
+	return dst;
+}
+
+void Navigator::SetPos(Pos _pos)
 {
 
 }
 
-Navigator::SetDst(float x, float y, float angle)
+void Navigator::SetDst(Pos _dst)
 {
 
 }
 
-Navigator::Refresh()
+void Navigator::Refresh()
 {
-	pos_angle += 720*3.141592*(dr - dl)/epsilon;
-	float dx = dst_x - pos_x;
-	float dy = dst_y - pos_y;
-	float dist = sqrt(dx*dx + dy*dy);
-	float theta = 2*arctan(dx/(dy+dist))-dst_angle;
-	if (abs(theta) > 0) {
-
-	} else if (abs(dist) > 0) {
-
-	} else if ((pos_angle-dst_angle) > 0) {
-
-	} else {
-		block_left.SetSpeed(0.0f);
-		block_right.SetSpeed(0.0f);
+	// Define eps (distance between wheels)
+	// Define thresholds for each conditionnal branch
+	// Define ComputeSpeed()
+	// Check RefreshPos()
+	RefreshPos();
+	float dx = dst.x - pos.x;
+	float dy = dst.y - pos.y;
+	float dist_err = sqrtf(dx*dx + dy*dy);
+	float angle_err = 2 * atan(dx/(dy+dist_err)) - pos.angle;
+	float angle_err_dst = pos.angle - dst.angle;
+	float dist_l = 0.0f;
+	float dist_r = 0.0f;
+	if (abs(angle_err) > 0) {
+		dist_l = -sg(angle_err) * angle_err * eps/2;
+		dist_r = -dist_l;
+	} else if (abs(dist_err) > 0) {
+		dist_l = dist_err;
+		dist_r = dist_err;
+	} else if (abs(angle_err_dst) > 0) {
+		dist_l = -sg(angle_err_dst) * angle_err_dst * eps/2;
+		dist_r = -dist_l;
 	}
+	float speed_l = ComputeSpeed(block_l.GetPV(), dist_l, vmax, amax,
+				amax_t);
+	float speed_r = ComputeSpeed(block_l.GetPV(), dist_r, vmax, amax,
+				amax_t);
+	block_l.SetSpeed(speed_l);
+	block_r.SetSpeed(speed_r);
+	block_l.Refresh();
+	block_r.Refresh();
+}
+
+void Navigator::RefreshPos()
+{
+	float dl = (float)block_l.GetQei(qei_l);
+	float dr = (float)block_r.GetQei(qei_r);
+	float angle = (dr-dl)/eps;
+	float radius = (dl+dr)/2/angle;
+	float dx = (dl+dr)/2;
+	float dy = 0;
+	if (!isnan(radius)) {
+		dx = radius*(cos(angle)-1.0f);
+		dy = radius*sin(angle);
+	}
+	pos.x += cos(pos.angle)*dx - sin(pos.angle)*dy;
+	pos.y += sin(pos.angle)*dx + cos(pos.angle)*dy;
+}
+
+
+float ComputeSpeed(short speed, float dist, float vmax_t, float amax,
+		float amax_t)
+{
+	return sg(dist) * min(abs((float)speed + sg(speed)*amax_t),
+			      vmax_t,
+			      sqrtf(2*amax*abs(dist)));
 }
 
