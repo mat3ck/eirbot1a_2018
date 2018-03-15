@@ -10,7 +10,6 @@
 #include "mbed.h"
 #include "config.hpp"
 #include "error.hpp"
-#include "telemetry.hpp"
 #include "qei.hpp"
 #include "motor.hpp"
 #include "pid.hpp"
