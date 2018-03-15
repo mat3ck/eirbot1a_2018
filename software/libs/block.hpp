@@ -25,8 +25,8 @@ public:
 	short GetQei(short&);
 	void SetSpeed(float);
 	void SetBreak(bool);
-private:
 	void Refresh();
+private:
 	float SPspeed;
 	float PVspeed;
 	float duty;
@@ -36,7 +36,6 @@ private:
 	Qei& qei;
 	Pid& pid;
 	Motor& motor;
-	Ticker ticker;
 };
 
 

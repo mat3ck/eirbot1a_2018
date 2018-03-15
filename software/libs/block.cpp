@@ -27,7 +27,6 @@ Block::~Block()
 
 void Block::Reset()
 {
-	ticker.detach();
 	SPspeed = 0;
 	PVspeed = 0;
 	qei.Reset();
@@ -41,7 +40,6 @@ void Block::Start()
 
 	qei_value = qei.GetQei();
 	duty = 0.0f;
-	ticker.attach(callback(this, &Block::Refresh), period);
 }
 
 float Block::GetSP()
