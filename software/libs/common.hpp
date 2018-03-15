@@ -3,11 +3,6 @@
 #define COMMON_HPP
 
 
-float sg(float val);
-float max(float val_1, float val_2);
-float min(float val_1, float val_2);
-float min(float val_1, float val_2, float val_3);
-
 class CArray
 {
 public:
@@ -22,6 +17,21 @@ private:
 	float* array;
 };
 
+class Pos
+{
+public:
+	Pos();
+	Pos(float _x, float _y, float _angle);
+	~Pos();
+	float x;
+	float y;
+	float angle;
+};
+
+float sg(float val);
+float max(float val_1, float val_2);
+float min(float val_1, float val_2);
+float min(float val_1, float val_2, float val_3);
 
 #endif
 

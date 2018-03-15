@@ -40,6 +40,27 @@ float CArray::operator[](int _index)
 	return array[(index+_index) % length];
 }
 
+
+Pos::Pos()
+{
+	x = 0.0f;
+	y = 0.0f;
+	angle = 0.0f;
+}
+
+Pos::Pos(float _x, float _y, float _angle)
+{
+	x = _x;
+	y = _y;
+	angle = _angle;
+}
+
+Pos::~Pos()
+{
+
+}
+
+
 float sg(float val)
 {
 	return (val < 0.0f) ? -1.0f : 1.0f;
