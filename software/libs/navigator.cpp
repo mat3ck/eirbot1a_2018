@@ -14,6 +14,11 @@ float vmax_t = vmax * 0.0052f;
 float amax = 0.05f*ticks_per_meter;
 float amax_t = amax*0.0052f;
 
+float thresh_angle = 0.087f;
+float thresh_dist = 2048.0f;
+float thresh_angle_dst = 0.087f;
+
+
 
 Navigator::Navigator(Block& _block_l, Block& _block_r, float _period):
 	pos(),
@@ -81,13 +86,13 @@ void Navigator::Refresh()
 	float angle_err_dst = pos.angle - dst.angle;
 	float dist_l = 0.0f;
 	float dist_r = 0.0f;
-	if (abs(angle_err) > 0) {
+	if (abs(angle_err) > thresh_angle) {
 		dist_l = -sg(angle_err) * angle_err * eps/2;
 		dist_r = -dist_l;
-	} else if (abs(dist_err) > 0) {
+	} else if (abs(dist_err) > thresh_dist) {
 		dist_l = dist_err;
 		dist_r = dist_err;
-	} else if (abs(angle_err_dst) > 0) {
+	} else if (abs(angle_err_dst) > thresh_angle_dst) {
 		dist_l = -sg(angle_err_dst) * angle_err_dst * eps/2;
 		dist_r = -dist_l;
 	}
