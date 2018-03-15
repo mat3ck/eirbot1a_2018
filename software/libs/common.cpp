@@ -60,7 +60,7 @@ Pos::~Pos()
 
 }
 
-Pos::Reset()
+void Pos::Reset()
 {
 	x = 0.0f;
 	y = 0.0f;
