@@ -18,9 +18,9 @@ public:
 	Pos GetDst();
 	void SetPos(Pos _pos);
 	void SetDst(Pos _dst);
+	void RefreshPos();
 private:
 	void Refresh();
-	void RefreshPos();
 	Pos pos;
 	Pos dst;
 	short qei_l;

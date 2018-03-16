@@ -1,8 +1,7 @@
 /*
  * TODO
  * Documentation
- * Add amax and vmax parameters
- * See Refresh function
+ * Add all constants in config.hpp
  */
 
 #include "navigator.hpp"
@@ -74,10 +73,6 @@ void Navigator::SetDst(Pos _dst)
 
 void Navigator::Refresh()
 {
-	// Define eps (distance between wheels)
-	// Define thresholds for each conditionnal branch
-	// Define ComputeSpeed()
-	// Check RefreshPos()
 	RefreshPos();
 	float dx = dst.x - pos.x;
 	float dy = dst.y - pos.y;
@@ -111,15 +106,17 @@ void Navigator::RefreshPos()
 	float dl = (float)block_l.GetQei(qei_l);
 	float dr = (float)block_r.GetQei(qei_r);
 	float angle = (dr-dl)/eps;
-	float radius = (dl+dr)/2/angle;
-	float dx = (dl+dr)/2;
-	float dy = 0;
-	if (!isnan(radius)) {
-		dx = radius*(cos(angle)-1.0f);
-		dy = radius*sin(angle);
+	float dx = (dl+dr)/2.0f;
+	float dy = 0.0f;
+	if (abs(angle) > 0.0000175f) {
+		float radius = (dl+dr)/2.0f/angle;
+		dx = radius*sin(angle);
+		dy = radius*(1.0f-cos(angle));
 	}
 	pos.x += cos(pos.angle)*dx - sin(pos.angle)*dy;
 	pos.y += sin(pos.angle)*dx + cos(pos.angle)*dy;
+	pos.angle += angle;
+	printf("%f\t%f\t%f\r", pos.x, pos.y, pos.angle);
 }
 
 
