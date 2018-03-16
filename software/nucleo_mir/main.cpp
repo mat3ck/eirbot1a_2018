@@ -1,8 +1,6 @@
 /*
  * TODO
  * Documentation
- * Initialization function
- * Rework classes to call them with PinNames
  * Integrate AX12 librarie
  */
 
@@ -14,6 +12,7 @@
 #include "motor.hpp"
 #include "pid.hpp"
 #include "block.hpp"
+#include "navigator.hpp"
 #include "gp2.hpp"
 
 
@@ -38,16 +37,16 @@ Motor motor_right(PWM_R, DIR_R, BREAK_R, DIR_FWD_R, PERIOD_PWM);
 // Blocks
 Block block_left(qei_left, pid_left, motor_left, MAX_DUTY, PERIOD_PID);
 Block block_right(qei_right, pid_right, motor_right, MAX_DUTY, PERIOD_PID);
+// Navigator
+Navigator navigator(block_left, block_right, PERIOD_PID);
 
 int main()
 {
 	led = 1;
 	pc.baud(115200);
-	block_left.Reset();
-	block_right.Reset();
-	wait(3);
-	led = 0;
+	navigator.Reset();
 	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
+	wait(3);
 	while (1) {
 
 	}
