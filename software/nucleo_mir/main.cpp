@@ -26,30 +26,33 @@ DigitalOut led(LED3);
 // Serial PC
 Serial pc(USBTX, USBRX);
 // Qeis
-Qei qei_left(ENCODER_TIM_LEFT, err);
-Qei qei_right(ENCODER_TIM_RIGHT, err);
+Qei qei_l(ENCODER_TIM_LEFT, err);
+Qei qei_r(ENCODER_TIM_RIGHT, err);
 // Speed PIDs
-Pid pid_left(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
-Pid pid_right(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
+Pid pid_l(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
+Pid pid_r(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
 // Motors
-Motor motor_left(PWM_L, DIR_L, BREAK_L, DIR_FWD_L, PERIOD_PWM);
-Motor motor_right(PWM_R, DIR_R, BREAK_R, DIR_FWD_R, PERIOD_PWM);
+Motor motor_l(PWM_L, DIR_L, BREAK_L, DIR_FWD_L, PERIOD_PWM);
+Motor motor_r(PWM_R, DIR_R, BREAK_R, DIR_FWD_R, PERIOD_PWM);
 // Blocks
-Block block_left(qei_left, pid_left, motor_left, MAX_DUTY, PERIOD_PID);
-Block block_right(qei_right, pid_right, motor_right, MAX_DUTY, PERIOD_PID);
+Block block_l(qei_l, pid_l, motor_l, MAX_DUTY, PERIOD_PID);
+Block block_r(qei_r, pid_r, motor_r, MAX_DUTY, PERIOD_PID);
 // Navigator
-Navigator navigator(block_left, block_right, PERIOD_PID);
+Navigator navigator(block_l, block_r, PERIOD_PID, PERIOD_POS);
 
 int main()
 {
 	led = 1;
 	pc.baud(115200);
-	navigator.Reset();
 	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
+	navigator.Reset();
 	wait(3);
+	led = 0;
+	navigator.Start();
+	navigator.SetDst(Pos(0.0f, 0.0f, 0.0f));
 	while (1) {
-
 	}
+
 	return 0;
 }
 
