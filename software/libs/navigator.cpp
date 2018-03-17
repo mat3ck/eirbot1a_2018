@@ -7,14 +7,14 @@
 #include "navigator.hpp"
 
 float ticks_per_meter = 43723.0f;
-float eps = 0.366f*ticks_per_meter;
-float vmax = 0.5f*ticks_per_meter;
+float eps = 0.348f*ticks_per_meter;
+float vmax = 0.15f*ticks_per_meter;
 float vmax_t = vmax * 0.0052f;
 float amax = 0.05f*ticks_per_meter;
 float amax_t = amax*0.0052f;
 
 float thresh_angle = 0.087f;
-float thresh_dist = 2048.0f;
+float thresh_dist = 4096.0f;
 float thresh_angle_dst = 0.087f;
 
 
@@ -85,19 +85,19 @@ void Navigator::Refresh()
 	float angle_err_dst = dst.angle - pos.angle;
 	float dist_l = 0.0f;
 	float dist_r = 0.0f;
-	if (abs(angle_err) > thresh_angle) {
+	/*if (abs(angle_err) > thresh_angle && abs(dist_err) > thresh_dist) {
 		dist_l = -angle_err * eps/2;
 		dist_r = -dist_l;
-	} else if (abs(dist_err) > thresh_dist) {
+	} else*/ if (abs(dist_err) > thresh_dist) {
 		dist_l = dist_err;
 		dist_r = dist_err;
 	} else if (abs(angle_err_dst) > thresh_angle_dst) {
 		dist_l = -angle_err_dst * eps/2;
 		dist_r = -dist_l;
 	}
-	float speed_l = ComputeSpeed(block_l.GetSP(), dist_l, vmax, amax,
+	float speed_l = ComputeSpeed(block_l.GetPV(), dist_l, vmax, amax,
 				amax_t);
-	float speed_r = ComputeSpeed(block_l.GetSP(), dist_r, vmax, amax,
+	float speed_r = ComputeSpeed(block_l.GetPV(), dist_r, vmax, amax,
 				amax_t);
 	block_l.SetSpeed(speed_l);
 	block_r.SetSpeed(speed_r);
@@ -120,6 +120,7 @@ void Navigator::RefreshPos()
 	pos.x += cos(pos.angle)*dx - sin(pos.angle)*dy;
 	pos.y += sin(pos.angle)*dx + cos(pos.angle)*dy;
 	pos.angle += angle;
+	if (abs(pos.angle) > PI) pos.angle -= sg(pos.angle)*TWOPI;
 }
 
 
