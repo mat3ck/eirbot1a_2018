@@ -6,6 +6,7 @@
 
 /* Speed PID */
 #define PERIOD_PID (0.0052f)
+#define PERIOD_POS (0.0001f)
 #define NB_COEF_ERR 4
 #define NB_COEF_SP 3
 #define K1_ERR (0.002996f/2.4f)
@@ -18,8 +19,8 @@
 /* Motor Parameters */
 #define PERIOD_PWM 0.000033f
 #define MAX_DUTY 0.50f
-#define DIR_FWD_L 1
-#define DIR_FWD_R 1
+#define DIR_FWD_L 0
+#define DIR_FWD_R 0
 
 
 /* == Pin connections == */
