@@ -18,8 +18,8 @@ float thresh_dist = 2048.0f;
 float thresh_angle_dst = 0.087f;
 
 
-
-Navigator::Navigator(Block& _block_l, Block& _block_r, float _period):
+Navigator::Navigator(Block& _block_l, Block& _block_r, float _period,
+		float _period_pos):
 	pos(),
 	dst(),
 	block_l(_block_l),
@@ -28,6 +28,7 @@ Navigator::Navigator(Block& _block_l, Block& _block_r, float _period):
 	qei_l = 0;
 	qei_r = 0;
 	period = _period;
+	period_pos = _period_pos;
 }
 
 Navigator::~Navigator()
@@ -38,6 +39,7 @@ Navigator::~Navigator()
 void Navigator::Reset()
 {
 	ticker.detach();
+	ticker_pos.detach();
 	block_l.Reset();
 	block_r.Reset();
 	qei_l = 0;
@@ -49,6 +51,7 @@ void Navigator::Start()
 	block_l.Start();
 	block_r.Start();
 	ticker.attach(callback(this, &Navigator::Refresh), period);
+	ticker_pos.attach(callback(this, &Navigator::RefreshPos), period_pos);
 }
 
 Pos Navigator::GetPos()
@@ -68,32 +71,33 @@ void Navigator::SetPos(Pos _pos)
 
 void Navigator::SetDst(Pos _dst)
 {
-
+	dst.x = _dst.x;
+	dst.y = _dst.y;
+	dst.angle = _dst.angle;
 }
 
 void Navigator::Refresh()
 {
-	RefreshPos();
 	float dx = dst.x - pos.x;
 	float dy = dst.y - pos.y;
 	float dist_err = sqrtf(dx*dx + dy*dy);
-	float angle_err = 2 * atan(dx/(dy+dist_err)) - pos.angle;
-	float angle_err_dst = pos.angle - dst.angle;
+	float angle_err = 2 * atan(dy/(dx+dist_err)) - pos.angle;
+	float angle_err_dst = dst.angle - pos.angle;
 	float dist_l = 0.0f;
 	float dist_r = 0.0f;
 	if (abs(angle_err) > thresh_angle) {
-		dist_l = -sg(angle_err) * angle_err * eps/2;
+		dist_l = -angle_err * eps/2;
 		dist_r = -dist_l;
 	} else if (abs(dist_err) > thresh_dist) {
 		dist_l = dist_err;
 		dist_r = dist_err;
 	} else if (abs(angle_err_dst) > thresh_angle_dst) {
-		dist_l = -sg(angle_err_dst) * angle_err_dst * eps/2;
+		dist_l = -angle_err_dst * eps/2;
 		dist_r = -dist_l;
 	}
-	float speed_l = ComputeSpeed(block_l.GetPV(), dist_l, vmax, amax,
+	float speed_l = ComputeSpeed(block_l.GetSP(), dist_l, vmax, amax,
 				amax_t);
-	float speed_r = ComputeSpeed(block_l.GetPV(), dist_r, vmax, amax,
+	float speed_r = ComputeSpeed(block_l.GetSP(), dist_r, vmax, amax,
 				amax_t);
 	block_l.SetSpeed(speed_l);
 	block_r.SetSpeed(speed_r);
@@ -116,7 +120,6 @@ void Navigator::RefreshPos()
 	pos.x += cos(pos.angle)*dx - sin(pos.angle)*dy;
 	pos.y += sin(pos.angle)*dx + cos(pos.angle)*dy;
 	pos.angle += angle;
-	printf("%f\t%f\t%f\r", pos.x, pos.y, pos.angle);
 }
 
 
