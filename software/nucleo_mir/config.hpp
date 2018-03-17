@@ -6,7 +6,7 @@
 
 /* Speed PID */
 #define PERIOD_PID (0.0052f)
-#define PERIOD_POS (0.0001f)
+#define PERIOD_POS (0.00004f)
 #define NB_COEF_ERR 4
 #define NB_COEF_SP 3
 #define K1_ERR (0.002996f/2.4f)
