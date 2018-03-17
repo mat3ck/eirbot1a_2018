@@ -19,9 +19,9 @@ public:
 private:
 	void RefreshPid(float, float);
 	float* coef_err;
-	int _len_err;
+	int len_err;
 	float* coef_sp;
-	int _len_sp;
+	int len_sp;
 	CArray err_ca;
 	CArray sp_ca;
 };
