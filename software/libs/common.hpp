@@ -3,6 +3,9 @@
 #define COMMON_HPP
 
 
+#define PI (3.141592654f)
+#define TWOPI (6.283185307f)
+
 class CArray
 {
 public:
