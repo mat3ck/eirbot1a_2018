@@ -40,6 +40,7 @@ Block block_r(qei_r, pid_r, motor_r, MAX_DUTY, PERIOD_PID);
 // Navigator
 Navigator navigator(block_l, block_r, PERIOD_PID, PERIOD_POS);
 
+
 int main()
 {
 	led = 1;
@@ -51,8 +52,8 @@ int main()
 	navigator.Start();
 	navigator.SetDst(Pos(0.0f, 0.0f, 0.0f));
 	while (1) {
-	}
 
+	}
 	return 0;
 }
 
