@@ -81,18 +81,18 @@ void Navigator::Refresh()
 	float dx = dst.x - pos.x;
 	float dy = dst.y - pos.y;
 	float dist_err = sqrtf(dx*dx + dy*dy);
-	float angle_err = 2 * atan(dy/(dx+dist_err)) - pos.angle;
+	float angle_err = 2.0f * atan(dy/(dx+dist_err)) - pos.angle;
 	float angle_err_dst = dst.angle - pos.angle;
 	float dist_l = 0.0f;
 	float dist_r = 0.0f;
-	/*if (abs(angle_err) > thresh_angle && abs(dist_err) > thresh_dist) {
-		dist_l = -angle_err * eps/2;
+	if (abs(angle_err) > thresh_angle && abs(dist_err) > thresh_dist) {
+		dist_l = -angle_err * eps/2.0f;
 		dist_r = -dist_l;
-	} else*/ if (abs(dist_err) > thresh_dist) {
+	} else if (abs(dist_err) > thresh_dist) {
 		dist_l = dist_err;
 		dist_r = dist_err;
 	} else if (abs(angle_err_dst) > thresh_angle_dst) {
-		dist_l = -angle_err_dst * eps/2;
+		dist_l = -angle_err_dst * eps/2.0f;
 		dist_r = -dist_l;
 	}
 	float speed_l = ComputeSpeed(block_l.GetPV(), dist_l, vmax, amax,
