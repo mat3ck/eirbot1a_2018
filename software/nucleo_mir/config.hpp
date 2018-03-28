@@ -28,12 +28,12 @@
 /* Encoders */
 // Left qei
 #define ENCODER_TIM_LEFT TIM4
-#define YELLOW_L PD_12
-#define GREEN_L PD_13
+#define YELLOW_L PD_13
+#define GREEN_L PD_12
 // Right qei
 #define ENCODER_TIM_RIGHT TIM2
-#define YELLOW_R PB_3
-#define GREEN_R PA_0
+#define YELLOW_R PA_0
+#define GREEN_R PB_3
 // Test qei
 #define ENCODER_TIM_TEST TIM3
 #define YELLOW_T PA_6
