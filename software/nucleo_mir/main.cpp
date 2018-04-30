@@ -53,6 +53,7 @@ int main()
 	Pos pos = navigator.GetPos();
 	wait(3);
 	navigator.Reset();
+	navigator.SetDst(Pos(0.0f, 0.0f, 0.0f));
 	led = 0;
 	while (1) {
 		if (pc.readable()) {
