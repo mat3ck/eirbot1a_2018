@@ -37,7 +37,6 @@ void Block::Reset()
 
 void Block::Start()
 {
-
 	qei_value = qei.GetQei();
 	duty = 0.0f;
 }
