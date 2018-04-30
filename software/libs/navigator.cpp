@@ -7,16 +7,20 @@
 #include "navigator.hpp"
 
 float ticks_per_meter = 43723.0f;
-float eps = 0.348f*ticks_per_meter;
+float eps = 0.318f*ticks_per_meter;
 float vmax = 0.15f*ticks_per_meter;
 float vmax_t = vmax * 0.0052f;
-float amax = 0.05f*ticks_per_meter;
-float amax_t = amax*0.0052f;
+float amax_up = 0.04f*ticks_per_meter;
+float amax_up_t = amax_up*0.0052f;
+float amax_down = 0.0001f*ticks_per_meter;
+float amax_down_t = amax_down*0.0052f;
 
-float thresh_angle = 0.087f;
-float thresh_angle_moving = 0.017f;
-float thresh_dist = 1024.0f;
-float thresh_angle_dst = 0.017f;
+float thresh_a = 0.1308f;
+float thresh_a_mov = 0.0087f;
+float thresh_dd = 874.0f;
+float thresh_dd_mov = 218.0f;
+float thresh_ad = 0.0436f;
+float thresh_ad_mov = 0.0087f;
 
 
 Navigator::Navigator(Block& _block_l, Block& _block_r, float _period,
@@ -55,6 +59,20 @@ void Navigator::Start()
 	ticker_pos.attach(callback(this, &Navigator::RefreshPos), period_pos);
 }
 
+void Navigator::Pause()
+{
+	ticker.detach();
+	block_l.Reset();
+	block_r.Reset();
+	qei_l = 0;
+	qei_r = 0;
+}
+
+void Navigator::Unpause()
+{
+	ticker.attach(callback(this, &Navigator::Refresh), period);
+}
+
 Pos Navigator::GetPos()
 {
 	return pos;
@@ -82,29 +100,59 @@ void Navigator::Refresh()
 	unsigned char status = 0;
 	float dx = dst.x - pos.x;
 	float dy = dst.y - pos.y;
-	float dist_err = sqrtf(dx*dx + dy*dy);
-	float angle_err = 2.0f * atan(dy/(dx+dist_err)) - pos.angle;
-	float angle_err_dst = dst.angle - pos.angle;
+	// Dist error
+	float err_d = sqrtf(dx*dx + dy*dy);
+	// Angle error to go to dst
+	float err_a = 2.0f * atan(dy/(dx+err_d)) - pos.angle;
+	// Dst angle error
+	float err_ad = dst.angle - pos.angle;
 	float dist_l = 0.0f;
 	float dist_r = 0.0f;
-	if ((abs(angle_err) > thresh_angle && abs(dist_err) > thresh_dist) ||
-			(abs(angle_err) > thresh_angle_moving && status == 1)) {
-		status = 1;
-		dist_l = -angle_err * eps/2.0f;
-		dist_r = -dist_l;
-	} else if (abs(dist_err) > thresh_dist) {
-		status = 0;
-		dist_l = dist_err;
-		dist_r = dist_err;
-	} else if (abs(angle_err_dst) > thresh_angle_dst) {
-		status = 0;
-		dist_l = -angle_err_dst * eps/2.0f;
-		dist_r = -dist_l;
+	if (abs(err_d) > thresh_dd) {
+		// Corrrect angle to go to dst
+		if ((abs(err_a) > thresh_a_mov && status == 1) ||
+				(abs(err_a) > thresh_a)) {
+			status = 1;
+			dist_l = -err_a*eps/2.0f;
+			dist_r = -dist_l;
+		}
+		// Arc to go to dst for little angles
+		else if ((abs(err_a) > thresh_a_mov && status == 2) ||
+				(abs(err_a) > thresh_a_mov)) {
+			status = 2;
+			float rad = err_d/2.0f/sin(err_a);
+			dist_l = (rad-sg(err_a)*eps/2.0f)/2.0f/err_a;
+			dist_r = (rad+sg(err_a)*eps/2.0f)/2.0f/err_a;
+		}
+		// Straight line forward to go to dst
+		else {
+			status = 3;
+			dist_l = err_d;
+			dist_r = err_d;
+		}
+	} else {
+		// Straight line forward to go to dst
+		if (abs(err_d) > thresh_dd_mov && status == 3) {
+			status = 3;
+			dist_l = err_d;
+			dist_r = err_d;
+		}
+		// Correct angle to final one
+		else if ((abs(err_ad) > thresh_ad_mov && status == 4) ||
+				(abs(err_a) > thresh_ad)) {
+			status = 4;
+			dist_l = -err_ad * eps/2.0f;
+			dist_r = -dist_l;
+		}
+		// No deplacement
+		else {
+			status = 0;
+		}
 	}
-	float speed_l = ComputeSpeed(block_l.GetPV(), dist_l, vmax, amax,
-				amax_t);
-	float speed_r = ComputeSpeed(block_l.GetPV(), dist_r, vmax, amax,
-				amax_t);
+	float speed_l = ComputeSpeed(block_l.GetPV(), dist_l, vmax, amax_up,
+				amax_up_t, amax_down, amax_down_t);
+	float speed_r = ComputeSpeed(block_l.GetPV(), dist_r, vmax, amax_up,
+				amax_up_t, amax_down, amax_down_t);
 	block_l.SetSpeed(speed_l);
 	block_r.SetSpeed(speed_r);
 	block_l.Refresh();
@@ -130,11 +178,11 @@ void Navigator::RefreshPos()
 }
 
 
-float ComputeSpeed(short speed, float dist, float vmax_t, float amax,
-		float amax_t)
+float ComputeSpeed(float speed, float dist, float vmax_t, float amax_up,
+		float amax_up_t, float amax_down, float amax_down_t)
 {
-	return sg(dist) * min(abs((float)speed + sg(speed)*amax_t),
+	return sg(dist) * min(abs((float)speed + sg(speed)*amax_up_t),
 			      vmax_t,
-			      sqrtf(2*amax*abs(dist)));
+			      sqrtf(2*amax_down*abs(dist)));
 }
 

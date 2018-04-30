@@ -14,6 +14,8 @@ public:
 			float _period_pos);
 	~Navigator();
 	void Reset();
+	void Pause();
+	void Unpause();
 	void Start();
 	Pos GetPos();
 	Pos GetDst();
@@ -34,7 +36,7 @@ private:
 	Ticker ticker_pos;
 };
 
-float ComputeSpeed(short speed, float dist, float vmax_t, float amax,
-		float amax_t);
+float ComputeSpeed(float speed, float dist, float vmax_t, float amax_up,
+		float amax_up_t, float amax_down, float amax_down_t);
 
 #endif
