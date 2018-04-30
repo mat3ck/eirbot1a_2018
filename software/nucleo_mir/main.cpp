@@ -46,13 +46,28 @@ int main()
 	led = 1;
 	pc.baud(115200);
 	pc.printf("\n\n\rStarting, error code : %d\n\r", err);
-	navigator.Reset();
+	char c;
+	char state = 'P';
+	Pos pos = navigator.GetPos();
 	wait(3);
+	navigator.Reset();
 	led = 0;
-	navigator.Start();
-	navigator.SetDst(Pos(0.0f, 0.0f, 0.0f));
 	while (1) {
-
+		if (pc.readable()) {
+			c = pc.getc();
+			if (c == 'q') {
+				navigator.Pause();
+				state = 'P';
+			} else if (c == 's') {
+				navigator.Start();
+				state = 'S';
+			} else if (c == 'R') {
+				navigator.Reset();
+				state = 'P';
+			}
+		}
+		pos = navigator.GetPos();
+		pc.printf("%c\t%f\t%f\t%f\r", state, pos.x, pos.y, pos.angle);
 	}
 	return 0;
 }
