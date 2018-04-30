@@ -18,8 +18,10 @@
 
 int err = 0;
 
-float coef_err[] = {K1_ERR, K2_ERR, K3_ERR, K4_ERR};
-float coef_sp[] = {K1_SP, K2_SP, K3_SP};
+float coef_err_l[] = {K1_ERR_L, K2_ERR_L, K3_ERR_L};
+float coef_sp_l[] = {K1_SP_L, K2_SP_L, K3_SP_L};
+float coef_err_r[] = {K1_ERR_R, K2_ERR_R, K3_ERR_R};
+float coef_sp_r[] = {K1_SP_R, K2_SP_R, K3_SP_R};
 
 // Led
 DigitalOut led(LED3);
@@ -29,8 +31,8 @@ Serial pc(USBTX, USBRX);
 Qei qei_l(ENCODER_TIM_LEFT, err);
 Qei qei_r(ENCODER_TIM_RIGHT, err);
 // Speed PIDs
-Pid pid_l(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
-Pid pid_r(coef_err, NB_COEF_ERR, coef_sp, NB_COEF_SP);
+Pid pid_l(coef_err_l, NB_COEF_ERR, coef_sp_l, NB_COEF_SP);
+Pid pid_r(coef_err_r, NB_COEF_ERR, coef_sp_r, NB_COEF_SP);
 // Motors
 Motor motor_l(PWM_L, DIR_L, BREAK_L, DIR_FWD_L, PERIOD_PWM);
 Motor motor_r(PWM_R, DIR_R, BREAK_R, DIR_FWD_R, PERIOD_PWM);

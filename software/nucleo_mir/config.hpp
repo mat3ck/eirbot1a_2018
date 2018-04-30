@@ -7,20 +7,27 @@
 /* Speed PID */
 #define PERIOD_PID (0.0052f)
 #define PERIOD_POS (0.00004f)
-#define NB_COEF_ERR 4
+#define NB_COEF_ERR 3
 #define NB_COEF_SP 3
-#define K1_ERR (0.002996f/2.4f)
-#define K2_ERR (0.005659f/2.4f)
-#define K3_ERR (0.003105f/2.4f)
-#define K4_ERR (0.004418f/2.4f)
-#define K1_SP (-0.947100f/2.4f)
-#define K2_SP (0.999500f/2.4f)
-#define K3_SP (0.947700f/2.4f)
+// Left
+#define K1_ERR_L (0.0080f)
+#define K2_ERR_L (-0.0141f)
+#define K3_ERR_L (0.0062f)
+#define K1_SP_L (2.1228f)
+#define K2_SP_L (-1.3187f)
+#define K3_SP_L (0.1959f)
+// Right
+#define K1_ERR_R (0.0085f)
+#define K2_ERR_R (-0.0152f)
+#define K3_ERR_R (0.0062f)
+#define K1_SP_R (2.1330f)
+#define K2_SP_R (-1.3366f)
+#define K3_SP_R (0.2036f)
 /* Motor Parameters */
 #define PERIOD_PWM 0.000033f
-#define MAX_DUTY 0.50f
+#define MAX_DUTY 1.0f
 #define DIR_FWD_L 0
-#define DIR_FWD_R 0
+#define DIR_FWD_R 1
 
 
 /* == Pin connections == */
