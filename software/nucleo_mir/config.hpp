@@ -25,9 +25,9 @@
 #define K3_SP_R (0.2036f)
 /* Motor Parameters */
 #define PERIOD_PWM 0.000033f
-#define MAX_DUTY 1.0f
+#define MAX_DUTY 0.90f
 #define DIR_FWD_L 0
-#define DIR_FWD_R 1
+#define DIR_FWD_R 0
 
 
 /* == Pin connections == */
