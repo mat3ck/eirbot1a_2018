@@ -54,6 +54,8 @@ int main()
 	wait(3);
 	navigator.Reset();
 	navigator.SetDst(Pos(0.0f, 0.0f, 0.0f));
+	navigator.Start();
+	navigator.Pause();
 	led = 0;
 	while (1) {
 		if (pc.readable()) {
@@ -62,7 +64,7 @@ int main()
 				navigator.Pause();
 				state = 'P';
 			} else if (c == 's') {
-				navigator.Start();
+				navigator.Unpause();
 				state = 'S';
 			} else if (c == 'R') {
 				navigator.Reset();
