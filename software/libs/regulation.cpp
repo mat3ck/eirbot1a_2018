@@ -26,7 +26,7 @@ void closedLoopQuadRamp(Block block_l, Block block_r, float speed_val,
 		i = t.read();
 		PV_l = block_l.GetQei(qei_l);
 		PV_r = block_r.GetQei(qei_r);
-		printf("%f\t%f\t%f\t%f\n\r", t.read(), speed, PV_l, PV_r);
+		printf("%f\t%f\t%f\t%f\n\r", i, speed, PV_l, PV_r);
 		speed = speed_val * i / rise_t;
 		block_l.SetSpeed(speed);
 		block_r.SetSpeed(speed);
@@ -35,12 +35,12 @@ void closedLoopQuadRamp(Block block_l, Block block_r, float speed_val,
 	}
 	t.reset();
 	i = t.read();
-	while (t.read() < rise_t) {
+	while (t.read() < step_t) {
 		while (t.read()-i < sample_t);
 		i = t.read();
 		PV_l = block_l.GetQei(qei_l);
 		PV_r = block_r.GetQei(qei_r);
-		printf("%f\t%f\t%f\t%f\n\r", t.read(), speed, PV_l, PV_r);
+		printf("%f\t%f\t%f\t%f\n\r", i + rise_t, speed, PV_l, PV_r);
 		block_l.Refresh();
 		block_r.Refresh();
 	}
@@ -51,7 +51,8 @@ void closedLoopQuadRamp(Block block_l, Block block_r, float speed_val,
 		i = t.read();
 		PV_l = block_l.GetQei(qei_l);
 		PV_r = block_r.GetQei(qei_r);
-		printf("%f\t%f\t%f\t%f\n\r", t.read(), speed, PV_l, PV_r);
+		printf("%f\t%f\t%f\t%f\n\r", i + rise_t + step_t,
+				speed, PV_l, PV_r);
 		speed = speed_val * (1 - i / fall_t);
 		block_l.SetSpeed(speed);
 		block_r.SetSpeed(speed);
