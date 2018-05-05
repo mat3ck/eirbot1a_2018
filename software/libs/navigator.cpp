@@ -8,12 +8,12 @@
 
 float ticks_per_meter = 43723.0f;
 float eps = 0.318f*ticks_per_meter;
-float vmax = 0.15f*ticks_per_meter;
-float vmax_t = vmax * 0.0052f;
-float amax_up = 0.04f*ticks_per_meter;
-float amax_up_t = amax_up*0.0052f;
-float amax_down = 0.0001f*ticks_per_meter;
-float amax_down_t = amax_down*0.0052f;
+float vmax = 0.50f*ticks_per_meter;
+float vmax_t = vmax * 0.005f;
+float amax_up = 0.50f*ticks_per_meter;
+float amax_up_t = amax_up*0.005f;
+float amax_down = 0.25f*ticks_per_meter;
+float amax_down_t = amax_down*0.005f;
 
 float thresh_a = 0.1308f;
 float thresh_a_mov = 0.0087f;
@@ -175,14 +175,5 @@ void Navigator::RefreshPos()
 	pos.y += sin(pos.angle)*dx + cos(pos.angle)*dy;
 	pos.angle += angle;
 	if (abs(pos.angle) > PI) pos.angle -= sg(pos.angle)*TWOPI;
-}
-
-
-float ComputeSpeed(float speed, float dist, float vmax_t, float amax_up,
-		float amax_up_t, float amax_down, float amax_down_t)
-{
-	return sg(dist) * min(abs((float)speed + sg(speed)*amax_up_t),
-			      vmax_t,
-			      sqrtf(2*amax_down*abs(dist)));
 }
 
