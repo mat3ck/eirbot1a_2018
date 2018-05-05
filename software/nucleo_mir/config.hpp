@@ -10,24 +10,24 @@
 #define NB_COEF_ERR 3
 #define NB_COEF_SP 3
 // Left
-#define K1_ERR_L (0.0080f)
-#define K2_ERR_L (-0.0141f)
-#define K3_ERR_L (0.0062f)
+#define K1_ERR_L (0.02650f)
+#define K2_ERR_L (-0.04701f)
+#define K3_ERR_L (0.02060f)
 #define K1_SP_L (2.1228f)
 #define K2_SP_L (-1.3187f)
 #define K3_SP_L (0.1959f)
 // Right
-#define K1_ERR_R (0.0085f)
-#define K2_ERR_R (-0.0152f)
-#define K3_ERR_R (0.0062f)
-#define K1_SP_R (2.1330f)
-#define K2_SP_R (-1.3366f)
-#define K3_SP_R (0.2036f)
+#define K1_ERR_R (0.02630f)
+#define K2_ERR_R (-0.04683f)
+#define K3_ERR_R (0.02061f)
+#define K1_SP_R (2.1370f)
+#define K2_SP_R (-1.3437f)
+#define K3_SP_R (0.2067f)
 /* Motor Parameters */
 #define PERIOD_PWM 0.000033f
 #define MAX_DUTY 0.90f
 #define DIR_FWD_L 0
-#define DIR_FWD_R 0
+#define DIR_FWD_R 1
 
 
 /* == Pin connections == */
