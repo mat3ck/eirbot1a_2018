@@ -6,20 +6,6 @@
 
 #include "navigator.hpp"
 
-float ticks_per_meter = 43723.0f;
-float eps = 0.318f*ticks_per_meter;
-float vmax = 0.50f*ticks_per_meter;
-float vmax_t = vmax * 0.005f;
-float amax_up = 0.50f*ticks_per_meter;
-float amax_up_t = amax_up*0.005f;
-float amax_down = 0.25f*ticks_per_meter;
-float amax_down_t = amax_down*0.005f;
-
-float thresh_a = 0.1308f;
-float thresh_a_mov = 0.0087f;
-float thresh_dd = 874.0f;
-float thresh_dd_mov = 218.0f;
-float thresh_ad = 0.0436f;
 float thresh_ad_mov = 0.0087f;
 
 
@@ -149,10 +135,10 @@ void Navigator::Refresh()
 			status = 0;
 		}
 	}
-	float speed_l = ComputeSpeed(block_l.GetPV(), dist_l, vmax, amax_up,
-				amax_up_t, amax_down, amax_down_t);
-	float speed_r = ComputeSpeed(block_l.GetPV(), dist_r, vmax, amax_up,
-				amax_up_t, amax_down, amax_down_t);
+	float speed_l = ComputeSpeed(period, block_l.GetPV(), dist_l, vmax,
+				amax_up_t, amax_down_t);
+	float speed_r = ComputeSpeed(period, block_l.GetPV(), dist_r, vmax,
+				amax_up_t, amax_down_t);
 	block_l.SetSpeed(speed_l);
 	block_r.SetSpeed(speed_r);
 	block_l.Refresh();

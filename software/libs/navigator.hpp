@@ -7,6 +7,22 @@
 #include "common.hpp"
 
 
+const float ticks_per_meter = 43723.0f;
+const float eps = 0.318f*ticks_per_meter;
+const float vmax = 0.50f*ticks_per_meter;
+const float vmax_t = vmax * 0.005f;
+const float amax_up = 0.50f*ticks_per_meter;
+const float amax_up_t = amax_up*0.005f;
+const float amax_down = 0.25f*ticks_per_meter;
+const float amax_down_t = amax_down*0.005f;
+
+const float thresh_a = 0.1308f;
+const float thresh_a_mov = 0.0087f;
+const float thresh_dd = 874.0f;
+const float thresh_dd_mov = 218.0f;
+const float thresh_ad = 0.0436f;
+
+
 class Navigator
 {
 public:
