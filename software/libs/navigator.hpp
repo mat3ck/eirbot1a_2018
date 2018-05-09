@@ -11,16 +11,18 @@ const float ticks_per_meter = 43723.0f;
 const float eps = 0.318f*ticks_per_meter;
 const float vmax = 0.50f*ticks_per_meter;
 const float vmax_t = vmax * 0.005f;
-const float amax_up = 0.50f*ticks_per_meter;
+const float amax_up = 0.75f*ticks_per_meter;
 const float amax_up_t = amax_up*0.005f;
-const float amax_down = 0.25f*ticks_per_meter;
+const float amax_down = 0.15f*ticks_per_meter;
 const float amax_down_t = amax_down*0.005f;
 
-const float thresh_a = 0.1308f;
-const float thresh_a_mov = 0.0087f;
-const float thresh_dd = 874.0f;
-const float thresh_dd_mov = 218.0f;
-const float thresh_ad = 0.0436f;
+const float th_a = 30 * PI / 360.0f;
+const float th_a_mov = 1 * PI / 360.0f;
+const float th_dd = 0.05 * ticks_per_meter;
+const float th_dd_mov = 0.02 * ticks_per_meter;
+const float th_ad = 3 * PI / 360.0f;
+const float th_ad_mov = 1 * PI / 360.0f;
+const float th_ab = 170 * PI / 360;
 
 
 class Navigator

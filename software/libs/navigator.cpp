@@ -6,8 +6,6 @@
 
 #include "navigator.hpp"
 
-float thresh_ad_mov = 0.0087f;
-
 
 Navigator::Navigator(Block& _block_l, Block& _block_r, float _period,
 		float _period_pos):
@@ -48,8 +46,8 @@ void Navigator::Start()
 void Navigator::Pause()
 {
 	ticker.detach();
-	block_l.Reset();
-	block_r.Reset();
+	block_l.Pause();
+	block_r.Pause();
 	qei_l = 0;
 	qei_r = 0;
 }
@@ -94,50 +92,72 @@ void Navigator::Refresh()
 	float err_ad = dst.angle - pos.angle;
 	float dist_l = 0.0f;
 	float dist_r = 0.0f;
-	if (abs(err_d) > thresh_dd) {
+	if (abs(err_d) > th_dd) {
 		// Corrrect angle to go to dst
-		if ((abs(err_a) > thresh_a_mov && status == 1) ||
-				(abs(err_a) > thresh_a)) {
+		if ((abs(err_a) > th_a_mov && status == 1) ||
+				(abs(err_a) > th_a)) {
 			status = 1;
 			dist_l = -err_a*eps/2.0f;
 			dist_r = -dist_l;
 		}
 		// Arc to go to dst for little angles
-		else if ((abs(err_a) > thresh_a_mov && status == 2) ||
-				(abs(err_a) > thresh_a_mov)) {
+		/*
+		else if ((abs(err_a) > th_a_mov && status == 2) ||
+				(abs(err_a) > th_a_mov)) {
 			status = 2;
 			float rad = err_d/2.0f/sin(err_a);
 			dist_l = (rad-sg(err_a)*eps/2.0f)/2.0f/err_a;
 			dist_r = (rad+sg(err_a)*eps/2.0f)/2.0f/err_a;
+			float ratio = dist_l/dist_r;
 		}
+		*/
+		// Straight line backward to go to dst
+		/*
+		else if (abs(err_a) > th_ab) {
+			status = 3;
+			dist_l = -err_d;
+			dist_r = -err_d;
+		}
+		*/
 		// Straight line forward to go to dst
 		else {
-			status = 3;
+			status = 4;
 			dist_l = err_d;
 			dist_r = err_d;
 		}
 	} else {
+		// Straight line backward to go to dst
+		/*
+		if ((abs(err_a) > th_ab) ||
+				(abs(err_d) > th_dd_mov && status == 4)) {
+			status = 4;
+			dist_l = err_d;
+			dist_r = err_d;
+		}
+		*/
 		// Straight line forward to go to dst
-		if (abs(err_d) > thresh_dd_mov && status == 3) {
-			status = 3;
+		if (abs(err_d) > th_dd_mov && status == 4) {
+			status = 4;
 			dist_l = err_d;
 			dist_r = err_d;
 		}
 		// Correct angle to final one
-		else if ((abs(err_ad) > thresh_ad_mov && status == 4) ||
-				(abs(err_a) > thresh_ad)) {
-			status = 4;
+		else if ((abs(err_ad) > th_ad_mov && status == 5) ||
+				(abs(err_ad) > th_ad)) {
+			status = 5;
 			dist_l = -err_ad * eps/2.0f;
 			dist_r = -dist_l;
 		}
 		// No deplacement
 		else {
 			status = 0;
+			dist_l = 0.0f;
+			dist_r = 0.0f;
 		}
 	}
-	float speed_l = ComputeSpeed(period, block_l.GetPV(), dist_l, vmax,
+	float speed_l = ComputeSpeed(period, block_l.GetSP(), dist_l, vmax,
 				amax_up_t, amax_down_t);
-	float speed_r = ComputeSpeed(period, block_l.GetPV(), dist_r, vmax,
+	float speed_r = ComputeSpeed(period, block_l.GetSP(), dist_r, vmax,
 				amax_up_t, amax_down_t);
 	block_l.SetSpeed(speed_l);
 	block_r.SetSpeed(speed_r);
