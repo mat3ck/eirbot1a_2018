@@ -28,8 +28,8 @@ DigitalOut led(LED3);
 // Serial PC
 Serial pc(USBTX, USBRX);
 // Qeis
-Qei qei_l(ENCODER_TIM_LEFT, err);
-Qei qei_r(ENCODER_TIM_RIGHT, err);
+Qei qei_l(ENCODER_TIM_LEFT, err, MIR);
+Qei qei_r(ENCODER_TIM_RIGHT, err, MIR);
 // Speed PIDs
 Pid pid_l(coef_err_l, NB_COEF_ERR, coef_sp_l, NB_COEF_SP);
 Pid pid_r(coef_err_r, NB_COEF_ERR, coef_sp_r, NB_COEF_SP);
