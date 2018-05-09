@@ -32,6 +32,11 @@ void Motor::Reset()
 	SetBreak(BREAK_OFF);
 }
 
+void Motor::Pause()
+{
+	SetPwm(0.0f);
+}
+
 float Motor::GetDuty()
 {
 	return pwm.read();

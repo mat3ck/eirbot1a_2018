@@ -19,6 +19,7 @@ public:
 			float _period);
 	~Motor();
 	void Reset();
+	void Pause();
 	float GetDuty();
 	bool GetDir();
 	bool GetBreak();
