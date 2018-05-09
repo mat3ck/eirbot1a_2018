@@ -78,7 +78,7 @@ void distQuadRamp(Block block_l, Block block_r, float dist, float sample_t,
 	short qei_r = block_r.GetQei();
 	t.start();
 	float i = t.read();
-	while (abs(dist) > thresh_dd_mov) {
+	while (abs(dist) > th_dd_mov) {
 		while (t.read() - i < sample_t);
 		i = t.read();
 		PV_l = block_l.GetQei(qei_l);
