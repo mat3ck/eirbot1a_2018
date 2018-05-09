@@ -2,6 +2,8 @@
 #ifndef NUCLEO_MIR_HPP
 #define NUCLEO_MIR_HPP
 
+#define MIR 1
+
 /* == Software paramters == */
 
 /* Speed PID */
