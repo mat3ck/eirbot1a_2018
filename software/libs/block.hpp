@@ -15,6 +15,7 @@ public:
 			float _period);
 	~Block();
 	void Reset();
+	void Pause();
 	void Start();
 	float GetSP();
 	float GetPV();

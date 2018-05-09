@@ -35,6 +35,11 @@ void Block::Reset()
 	duty = 0.0f;
 }
 
+void Block::Pause()
+{
+	motor.Pause();
+}
+
 void Block::Start()
 {
 	qei_value = qei.GetQei();
