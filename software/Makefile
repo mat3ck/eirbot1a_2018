@@ -56,6 +56,7 @@ OBJECTS += libs/pid.o
 OBJECTS += libs/block.o
 OBJECTS += libs/navigator.o
 OBJECTS += libs/cannon.o
+OBJECTS += libs/regulation.o
 
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/stm32f4xx_hal_flash_ramfunc.o
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F429ZI/TOOLCHAIN_GCC_ARM/PeripheralPins.o
