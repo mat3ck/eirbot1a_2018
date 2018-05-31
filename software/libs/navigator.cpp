@@ -7,13 +7,19 @@
 #include "navigator.hpp"
 
 
-Navigator::Navigator(Block& _block_l, Block& _block_r, float _period,
-		float _period_pos):
+Navigator::Navigator(Block& _block_l, Block& _block_r, Gp2Group& _front_gp2,
+		Gp2Group& _back_gp2, float _period, float _period_pos):
 	pos(),
 	dst(),
 	block_l(_block_l),
-	block_r(_block_r)
+	block_r(_block_r),
+	front_gp2(_front_gp2),
+	back_gp2(_back_gp2)
 {
+	color = 0;
+	status = -1;
+	obstacle = 0;
+	check_obs = 1;
 	qei_l = 0;
 	qei_r = 0;
 	period = _period;
@@ -79,6 +85,11 @@ void Navigator::SetDst(Pos _dst)
 	dst.angle = _dst.angle;
 }
 
+bool Navigator::IsReady()
+{
+	return (status == 0);
+}
+
 void Navigator::Refresh()
 {
 	unsigned char status = 0;
@@ -112,13 +123,13 @@ void Navigator::Refresh()
 		}
 		*/
 		// Straight line backward to go to dst
-		/*
+		// /*
 		else if (abs(err_a) > th_ab) {
 			status = 3;
 			dist_l = -err_d;
 			dist_r = -err_d;
 		}
-		*/
+		// */
 		// Straight line forward to go to dst
 		else {
 			status = 4;
@@ -159,6 +170,12 @@ void Navigator::Refresh()
 				amax_up_t, amax_down_t);
 	float speed_r = ComputeSpeed(period, block_l.GetSP(), dist_r, vmax,
 				amax_up_t, amax_down_t);
+	
+	if (check_obs && FrontObstacle()) {
+		speed_l = 0.0f;
+		speed_r = 0.0f;
+	}
+
 	block_l.SetSpeed(speed_l);
 	block_r.SetSpeed(speed_r);
 	block_l.Refresh();
@@ -183,3 +200,12 @@ void Navigator::RefreshPos()
 	if (abs(pos.angle) > PI) pos.angle -= sg(pos.angle)*TWOPI;
 }
 
+bool Navigator::FrontObstacle()
+{
+	return front_gp2.Obstacle(!color, 1, 1, color);
+}
+
+bool Navigator::BackObstacle()
+{
+	return back_gp2.Obstacle(1, 1, 1, 1);
+}

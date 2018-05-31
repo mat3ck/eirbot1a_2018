@@ -27,7 +27,7 @@
 #define K3_SP_R (0.2067f)
 /* Motor Parameters */
 #define PERIOD_PWM 0.000033f
-#define MAX_DUTY 0.90f
+#define MAX_DUTY 0.70f
 #define DIR_FWD_L 0
 #define DIR_FWD_R 1
 
@@ -67,22 +67,22 @@
 #define DISPLAY_TX PC_12
 
 /* Analog pins available */
-#define ADC_1 PA3
-#define ADC_2 PA4
-#define ADC_3 PA5
-#define ADC_4 PA6
-#define ADC_5 PA7
-#define ADC_6 PB0
-#define ADC_7 PB1
-#define ADC_8 PC0
-#define ADC_9 PC2
-#define ADC_10 PC3
-#define ADC_11 PF7
-#define ADC_12 PF8
-#define ADC_13 PF9
-#define ADC_14 PF10
-#define ADC_15 PF3
-#define ADC_16 PF4
-#define ADC_17 PF5
+#define ADC_1 PA_3
+#define ADC_2 PA_4
+#define ADC_3 PA_5
+#define ADC_4 PA_6
+#define ADC_5 PA_7
+#define ADC_6 PB_0
+#define ADC_7 PB_1
+#define ADC_8 PC_0
+#define ADC_9 PC_2
+#define ADC_10 PC_3
+#define ADC_11 PF_7
+#define ADC_12 PF_8
+#define ADC_13 PF_9
+#define ADC_14 PF_10
+#define ADC_15 PF_3
+#define ADC_16 PF_4
+#define ADC_17 PF_5
 
 #endif

@@ -34,6 +34,18 @@ public:
 	float angle;
 };
 
+class PosQueue
+{
+public:
+	PosQueue();
+	~PosQueue();
+	void AddPos();
+	void RmPos();
+	bool isEmpty();
+private:
+	Pos pos;
+};
+
 float sg(float val);
 float max(float val_1, float val_2);
 float min(float val_1, float val_2);
